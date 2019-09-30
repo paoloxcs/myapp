@@ -1,0 +1,198 @@
+html,body{
+    margin: 0;
+    padding: 0;
+}
+.main-container{
+    min-width: 1000px;
+    position: relative;
+    width: 100%;
+    font-size: 0.9rem;
+}
+.top-nav{
+    width: 100%;
+    position: fixed;
+    display: flex;
+    justify-content: center;
+    height: 50px;
+    border-bottom: 1px solid rgb(216, 212, 211);
+    top: 0;
+    z-index: 1000;
+    background-color: #fff;
+}
+.top-nav .top-nav-content{
+    width: 98%;
+    display: flex;
+    align-items: center;
+    flex-wrap: nowrap;
+}
+.top-nav-content .logo{
+    width: 15%;
+    border-right: 1px solid rgb(216, 212, 211); 
+}
+.top-nav-content .logo img{
+    width: 35%;
+}
+.top-nav-content .wrapper-user{
+      display: flex;
+      width: 100%;
+      justify-content: flex-end;
+      align-items: center;
+      position: relative;
+}
+.wrapper-user .box-item{
+    width: 40px;
+    overflow: hidden;
+    border-radius: 4px;
+}
+.wrapper-user .box-item.bordered{
+    border: 1px solid #EF6A0B;
+}
+.wrapper-user .box-item .user-icon{
+    width: 100%;
+    cursor: pointer;
+}
+.user-settings{
+    position: absolute;
+    right: 0;
+    box-shadow: 0px 0px 20px 0px rgba(0,0,0,0.5); 
+    top: 0;
+    background-color: #fff;
+    width: 300px;
+    z-index: 1000;
+    display: none;
+
+}
+.user-settings>.profile{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    padding: 15px;
+}
+.user-settings>.profile>.icon{
+    width: 50px;
+    border-radius: 50%;
+    overflow: hidden;
+}
+.user-settings>.profile>.name{
+    padding-left: 10px;
+    font-size: 18px;
+}
+.user-settings > .menu{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.user-settings > .menu>li{
+    display: block;
+    border-top: 1px solid rgb(216, 212, 211);
+}
+.user-settings > .menu>li>a{
+    display: block;
+    padding: 15px 0px 15px 30px;
+    text-decoration: none;
+    color: rgba(0,0,0,0.54);
+}
+.user-settings > .menu>li>a:hover{
+    background-color: #e9ecef; 
+    color: rgba(0,0,0,0.60);
+    transition: .30s;
+}
+.app-content{
+    top: 50px;
+    position: relative;
+}
+
+.app-content > .left-nav{
+    height: 100%;
+    position: fixed;
+    left: 0;
+    width: 250px;
+    border-right: 1px solid rgb(216, 212, 211);
+    z-index: 900;
+    background-color: #fff;
+    overflow: auto;
+}
+.left-nav .main-menu{
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+}
+.left-nav .main-menu>li{
+   display: block;
+}
+.left-nav .main-menu>li>a{
+    display: block;
+    padding: 10px 0 10px 20px;
+    margin: 1px 0;
+    text-decoration: none;
+    border-radius: 0 20px 20px 0;
+    color: rgba(0,0,0,0.54);
+
+}
+.left-nav .main-menu>li>a:hover{
+    background-color: #e9ecef; 
+    color: rgba(0,0,0,0.60);
+    transition: .30s;
+}
+.app-content > .content-section{
+    left: 260px;
+    position: absolute;
+    width: calc(100% - 260px);
+    margin-top: 10px;
+}
+.list-photos{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.list-photos >.photo-post{
+    width: 200px;
+    overflow: hidden;
+    margin: 5px;
+    border: 1px solid rgb(216, 212, 211);
+    align-items: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+
+}
+.list-photos >.photo-post > .picture{
+    width: 100%;
+}
+.list-photos >.photo-post > .actions{
+    width: 100%;
+}
+.photo-post > .actions>.btn{
+    margin: 0;
+}
+.modal-xl{
+    max-width: 1200px;
+}
+
+::-webkit-scrollbar-track
+{
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar
+{
+    width: 10px;
+    height: 10px;
+    background-color: #F5F5F5;
+}
+
+::-webkit-scrollbar-thumb
+{
+    background-color: #AAA;
+    border-radius: 10px;
+    background-image: -webkit-linear-gradient(90deg,
+                                              rgba(0, 0, 0, .2) 25%,
+                                              transparent 25%,
+                                              transparent 50%,
+                                              rgba(0, 0, 0, .2) 50%,
+                                              rgba(0, 0, 0, .2) 75%,
+                                              transparent 75%,
+                                              transparent)
+}
