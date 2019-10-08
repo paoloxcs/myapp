@@ -1,13 +1,36 @@
-# Documentación del proyecto
-El cliente requiere implementar una aplicación web en donde pueda dar a conocer sus productos de sellos para maquinarias industriales.
+# Guia para ejecutar el proyecto
 
-- Los productos estan clasificados por distintos tipos de categorias.
-- Los productos tambien estan clasificados por 2 unidades de media (Metric|Inch).
+## Paso 1 : Clonar el repositorio y configura el proyecto
 
-Carateristicas de un producto.
+`git clone https://github.com/paoloxcs/myapp.git`
 
-- Cada producto tiene un perfil que las identifica
-- Cada producto tiene condiciones de operatibvidad
-- Cada producto tiene compatibilidad de fluidos
-- Cada producto tiene una lista de partes bajo distintas dimensiones
+copia el archivo `.env.example` como `.env`
+
+`cp .env.example .env`
+
+Genera la llave
+
+`php artisan key:generate`
+
+## Paso 2: Instalar las dependecias
+
+`composer update`
+
+## Paso 3: Crear la base de datos y ejecutar la migracion
+
+Cree una base de datos, ejemplo: `db_name` 
+
+Ejecuta de la migración 
+
+`php artisan migrate`
+
+## Cree datos semilla
+
+`php artisan db:seed`
+
+Nota: el password del usuario sera `secret`
+
+
+
+
 

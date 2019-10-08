@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Role extends Model
 {
     
+    public $timestamps = false;
     /*=========== Relaciones ==================*/
     public function users()
     {
@@ -14,7 +15,7 @@ class Role extends Model
     }
     public function permissions()
     {
-    	return $this->belongsToMany(Permission::class,'rule_permission','role_id');
+    	return $this->belongsToMany(Permission::class,'role_permission','role_id');
     }
 
     public function hasPermission($permission)
