@@ -15,7 +15,7 @@ class Permision
      */
     public function handle($request, Closure $next,$permision)
     {
-        if (Auth()->user()->rule->hasPermision($permision)) return $next($request);
+        if (Auth()->user()->role->hasPermission($permision)) return $next($request);
 
         return back()->with('msg-warning','Acceso no autorizado');
 
