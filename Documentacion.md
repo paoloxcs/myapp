@@ -18,8 +18,10 @@ Genera la llave
 
 ## Paso 3: Crear la base de datos y ejecutar la migracion
 
-Cree una base de datos, ejemplo: `db_name` 
+Cree una base de datos, ejemplo: `db_name`
 
+Editar el archivo `.env` para establecer la conexion a la  BD con tus credenciales
+ 
 Ejecuta de la migración 
 
 `php artisan migrate`
