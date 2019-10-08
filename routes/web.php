@@ -95,11 +95,19 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::get('posts/photos/{id}/changemain','PostController@changeMainPhoto');
 			Route::get('posts/photos/{id}/destroy','PostController@destroyPhoto');
 
+			//Ruta para Videos
 			Route::get('videos','VideoController@index')->name('videos.index');
 			Route::get('videos-data','VideoController@getvideos');
 			Route::post('videos','VideoController@store');
 			Route::put('videos/{id}','VideoController@update');
 			Route::get('videos/{id}/destroy','VideoController@destroy');
+
+			//Ruta para Catálogos
+			Route::get('catalogs','CatalogController@index')->name('catalog.index');
+			Route::get('catalogs-data','CatalogController@getcatalogs');
+			Route::post('catalogs','CatalogController@store');
+			Route::put('catalogs/{id}','CatalogController@update');
+			Route::get('catalogs/{id}/destroy','CatalogController@destroy');
 		});
 
 		
