@@ -32,9 +32,9 @@ class User extends Authenticatable
         return $this->name.' '.$this->last_name;
     }
 
-    public function rule()
+    public function role()
     {
-        return $this->belongsTo(Rule::class);
+        return $this->belongsTo(Role::class);
     }
 
     public function prfiles()
@@ -50,6 +50,6 @@ class User extends Authenticatable
     // retorna verdadero o falso
     public function accessPanel()
     {
-        return $this->rule->section === 'panel';
+        return $this->role->section === 'panel';
     }
 }
