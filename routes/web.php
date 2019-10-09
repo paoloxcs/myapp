@@ -108,6 +108,13 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::post('catalogs','CatalogController@store');
 			Route::put('catalogs/{id}','CatalogController@update');
 			Route::get('catalogs/{id}/destroy','CatalogController@destroy');
+
+			//Ruta para Slider
+			Route::get('slides', 'SlideController@index')->name('slide.index');
+			Route::get('slides-data', 'SlideController@getSlides');
+			Route::post('slides','SlideController@store');
+			Route::put('slides/{id}','SlideController@update');
+			Route::get('slides/{id}/destroy', 'SlideController@destroy');
 		});
 
 		
