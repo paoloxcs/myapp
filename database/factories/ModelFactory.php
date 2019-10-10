@@ -14,26 +14,28 @@
 
 
 /** @var \Illuminate\Database\Eloquent\Factory $factory */
-// Factory para roles
-$factory->define(App\Role::class, function (Faker\Generator $faker) {
-
-    return [
-        'name' => $faker->name,
-        'section' => 'panel'
-    ];
-});
-
 
 // Factory para users
 $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->name,
-        'last_name' => $faker->name,
+        'name' => $faker->firstName,
+        'last_name' => $faker->lastName,
         'email' => $faker->unique()->safeEmail,
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
         'role_id' => 1
+    ];
+});
+
+// Factory para brands
+$factory->define(App\Brand::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->sentence,
+        'slug' => $faker->slug,
+        'url_image' => 'default.jpg',
+        'status' => '1'
     ];
 });

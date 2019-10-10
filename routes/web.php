@@ -43,7 +43,7 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('/', 'HomeController@index')->name('dashboard');
 
 		// Ruta para CRUD de Categorias y subcategorias
-		Route::group(['middleware'=>'permision:manage_categorys'],function(){
+		Route::group(['middleware'=>'permision:manage_categories'],function(){
 			Route::resource('categories','CategoryController');
 			Route::get('categories-data','CategoryController@getCategories');
 			Route::get('categories-all-data','CategoryController@getCategoriesAll');
