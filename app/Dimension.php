@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dimension extends Model
 {
-    protected $fillable = ['name','sigla'];
+    protected $fillable = ['name','sigla','slug'];
     public $timestamps = false;
 
     public function profiles()
