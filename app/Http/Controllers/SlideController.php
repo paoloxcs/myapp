@@ -60,11 +60,11 @@ class SlideController extends Controller
     {
         //validación
         $validation = \Validator::make($request->all(),[
-            'slidename' => $request->slidename,
-            'headerline' => $request->headerline,
-            'slidetext' => $request->slidetext,
-            'textlink' => $request->textlink,
-            'actionlink' => $request->actionlink,
+            'slidename' => 'required|string',
+            'headerline' => 'required|string',
+            'slidetext' => 'required|string',
+            'textlink' => 'string',
+            'actionlink' => 'string'
         ]);
         //condicionando validación de elementos no recuperables
         if($validation->fails()){
