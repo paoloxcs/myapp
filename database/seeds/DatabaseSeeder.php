@@ -23,10 +23,14 @@ class DatabaseSeeder extends Seeder
         $role->permissions()->sync($permisions);
 
 
-        // Invocando facotires para llenar user
+        // Invocando factories para llenar user
         factory(App\User::class, 1)->create();
-        // Invocando facotires para llenar marcas
+        // Invocando factories para llenar marcas
         factory(App\Brand::class, 3)->create();
+        //Invocando factories para llenar categorias
+        factory(App\Category::class, 3)->create();
+        //Invocando factories para llenar mercados
+        factory(App\Market::class, 3)->create();
 
     }
 }

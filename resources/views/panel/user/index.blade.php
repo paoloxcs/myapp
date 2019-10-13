@@ -37,9 +37,9 @@
 									@foreach($users as $user)
 									<tr>
 										<td>{{$user->id}}</td>
-										<td>{{$user->uname}} {{$user->last_name}}</td>
+										<td>{{$user->name}} {{$user->last_name}}</td>
 										<td>{{$user->email}}</td>
-										<td>{{$user->rule->name}}</td>
+										<td>{{$user->role->name}}</td>
 										<td>{{date('d/m/Y',strtotime($user->created_at))}}</td>
 										<td>
 											<a class="btn btn-blue btn-sm" href="{{route('users.edit',$user->id)}}"><i class="fa fa-pen"></i> Editar</a>

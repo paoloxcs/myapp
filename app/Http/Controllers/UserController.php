@@ -15,9 +15,9 @@ class UserController extends Controller
     public function index()
     {
         
-        $users = User::join('rules as r','users.rule_id','=','r.id')
-        ->select('*','users.name as uname')
-        ->where('r.section','panel')->get();
+        $users = User::with(['role' => function($query){
+            $query->where('section','=','panel');
+        }])->get();
 
         return view('panel.user.index',compact('users'));
     }

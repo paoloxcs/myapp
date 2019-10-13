@@ -39,3 +39,25 @@ $factory->define(App\Brand::class, function (Faker\Generator $faker) {
         'status' => '1'
     ];
 });
+
+// Factory para categorias
+$factory->define(App\Category::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->sentence,
+        'slug' => $faker->slug,
+        'description' => $faker->text,
+        'url_image' => 'default.jpg',
+        'status' => '1'
+    ];
+});
+
+// Factory para mercados
+$factory->define(App\Market::class, function (Faker\Generator $faker) {
+
+    return [
+        'name' => $faker->sentence,
+        'slug' => $faker->slug,
+        'url_image' => 'default.jpg',
+    ];
+});
