@@ -12,19 +12,22 @@ class Category extends Model
 
     public $timestamps = false;
 
-    public function profiles()
+    // Relacion con productos
+    public function products()
     {
-    	return $this->hasMany(Profile::class);
+    	return $this->hasMany(Product::class);
     }
 
+    // Relacion con videos
+    public function videos()
+    {
+        return $this->hasMany(Video::class);
+    }
+
+    // Mutador para url_image
     public function getUrlImageAttribute($value)
     {
     	return url('/').'/allimages/'.$value;
-    }
-
-    public function video()
-    {
-        return $this->hasMany(Video::class);
     }
 
 }

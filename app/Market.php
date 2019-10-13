@@ -10,9 +10,9 @@ class Market extends Model
 
     public $timestamps = false;
 
-    public function profiles()
+    public function products()
     {
-    	return $this->belongsToMany(Profile::class,'markets_profiles');
+    	return $this->belongsToMany(Product::class,'market_product');
     }
 
     public function getUrlImageAttribute($value)

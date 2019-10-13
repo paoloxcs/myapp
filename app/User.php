@@ -37,13 +37,14 @@ class User extends Authenticatable
         return $this->belongsTo(Role::class);
     }
 
-    public function prfiles()
-    {
-        return $this->hasMany(Profile::class);
-    }
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function client()
+    {
+        return $this->hasOne(Client::class);
     }
 
     // Verificar si el usuario autenticado tiene acceso al panel
