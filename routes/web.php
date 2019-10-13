@@ -6,9 +6,11 @@
 |--------------------------------------------------------------------------
 */
 // Rutas sin auntenticación de usuarios
-Route::get('/', function () {
-    return view('web.index');
-});
+
+Route::get('/','FrontController@index');
+// Route::get('/', function () {
+//     return view('web.index');
+// });
 Route::get('productos','FrontController@getProducts')->name('products');
 Route::get('productos/{categoria}','FrontController@getProductsOfCategory');
 Route::get('productos/{categoria}/{tipo}','FrontController@getProduct');
@@ -43,7 +45,7 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::get('/', 'HomeController@index')->name('dashboard');
 
 		// Ruta para CRUD de Categorias y subcategorias
-		Route::group(['middleware'=>'permision:manage_categories'],function(){
+		Route::group(['middleware'=>'permision:manage_categorys'],function(){
 			Route::resource('categories','CategoryController');
 			Route::get('categories-data','CategoryController@getCategories');
 			Route::get('categories-all-data','CategoryController@getCategoriesAll');
@@ -62,6 +64,11 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::group(['middleware'=>'permision:manage_brands'],function(){
 			Route::resource('brands','BrandController');
 			Route::get('brands-data','BrandController@getBrands');
+
+			//Llenado de Combo
+			Route::get('brands-all-data','BrandController@getBrandsAll');
+
+
 			Route::get('brands/{id}/destroy','BrandController@destroy')->name('brands.destroy');
 		});
 		
@@ -95,7 +102,7 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::get('posts/photos/{id}/changemain','PostController@changeMainPhoto');
 			Route::get('posts/photos/{id}/destroy','PostController@destroyPhoto');
 
-			//Ruta para Videos
+			// Ruta para Videos
 			Route::get('videos','VideoController@index')->name('videos.index');
 			Route::get('videos-data','VideoController@getvideos');
 			Route::post('videos','VideoController@store');

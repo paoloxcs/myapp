@@ -29,8 +29,8 @@ class SlideController extends Controller
             'slidename'=>'required|string',
             'headerline'=>'required|string',
             'slidetext'=>'required|string',
-            'textlink'=>'string',
-            'actionlink'=>'string',
+            // 'textlink'=>'string',
+            // 'actionlink'=>'string',
             'url_image'=>'required|mimes:jpg,png,jpeg|max:100'
         ]);
         //Testeando validación
@@ -62,9 +62,9 @@ class SlideController extends Controller
         $validation = \Validator::make($request->all(),[
             'slidename' => 'required|string',
             'headerline' => 'required|string',
-            'slidetext' => 'required|string',
-            'textlink' => 'string',
-            'actionlink' => 'string'
+            'slidetext' => 'required|string'
+            // 'textlink' => 'string',
+            // 'actionlink' => 'string'
         ]);
         //condicionando validación de elementos no recuperables
         if($validation->fails()){

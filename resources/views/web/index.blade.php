@@ -2,42 +2,33 @@
 @section('title','Sellos Hidráulicos | Orings | Retenes Radiales | Sellos Neumáticos | Fajas de Transmisión | Retenes')
 @section('content')
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-	<ol class="carousel-indicators">
+	<!-- <ol class="carousel-indicators">
 	  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
 	  <li data-target="#myCarousel" data-slide-to="1"></li>
 	  <li data-target="#myCarousel" data-slide-to="2"></li>
-	</ol>
+	</ol> -->
 	<div class="carousel-inner">
+	<!-- Programación de slides dinámicos -->
+	  @foreach($slides as $index => $slide)
+	  @if($index===0)
 	  <div class="carousel-item active">
-	    <img class="first-slide" src="{{asset('images/slide1.jpg')}}" alt="First slide">
+	  @else
+	  <div class="carousel-item ">
+	  @endif
+	    <img class="first-slide" src="{{asset('images/'.$slide->url_image)}}" alt="{{$slide->slidename}}">
 	    <div class="container">
 	      <div class="carousel-caption text-left">
-	        <h1 class="text-xlg">Example headline.</h1>
-	        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-	        <p><a class="btn btn-lg btn-orange" href="#" role="button">Sign up today</a></p>
+	        <h1 class="text-xlg">{{$slide->headerline}}</h1>
+	        <p>{{$slide->slidetext}}</p>
+	        @if($slide->actionlink!='')
+	        <p>
+	        	<a class="btn btn-lg btn-orange" target="_blank" href="{{$slide->actionlink}}" role="button">{{$slide->textlink}}</a>
+	        </p>
+	        @endif
 	      </div>
 	    </div>
 	  </div>
-	  <div class="carousel-item">
-	    <img class="second-slide" src="{{asset('images/slide1.jpg')}}" alt="Second slide">
-	    <div class="container">
-	      <div class="carousel-caption">
-	        <h1 class="text-xlg">Another example headline.</h1>
-	        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-	        <p><a class="btn btn-lg btn-orange" href="#" role="button">Learn more</a></p>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="carousel-item">
-	    <img class="third-slide" src="{{asset('images/slide1.jpg')}}" alt="Third slide">
-	    <div class="container">
-	      <div class="carousel-caption text-right">
-	        <h1 class="text-xlg">One more for good measure.</h1>
-	        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-	        <p><a class="btn btn-lg btn-orange" href="#" role="button">Browse gallery</a></p>
-	      </div>
-	    </div>
-	  </div>
+	  @endforeach
 	</div>
 	<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
 	  <span class="carousel-control-prev-icon" aria-hidden="true"></span>

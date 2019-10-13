@@ -7,6 +7,7 @@ use App\FluidGroup;
 use App\FluidKey;
 use App\Post;
 use App\Profile;
+use App\Slide;
 use App\TypeApplication;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -18,6 +19,14 @@ class FrontController extends Controller
     {
         Carbon::setlocale('es');
     }
+
+    public function index()
+    {
+        $slides = Slide::where('status','1')->get();
+        return view('web.index',compact('slides'));
+    }
+
+
     public function getProducts()
     {
         $categories = Category::with('profiles')->get();
