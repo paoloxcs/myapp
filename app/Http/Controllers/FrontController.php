@@ -6,6 +6,7 @@ use App\Category;
 use App\FluidGroup;
 use App\FluidKey;
 use App\Post;
+use App\Catalog;
 use App\Profile;
 use App\Slide;
 use App\TypeApplication;
@@ -71,11 +72,19 @@ class FrontController extends Controller
 
         return response()->json($profile->parts);
     }
-
-    public function getCatalogs()
+    //Catálogos
+    public function getCatalogsViews()
     {
     	return view('web.catalogs');
     }
+    public function getCatalogs(Request $request)
+    {
+        $catalogs=Catalog::with('brand')->orderBy('edicion','DESC')->paginate(9);
+        return response()->json($catalogs);
+    }
+
+
+
     public function getNewsView(){
 
         return view('web.news');

@@ -14,7 +14,10 @@ Route::get('/','FrontController@index');
 Route::get('productos','FrontController@getProducts')->name('products');
 Route::get('productos/{categoria}','FrontController@getProductsOfCategory');
 Route::get('productos/{categoria}/{tipo}','FrontController@getProduct');
-Route::get('catalogos','FrontController@getCatalogs')->name('catalogs');
+
+Route::get('catalogos','FrontController@getCatalogsViews')->name('catalogs');
+Route::get('catalogos-data', 'FrontController@getCatalogs');
+
 Route::get('noticias','FrontController@getNewsView')->name('news');
 Route::get('noticias-data','FrontController@getNews');
 Route::get('noticia/{slug}','FrontController@getNew')->name('new');

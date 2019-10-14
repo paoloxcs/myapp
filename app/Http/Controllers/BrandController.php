@@ -23,6 +23,11 @@ class BrandController extends Controller
        $brands = Brand::orderBy('id','desc')->paginate(6);
        return response()->json($brands);
     }
+    public function getBrandsAll()
+    {
+        $brands = Brand::orderBy('name','asc')->get();
+        return response()->json($brands);
+    }
 
     /**
      * Show the form for creating a new resource.
