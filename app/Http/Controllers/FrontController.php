@@ -82,6 +82,11 @@ class FrontController extends Controller
         $catalogs=Catalog::with('brand')->orderBy('edicion','DESC')->paginate(9);
         return response()->json($catalogs);
     }
+    public function getAllEditions(Request $request)
+    {
+        $editions=Catalog::groupBy('edicion')->orderBy('id', 'DESC')->get();
+        return response()->json($editions);
+    }
 
 
 

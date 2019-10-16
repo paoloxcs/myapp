@@ -8,59 +8,14 @@
 
 	<div class="row mt-3">
 		<section class="col-12 col-md-3">
-			<ul class="list-group">
-			  <li class="list-group-item active">2019</li>
-			  <li class="list-group-item">2018</li>
-			  <li class="list-group-item">2017</li>
-			  <li class="list-group-item">2016</li>
-			  <li class="list-group-item">2015</li>
+			<ul class="list-group" id="editions">
+			  
 			</ul>
 		</section>
 
 		<section class="col-12 col-md-9">
 			<div class="row" id="catalogs">
-				<!-- <section class="col-12 col-sm-6 col-md-4">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Materiales de Sellado</h5>
-						</div>			  
-						<div class="card-body">
-							<img src="http://www.casdel.com.pe/images/servicios/thumbnail_1455811182.jpg" class="img-fluid" alt="">
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>					
-						</div>
-						<div class="card-footer text-center">
-							<a href="#" class="btn btn-primary">Descargar <i class="fas fa-download"></i></a>
-						</div>
-					</div>
-				</section>
-				<section class="col-12 col-sm-6 col-md-4">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Materiales de Sellado</h5>
-						</div>			  
-						<div class="card-body">
-							<img src="http://www.casdel.com.pe/images/servicios/thumbnail_1455811182.jpg" class="img-fluid" alt="">
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>					
-						</div>
-						<div class="card-footer text-center">
-							<a href="#" class="btn btn-primary">Descargar <i class="fas fa-download"></i></a>
-						</div>
-					</div>
-				</section>
-				<section class="col-12 col-sm-6 col-md-4">
-					<div class="card">
-						<div class="card-header">
-							<h5 class="card-title">Materiales de Sellado</h5>
-						</div>			  
-						<div class="card-body">
-							<img src="http://www.casdel.com.pe/images/servicios/thumbnail_1455811182.jpg" class="img-fluid" alt="">
-							<p class="card-text">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>					
-						</div>
-						<div class="card-footer text-center">
-							<a href="#" class="btn btn-primary">Descargar <i class="fas fa-download"></i></a>
-						</div>
-					</div>
-				</section> -->
+				
 			</div>
 		</section>
 
@@ -75,11 +30,13 @@
 <script>
 	$(document).ready(function(){
 		getCatalogs();
+		getEditions();
 	});
 
 	let props = {
 		ruta : '',
 		catalogList : $("#catalogs"),
+		editionList: $("#editions"),
 	}
 
 	function getCatalogs(page = 0) {
@@ -115,6 +72,34 @@
 				});
 				
 				renderPagination(res,'getCatalogs');
+			},
+			error: error =>{
+				console.log(error);
+			}
+		});
+	}
+
+
+	function getEditions(page = 0) {
+		props.ruta = '/editions-data';
+		if(page != 0) props.ruta = `/editions-data/?page=${page}`;
+
+		spinner.show();
+		$.ajax({
+			url: props.ruta,
+			type: 'GET',
+			dataType: 'JSON',
+			success: res =>{
+				console.log(res);
+				spinner.hide();
+				props.editionList.empty();
+				res.data.forEach(edition =>{
+					props.editionList.append(`
+						<li class="list-group-item active">${edition.edicion}</li>
+						`);
+				});
+				
+				renderPagination(res,'getEditions');
 			},
 			error: error =>{
 				console.log(error);
