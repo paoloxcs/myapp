@@ -84,7 +84,9 @@ class FrontController extends Controller
     }
     public function getAllEditions(Request $request)
     {
-        $editions=Catalog::groupBy('edicion')->orderBy('id', 'DESC')->get();
+        // $editions=Catalog::groupBy('edicion')->orderBy('id', 'DESC')->get();
+
+        $editions = Catalog::distinct('edicion')->get()->pluck('edicion');
         return response()->json($editions);
     }
 
