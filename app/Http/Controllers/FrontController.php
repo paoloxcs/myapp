@@ -25,7 +25,10 @@ class FrontController extends Controller
     public function index()
     {
         $slides = Slide::where('status','1')->get();
-        return view('web.index',compact('slides'));
+        $news=Post::where('post_type','=','N')->orderBy('created_at','DESC')->with('images')->limit(3)->get();
+        // $news=Post::where('post_type','=','N')->orderBy('created_at','DESC')->with(['images' => function($query){$query->where('is_main',1);}])->limit(3)->get();
+           
+        return view('web.index',compact('slides','news'));
     }
 
 
