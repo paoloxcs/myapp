@@ -44,23 +44,23 @@
 	<div class="mt-4 news-content">
 		<section class="news-item">
 			<img src="{{asset('images/seal1.jpg')}}" class="img-fluid" alt="">
-			<h5 class="mt-4"> Identificando el Sello Correcto</h5>
-			<p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ratione laborum nesciunt optio enim quasi consectetur dicta reiciendis sint, in commodi a.</p>
-			<a class="text-blue" href="#"> <i class="fas fa-arrow-circle-right"></i> Leer más</a>
+			<h5 class="mt-4"> Asesoría </h5>
+			<p class="mt-3">Ponemos a nuestros asesores comerciales a su servicio quienes darán soluciones técnicas a sus consultas. </p>
+			<!-- <a class="text-blue" href="#"> <i class="fas fa-arrow-circle-right"></i> Leer más</a> -->
 		</section>
 
 		<section class="justify-content-center news-item">
 			<img src="{{asset('images/seal2.jpg')}}" class="img-fluid" alt="">
-			<h5 class="mt-4"> Sellos personalizados </h5>
-			<p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ratione laborum nesciunt optio enim quasi consectetur dicta reiciendis sint, in commodi a.</p>
-			<a class="text-blue" href="#"> <i class="fas fa-arrow-circle-right"></i> Leer más</a>
+			<h5 class="mt-4"> Ventas </h5>
+			<p class="mt-3">Contamos con el mejor equipo de ventas para brindarle la más óptima solución a sus necesidades.</p>
+			
 		</section>
 
 		<section class="justify-content-center news-item">
 			<img src="{{asset('images/seal3.jpg')}}" class="img-fluid" alt="">
-			<h5 class="mt-4"> Catálogos Disponibles </h5>
-			<p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ratione laborum nesciunt optio enim quasi consectetur dicta reiciendis sint, in commodi a.</p>
-			<a class="text-blue" href="#"> <i class="fas fa-arrow-circle-right"></i> Leer más</a>
+			<h5 class="mt-4"> Fabricación </h5>
+			<p class="mt-3">Diseñamos una gran variedad de sellos a medida de acuerdo a sus requerimientos.</p>
+			
 		</section>
 	</div>
 </div>
@@ -70,8 +70,8 @@
 	<div class="container mt-5">
 		<div class="row mt-5">
 			<section class="col-xs-12 col-sm-12 col-md-8 white">
-				<h4>Lorem ipsum dolor sit amet</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque id consequuntur dolor eligendi fugiat facilis, asperiores quidem, perspiciatis blanditiis laudantium, eos, aut! Incidunt, beatae iusto error ab rem animi at!</p>
+				<!-- <h4>Lorem ipsum dolor sit amet</h4> -->
+				<p>Casdel Hnos S.A. es una empresa Peruana con 24 años en el mercado nacional, desde el 18 de Julio de 1991, ofreciendo a nuestros clientes calidad, garantía, confianza, mejores precios, stock amplio, atención rápida y soporte técnico en la distribución de elementos de estanqueidad como: orings, sellos hidráulicos, retenes radiales y fabricaciones de sellos especiales en nuestro torno CNC especial solo para sellos y de sobre medida según el requerimiento de nuestros clientes.</p>
 			</section>
 			<section class="col-xs-12 col-sm-12 col-md-4 col align-self-center">
 				<button type="button" class="btn btn-orange btn-lg col align-self-center">Alcance de Productos</button>
@@ -84,14 +84,17 @@
 	<div class="container mt-5">
 		<div class="row mt-5">
 			<section class="col-xs-12 col-sm-12 col-md-6">				
-				<p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla rerum ratione sapiente provident asperiores molestias, neque, error repellat deleniti amet itaque officia pariatur aliquid dolorem, aut quaerat sequi. Nam, repudiandae.</strong></p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla rerum ratione sapiente provident asperiores molestias, neque, error repellat deleniti amet itaque officia pariatur aliquid dolorem, aut quaerat sequi. Nam, repudiandae.</p>
+				<p>Brindamos soluciones confiables, rentables e inmediatas a nuestros clientes bajo la asesoría técnica de nuestro staff durante proceso de venta y también post venta asegurando el óptimo funcionamiento de nuestros productos.</p>
+				<p>Para el 2020 seremos reconocidos como una marca líder en distribución y fabricación de elementos de estanqueidad como: o´rings, sellos hidráulicos, retenes radiales y fabricaciones de sellos especiales en nuestro torno CNC y de sobre medida, comprometidos con la completa satisfacción de nuestros clientes.</p>
 			</section>
 			<section class="col-xs-12 col-sm-12 col-md-6">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic rerum quasi provident quis voluptate ad ipsam labore 
-				alias quisquam dolorum suscipit, ducimus ratione harum nesciunt. Tenetur, illo doloribus qui quibusdam!</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic rerum quasi provident quis voluptate ad ipsam labore alias quisquam dolorum suscipit, ducimus ratione harum nesciunt. Tenetur, illo doloribus qui quibusdam!</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic rerum quasi provident quis voluptate ad ipsam labore alias quisquam dolorum suscipit, ducimus ratione harum nesciunt. Tenetur, illo doloribus qui quibusdam!</p>
+				<ul>
+					<li>Mejorar continuamente nuestro desempeño y eficacia de nuestro sistema gestión de la calidad.</li>
+					<li>Brindar productos enfocados hacia el cliente, mejorando permanentemente nuestra tecnología para lograr su satisfacción.</li>
+					<li>Cumplir con sus requisitos y exigencias recibidas mediante una constante retroalimentación; evaluando y midiendo la calidad del producto en base a los indicadores de procesos implementados para la mejora continua de la calidad.</li>
+					<li>Definir metas y objetivos medibles, consistentes y dinámicos que permitan seguir y elevar nuestro desempeño empresarial.</li>
+					<li>A proteger la seguridad y salud integral de todos los miembros de la organización mediante la prevención de las lesiones, dolencias, enfermedades e incidentes relacionados con el trabajo.</li>
+				</ul>
 			</section>	
 		</div>
 	</div>

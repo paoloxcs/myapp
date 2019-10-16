@@ -9,6 +9,7 @@ use App\Post;
 use App\Catalog;
 use App\Profile;
 use App\Slide;
+use App\Video;
 use App\TypeApplication;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -120,8 +121,13 @@ class FrontController extends Controller
     public function getEvent(){
         return view('web.event');
     }
-    public function getVideos(){
+    public function getVideosView(){
         return view('web.videos');
+    }
+    public function getVideos(Request $request)
+    {
+        $videos=Video::with('category')->orderBy('created_at','DESC')->paginate(9);
+        return response()->json($videos);
     }
     public function getContact(){
         return view('web.contact');

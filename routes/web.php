@@ -25,7 +25,10 @@ Route::get('noticia/{slug}','FrontController@getNew')->name('new');
 Route::get('eventos','FrontController@getEventsView')->name('events');
 Route::get('eventos-data','FrontController@getEvents');
 Route::get('evento','FrontController@getEvent')->name('event');
-Route::get('videos','FrontController@getVideos')->name('videos');
+
+Route::get('videos','FrontController@getVideosView')->name('videos');
+Route::get('videos-data', 'FrontController@getVideos');
+
 Route::get('contacto','FrontController@getContact')->name('contact');
 
 Route::get('nosotros', function () {
