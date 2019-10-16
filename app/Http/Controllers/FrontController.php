@@ -87,7 +87,7 @@ class FrontController extends Controller
         // $editions=Catalog::groupBy('edicion')->orderBy('id', 'DESC')->get();
 
         $editions = Catalog::distinct('edicion')->get()->pluck('edicion');
-        return response()->json($editions);
+        return response()->json(['editions' => $editions]);
     }
 
 

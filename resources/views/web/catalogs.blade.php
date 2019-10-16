@@ -49,7 +49,7 @@
 			type: 'GET',
 			dataType: 'JSON',
 			success: res =>{
-				console.log(res);
+
 				spinner.hide();
 				props.catalogList.empty();
 				res.data.forEach(catalog =>{
@@ -79,27 +79,22 @@
 		});
 	}
 
-
-	function getEditions(page = 0) {
+	// Obteniendo lista de ediciones 
+	function getEditions() {
 		props.ruta = '/editions-data';
-		if(page != 0) props.ruta = `/editions-data/?page=${page}`;
-
-		spinner.show();
 		$.ajax({
 			url: props.ruta,
 			type: 'GET',
 			dataType: 'JSON',
 			success: res =>{
-				console.log(res);
-				spinner.hide();
+				
 				props.editionList.empty();
-				res.data.forEach(edition =>{
+				res.editions.forEach((edition, index) =>{
 					props.editionList.append(`
-						<li class="list-group-item active">${edition.edicion}</li>
+						<a href="#" class="list-group-item list-group-item-action ${index === 0 ? 'active' : ''}">${edition}</a>
 						`);
 				});
-				
-				renderPagination(res,'getEditions');
+			
 			},
 			error: error =>{
 				console.log(error);
