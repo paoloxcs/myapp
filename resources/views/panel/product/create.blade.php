@@ -48,6 +48,7 @@
 									<input id="file_upload" data-validate="true" type="file" name="url_image" accept="image/*" style="display: none;" onchange="readImage(this,'showImage');">
 								</div>
 								<div class="col-md-12">
+									{{-- Las unidades de medida tambien son renderizados desde la BD --}}
 									<div class="form-group">
 										<h6><i class="fa fa-check"></i> Unidad de medida</h6>
 										<div class="unit_measurements">

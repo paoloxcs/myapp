@@ -9,11 +9,6 @@
 			</div>
 			<div class="modal-body">
 				<section class="col-12">
-				<form action="{{route('parts.template')}}" method="POST">
-					{{ csrf_field() }}
-					<input type="hidden" name="profile_id" id="prof-id" >
-					<input type="submit" class="btn btn-primary" value="Descargar plantilla">
-				</form>
 					<form action="">
 						<div class="form-group">
 							<h6><i class="fa fa-check"></i> Unidad de medida</h6><br>

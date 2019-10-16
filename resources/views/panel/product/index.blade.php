@@ -6,7 +6,7 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<div class="card-title">Perfiles</div>
+					<div class="card-title">Productos</div>
 				</div>
 				<div class="card-body">
 					<div class="row">
@@ -16,7 +16,7 @@
 						<div class="col-xs-12 col-md-4">
 							<!-- Button New -->
 						
-							<button onclick="createProfile()" class="btn btn-orange"><i class="fa fa-plus"></i> Nuevo perfil</button>
+							<button onclick="createProduct()" class="btn btn-orange"><i class="fa fa-plus"></i> Nuevo producto</button>
 						</div>
 					</div>
 					<div class="row mt-2">
@@ -24,14 +24,13 @@
 							<table class="table table-hover table-condensed table-bordered">
 								<thead>
 									<th width="80">Perfil</th>
-									<th>Tipo</th>
+									<th>Nombre</th>
 									<th>Categoría</th>
-									<th>Autor</th>
 									<th>Estado</th>
 									<th>Fecha</th>
 									<th>Acción</th>
 								</thead>
-								<tbody id="profiles">
+								<tbody id="products">
 									
 								</tbody>
 							</table>
@@ -41,49 +40,49 @@
 			</div>
 		</div>
 	</div>
-	@include('panel.profile.create')
-	@include('panel.profile.fluid')
-	@include('panel.profile.parts')
+	@include('panel.product.create')
+	@include('panel.product.fluid')
+	@include('panel.product.parts')
 </div>
 @endsection
 @section('scripts')
 <script>
 	$(document).ready(function(){
-		getProfiles();
+		getProducts();
 	});
 	let props = {
 		ruta : '',
-		tbProfiles: $("#profiles"),
+		tbProducts: $("#products"),
 		modal_create : $("#modal_create"),
 		modal_fluid : $("#modal_fluid"),
 		modal_part : $("#modal_parts")
 	}
-	function getProfiles() {
+	function getProducts(page = 1) {
 		spinner.show();
-		props.ruta = '/panel/profiles-data';
+		props.ruta = `/panel/products-data?page=${page}`;
 		$.ajax({
 			url: props.ruta,
 			type: 'GET',
 			dataType: 'JSON',
 			success: resp =>{
-				props.tbProfiles.empty();
-				resp.profiles.forEach(prof =>{
-					props.tbProfiles.append(`
+				console.log(resp);
+				props.tbProducts.empty();
+				resp.data.forEach(product =>{
+					props.tbProducts.append(`
 						<tr>
 							<td>
-								<img src="${prof.url_image}"/>
+								<img src="${product.url_image}"/>
 							</td>
-							<td>${prof.type}</td>
-							<td>${prof.category.name}</td>
-							<td>${prof.creator.name}</td>
+							<td>${product.name}</td>
+							<td>${product.category.name}</td>
 							<td>
-							${prof.status === 1 ? 'Activo': 'Inactivo'}
+							${product.status === 1 ? 'Activo': 'Inactivo'}
 							</td>
-							<td>${prof.created_at}</td>
+							<td>${product.created_at}</td>
 							<td>
 								<button class="btn btn-info btn-sm" title="Editar"><i class="fas fa-pen"></i></button>
-								<button class="btn btn-orange btn-sm" onclick="getFluid(${prof.id})" title="Compatibilidad de fluidos"><i class="fas fa-water"></i></button>
-								<button class="btn btn-secondary btn-sm" onclick="getParts(${prof.id})" title="Gestionar partes"><i class="fas fa-cogs"></i></button>
+								<button class="btn btn-orange btn-sm" onclick="getFluid(${product.id})" title="Compatibilidad de fluidos"><i class="fas fa-water"></i></button>
+								<button class="btn btn-secondary btn-sm" onclick="getParts(${product.id})" title="Gestionar partes"><i class="fas fa-cogs"></i></button>
 								<button class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
 							</td>
 						</tr>
@@ -96,7 +95,10 @@
 			}
 		});
 	}
-	function getCategpories() {
+
+
+	function getCategories() {
+		// funciona
 		props.ruta = '/panel/categories-all-data';
 		$.ajax({
 			url: props.ruta,
@@ -119,6 +121,7 @@
 		});
 	}
 	function getDimensions() {
+		// funciona
 		props.ruta = '/panel/dimensions-data';
 		$.ajax({
 			url: props.ruta,
@@ -128,9 +131,9 @@
 				$('.dimensions').empty();
 				resp.forEach((dimen, index) =>{
 					$('.dimensions').append(`
-						<div class="form-check form-check-inline p-2">
+						<div class="form-check form-check-inline p-2" title="${dimen.name}">
 							<input type="checkbox" name="dimensions[]" id="inline-checkbox${index}" class="form-check-input" value="${dimen.id}">
-							<label for="inline-checkbox${index}" class="form-check-label">${dimen.sigla}</label>
+							<label for="inline-checkbox${index}"  class="form-check-label">${dimen.sigla}</label>
 						</div>
 						`);
 				});
@@ -141,15 +144,16 @@
 		});
 	}
 	
-	function createProfile() {
+	function createProduct() {
+		// funciona
 		getDimensions();
-		getCategpories();
+		getCategories();
 		props.modal_create.modal();
 	}
-	function saveProfile(form) {
-
+	function saveProduct(form) {
+		// Aun no funciona
 		event.preventDefault();
-		props.ruta = '/panel/profiles';
+		props.ruta = '/panel/products';
 		let formData = new FormData($(form)[0]);
 		formData.set('body', CKEDITOR.instances[form.body.name].getData());
 		$.ajax({
@@ -180,10 +184,11 @@
 
 	}
 	function getFluid(profile_id){
-
+		// Aun no funciona
 		props.modal_fluid.modal();
 	}
 	function getParts(profile_id){
+		// Aun no funciona
 		$('#prof-id').val(profile_id);
 		props.ruta = `/panel/profiles/${profile_id}/parts`;
 		$.ajax({

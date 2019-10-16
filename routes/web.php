@@ -78,18 +78,15 @@ Route::group(['middleware'=>'auth'],function(){
 		
 		// Ruta para productos
 		Route::group(['middleware'=>'permision:manage_products'],function(){
-			Route::get('profiles','ProfileController@index')->name('profiles.index');
-			Route::get('profiles-data','ProfileController@getProfiles');
-			Route::post('profiles','ProfileController@store');
-
-			// Generar plantilla excel para perfiles
-			Route::post('profiles/parts/template', 'ProfileController@generateTemplateExcelParts')->name('parts.template');
+			Route::get('products','ProductController@index')->name('profiles.index');
+			Route::get('products-data','ProductController@getProducts');
+			Route::post('products','ProductController@store');
 
 			// Lista toda las dimensiones
-			Route::get('dimensions-data','ProfileController@getDimensions');
+			Route::get('dimensions-data','ProductController@getDimensions');
 
 			// Ruta para listar partes del perfil | Panel
-			Route::get('profiles/{id}/parts', 'ProfileController@getParts');
+			Route::get('products/{id}/parts', 'ProductController@getParts');
 			
 		});
 		
