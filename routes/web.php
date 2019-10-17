@@ -87,6 +87,12 @@ Route::group(['middleware'=>'auth'],function(){
 
 			// Lista toda las dimensiones
 			Route::get('dimensions-data','ProductController@getDimensions');
+			// Lista de unidades de medida
+			Route::get('measurements-data','ProductController@getMeasurements');
+			// Lista compatibilidades disponibles
+			Route::get('compatibilities-data','ProductController@getCompatibilities');
+
+
 
 			// Ruta para listar partes del perfil | Panel
 			Route::get('products/{id}/parts', 'ProductController@getParts');

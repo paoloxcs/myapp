@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateProductCompatibilitiesTable extends Migration
+class CreateCompatibilitiesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,11 +13,11 @@ class CreateProductCompatibilitiesTable extends Migration
      */
     public function up()
     {
-        Schema::create('product_compatibilities', function (Blueprint $table) {
+        Schema::create('compatibilities', function (Blueprint $table) {
             $table->increments('id');
             $table->string('name');
-            $table->unsignedInteger('product_id');
-            $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+            $table->boolean('level'); // Determina en nivel | 1 = parent 2 = child
+            $table->integer('parent_id')->index(); // Contiene id de child | si es parent sera 0
             //$table->timestamps();
         });
     }
@@ -29,6 +29,6 @@ class CreateProductCompatibilitiesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('product_compatibilities');
+        Schema::dropIfExists('compatibilities');
     }
 }

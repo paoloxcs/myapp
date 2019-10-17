@@ -1,10 +1,10 @@
 <div class="modal" id="modal_create" role="modal">
 	<div class="modal-dialog modal-xl" role="document">
 		<div class="modal-content">
-			<form action="#" onsubmit="saveProfile(this);" method="POST">
+			<form action="#" onsubmit="saveProduct(this);" method="POST">
 				{{ csrf_field() }}
 				<div class="modal-header">
-					<h5><i class="fa fa-plus"></i> Nuevo perfil</h5>
+					<h5><i class="fa fa-plus"></i> Nuevo producto</h5>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close">
 					  <span aria-hidden="true">&times;</span>
 					</button>
@@ -29,7 +29,7 @@
 								</div>
 								<div class="col-xs-12 col-md-4">
 									<div class="form-group">
-										<input type="text" name="type" class="form-control" placeholder="Tipo">
+										<input type="text" name="name" class="form-control" placeholder="Nombre">
 									</div>
 								</div>
 								<div class="col-md-8">
@@ -52,14 +52,7 @@
 									<div class="form-group">
 										<h6><i class="fa fa-check"></i> Unidad de medida</h6>
 										<div class="unit_measurements">
-											<div class="form-check form-check-inline p-2">
-												<input type="checkbox" name="unit_measurements[]" id="inline-checkbox1" class="form-check-input" value="METRIC">
-												<label for="inline-checkbox1" class="form-check-label">Milimetrico</label>
-											</div>
-											<div class="form-check form-check-inline p-2">
-												<input type="checkbox" name="unit_measurements[]" id="inline-checkbox2" class="form-check-input" value="INCH">
-												<label for="inline-checkbox2" class="form-check-label">Pulgada</label>
-											</div>
+											
 										</div>
 									</div>
 								</div>

@@ -56,5 +56,11 @@ class Product extends Model
         return $this->hasMany(ProductPart::class);
     }
 
+    // Mutador para la imagen 
+    public function getUrlImageAttribute($value)
+    {
+        return url('/').'/allimages/'.$value;
+    }
+
 
 }

@@ -55,7 +55,8 @@
 		tbProducts: $("#products"),
 		modal_create : $("#modal_create"),
 		modal_fluid : $("#modal_fluid"),
-		modal_part : $("#modal_parts")
+		modal_part : $("#modal_parts"),
+		
 	}
 	function getProducts(page = 1) {
 		spinner.show();
@@ -65,7 +66,6 @@
 			type: 'GET',
 			dataType: 'JSON',
 			success: resp =>{
-				console.log(resp);
 				props.tbProducts.empty();
 				resp.data.forEach(product =>{
 					props.tbProducts.append(`
@@ -143,15 +143,40 @@
 			}
 		});
 	}
+
+	function getMeasurements() {
+		props.ruta = '/panel/measurements-data';
+		$.ajax({
+			url: props.ruta,
+			type: 'GET',
+			dataType: 'JSON',
+			success: resp =>{
+				$('.unit_measurements').empty();
+				resp.forEach((measurement, index) =>{
+					$('.unit_measurements').append(`
+						<div class="form-check form-check-inline p-2">
+							<input type="checkbox" name="measurements[]" id="inline-checkbox${index}" ${index === 0 ? 'checked': ''} class="form-check-input" value="${measurement.id}">
+							<label for="inline-checkbox${index}" class="form-check-label">${measurement.name}</label>
+						</div>
+					`);
+				});
+			},
+			error: err =>{
+				console.log(err);
+			}
+		});
+
+	}
 	
 	function createProduct() {
 		// funciona
 		getDimensions();
 		getCategories();
+		getMeasurements();
 		props.modal_create.modal();
 	}
 	function saveProduct(form) {
-		// Aun no funciona
+		// Funciona
 		event.preventDefault();
 		props.ruta = '/panel/products';
 		let formData = new FormData($(form)[0]);
@@ -164,7 +189,7 @@
 			contentType: false,
 			processData: false,
 			success: resp =>{
-				getProfiles();
+				getProducts();
 				toastr.success(resp.message);
 				props.modal_create.modal('hide');
 				$(form).trigger('reset');
@@ -183,9 +208,101 @@
 		});
 
 	}
-	function getFluid(profile_id){
-		// Aun no funciona
+	function getFluid(product_id){
+		//Funciona - incompleta
+		console.log(product_id);
+		props.ruta = '/panel/compatibilities-data';
+		$.ajax({
+			url: props.ruta,
+			type: 'GET',
+			dataType: 'JSON',
+			success: resp =>{
+				$('#compatibilities').empty();
+				resp.forEach((compat, index) =>{
+					
+					if(compat.level === 1){
+						$('#compatibilities').append(`
+							<table class="table table-striped table-bordered table-sm">
+								<thead>
+									<tr>
+									<th scope="col">${compat.name}</th>
+									<th scope="col">Dinámico</th>
+									<th scope="col">Estático</th>
+									</tr>
+								</thead>
+								<tbody>
+									${renderChilds(resp,compat.id)}
+								</tbody>
+							</table>
+						`);
+
+					}
+				});
+			},
+			error: err =>{
+				console.log(err);
+			}
+		});
 		props.modal_fluid.modal();
+	}
+
+	function renderChilds(compatibilities, compat_id) {
+		let childs = compatibilities.filter(compat =>{
+			return compat.parent_id === compat_id;
+		});
+
+		let template = '';
+		childs.forEach(child =>{
+			template += `
+			<tr>
+				<td scope="row"> ${child.name}</td>
+				<td>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="oil" id="oil1" value="option1" checked>
+					<label class="form-check-label" for="oil1">
+					<i class="fas fa-check text-success"></i>
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="oil" id="oil2" value="option2">
+					<label class="form-check-label" for="oil2">
+					<i class="fas fa-dot-circle text-primary"></i>
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="oil" id="oil3" value="option3">
+					<label class="form-check-label" for="exampleRadios3">
+						<i class="fas fa-times text-danger"></i>
+					</label>
+				</div>
+				</td>
+				<td>
+
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="other" id="other1" value="option1" checked>
+					<label class="form-check-label" for="other1">
+					<i class="fas fa-check text-success"></i>
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="other" id="other2" value="option2">
+					<label class="form-check-label" for="other2">
+					<i class="fas fa-dot-circle text-primary"></i>
+					</label>
+				</div>
+				<div class="form-check">
+					<input class="form-check-input" type="radio" name="other" id="other3" value="option3">
+					<label class="form-check-label" for="other3">
+						<i class="fas fa-times text-danger"></i>
+					</label>
+				</div>					      	
+				</td>
+			</tr>
+			`;
+		});
+		
+	return template;
+
 	}
 	function getParts(profile_id){
 		// Aun no funciona

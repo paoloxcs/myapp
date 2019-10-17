@@ -7,18 +7,17 @@ use Illuminate\Database\Eloquent\Model;
 class ProductComatibility extends Model
 {
     protected $table = 'product_compatibilities';
-    protected $fillable = ['name','product_id'];
+    protected $fillable = ['name','static','dynamic','compatibility_id','product_id'];
     public $timestamps = false;
 
-    // Relacion con producto
-    public function product()
+    // Relacion con la compatibilidad
+    public function compatibility()
     {
-        return $this->belongsTo(Product::class,'product_id');
+        return $this->belongsTo(ProductComatibility::class,'compatibility_id');
     }
 
-    // Relacion con el detalle
-    public function details()
+    public function product()
     {
-        return $this->hasMany(ProductComatibilityDetail::class);
+        return $this->belongsTo(Product::class, 'product_id');
     }
 }
