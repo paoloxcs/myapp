@@ -33,7 +33,7 @@ class Product extends Model
     // Relacion con compatibilidad
     public function compatibilities()
     {
-        return $this->hasMany(ProductComatibility::class);
+        return $this->hasMany(ProductCompatibility::class);
     }
     // Relacion con documentos (pdf)
     public function docs()

@@ -85,6 +85,12 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::get('products-data','ProductController@getProducts');
 			Route::post('products','ProductController@store');
 
+			Route::get('products/{id}/edit', 'ProductController@edit');
+
+			Route::get('products/{id}/compatibility', 'ProductController@editCompatibility');
+			Route::put('products/compatibility/{id}','ProductController@storeCompatibility')->name('products.compatibility');
+
+
 			// Lista toda las dimensiones
 			Route::get('dimensions-data','ProductController@getDimensions');
 			// Lista de unidades de medida

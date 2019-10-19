@@ -80,8 +80,8 @@
 							</td>
 							<td>${product.created_at}</td>
 							<td>
-								<button class="btn btn-info btn-sm" title="Editar"><i class="fas fa-pen"></i></button>
-								<button class="btn btn-orange btn-sm" onclick="getFluid(${product.id})" title="Compatibilidad de fluidos"><i class="fas fa-water"></i></button>
+								<a href="/panel/products/${product.id}/edit" class="btn btn-info btn-sm" title="Editar"><i class="fas fa-pen"></i></a>
+								<a href="/panel/products/${product.id}/compatibility" class="btn btn-orange btn-sm" title="Compatibilidad de fluidos"><i class="fas fa-water"></i></a>
 								<button class="btn btn-secondary btn-sm" onclick="getParts(${product.id})" title="Gestionar partes"><i class="fas fa-cogs"></i></button>
 								<button class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
 							</td>

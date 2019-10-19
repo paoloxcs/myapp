@@ -8,6 +8,7 @@ use App\Dimension;
 use App\Measurement;
 use App\Compatibility;
 use Illuminate\Http\Request;
+use App\ProductCompatibility;
 
 class ProductController extends Controller
 {
@@ -66,6 +67,62 @@ class ProductController extends Controller
 
         return response()->json(['message'  =>  'Registro exitoso'], 201);
 
+    }
+
+    public function edit($id)
+    {
+        $product = Product::findOrFail($id);
+        return view('panel.product.edit', compact('product'));
+    }
+
+    public function editCompatibility($id)
+    {
+        $product = Product::with('compatibilities')->findOrFail($id);
+        $compatibilities = Compatibility::all();
+        return view('panel.product.compatibility', compact('product','compatibilities'));
+    }
+
+    public function storeCompatibility(Request $request, $id)
+    {
+
+
+        foreach($request->compats as $compat_id){
+            
+            $compat1 = ProductCompatibility::firstOrCreate(
+                [
+                    'name' => 'compat_static_'.$compat_id
+                ],
+                [
+                'type_field' => 'STATIC',
+                'product_id' => $id,
+                'value_field' => $request["compat_static_$compat_id"],
+                'compatibility_id' => $compat_id,
+            ]);
+
+            $compat1->value_field = $request["compat_static_$compat_id"];
+            $compat1->save();
+
+
+            $compat2 = ProductCompatibility::firstOrCreate(
+                [
+                    'name' => 'compat_dynamic_'.$compat_id,
+                ],
+                [
+                'type_field' => 'DYNAMIC',
+                'product_id' => $id,
+                'value_field' => $request["compat_dynamic_$compat_id"],
+                'compatibility_id' => $compat_id
+            ]);
+
+
+            $compat2->value_field = $request["compat_dynamic_$compat_id"];
+            $compat2->save();
+
+
+        }
+
+
+        return back()->with(['message' => 'Los cambios se guardaron con éxito']);
     }
 
     public function getParts($profile_id)

@@ -15,9 +15,10 @@ class CreateProductCompatibilitiesTable extends Migration
     {
         Schema::create('product_compatibilities', function (Blueprint $table) {
             $table->increments('id');
+            $table->string('name', 45);
             // Nota: los valores de los campos de static y dynamic varian entre:
-            $table->boolean('static',1)->comment('1 = Recomendado, 2 = Posible, 3 = No adecuado'); 
-            $table->boolean('dynamic',1)->comment('1 = Recomendado, 2 = Posible, 3 = No adecuado');
+            $table->string('type_field',20); 
+            $table->boolean('value_field',1)->comment('1 = Recomendado, 2 = Posible, 3 = No adecuado');
 
             $table->unsignedInteger('product_id');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
