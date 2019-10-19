@@ -132,6 +132,13 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::post('slides','SlideController@store');
 			Route::put('slides/{id}','SlideController@update');
 			Route::get('slides/{id}/destroy', 'SlideController@destroy');
+
+			//Ruta para Isos
+			Route::get('isos', 'IsoController@index')->name('iso.index');
+			Route::get('isos-data','IsoController@getIsos');
+			Route::post('isos','IsoController@store');
+			Route::put('isos/{id}', 'IsoController@update');
+			Route::get('isos/{id}/destroy','IsoController@destroy');
 		});
 
 		
