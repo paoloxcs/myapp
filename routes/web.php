@@ -101,7 +101,8 @@ Route::group(['middleware'=>'auth'],function(){
 
 
 			// Ruta para listar partes del perfil | Panel
-			Route::get('products/{id}/parts', 'ProductController@getParts');
+			Route::get('productpart/{id}', 'ProductPartController@index');
+			//Route::get('products/{id}/parts', 'ProductController@getParts');
 			
 		});
 		
