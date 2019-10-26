@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use stdClass;
 use Validator;
 use App\Product;
 use App\Dimension;
@@ -125,8 +126,35 @@ class ProductController extends Controller
         return back()->with(['message' => 'Los cambios se guardaron con éxito']);
     }
 
-    public function getParts($profile_id)
+    // Metodo que permite retornar la vista de partes del producto
+    public function ediParts($id)
     {
+        $product = Product::with('dimensions','measurements','parts')->findOrFail($id);
+        return view('panel.product.parts', compact('product'));
+    }
+
+    // Metodo que permite guardar partes del producto
+    public function storeParts(Request $request, $id)
+    {
+        // Busca el producto mediante el id
+        $product = Product::with('dimensions')->find($id);
+        
+        // Crea una instancia de stdClass para acumular las dimensiones
+        $object = new stdClass;
+        // Itera las dimensiones del producto y obtiene los campos del formulario
+        foreach($product->dimensions as $index => $dimen){
+            // Agrega la dimension del formulario al objeto con el nombre ejemplo: dimension_0
+            $object->{'dimension_'.$index} = $request[$dimen->slug];
+        }
+
+        // Guardar en la base de datos 
+        $product->parts()->create([
+            'part_nro' => $request->part_nro,
+            'dimensions' => json_encode($object), // el campo dimensions de la tabla partes recibe un objeto JSON
+            'measurement_id' => $request->measurement
+        ]);
+
+        return back()->with(['message' => 'Registro guardado']);
 
     }
 

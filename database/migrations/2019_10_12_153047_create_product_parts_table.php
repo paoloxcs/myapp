@@ -15,8 +15,8 @@ class CreateProductPartsTable extends Migration
     {
         Schema::create('product_parts', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('key_field');
-            $table->string('value_field');
+            $table->string('part_nro', 25);
+            $table->longText('dimensions')->nullable();
             $table->unsignedInteger('measurement_id');
             $table->unsignedInteger('product_id');
             

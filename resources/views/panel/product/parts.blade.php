@@ -1,91 +1,96 @@
-<div class="modal" id="modal_parts" role="modal">
-	<div class="modal-dialog modal-xl" role="document">
-		<div class="modal-content">
-			<div class="modal-header">
-				<h5><i class="fas fa-water"></i> Gestionar Partes</h5>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
-				  <span aria-hidden="true">&times;</span>
-				</button>
-			</div>
-			<div class="modal-body">
-				<section class="col-12">
-					<form action="">
-						<div class="form-group">
-							<h6><i class="fa fa-check"></i> Unidad de medida</h6><br>
-							<div id="unit_measurements">
-
+@extends('layouts.app')
+@section('title','Gestion de partes del producto')
+@section('content')
+<div class="container">
+	@if(session('message'))
+    <div class="alert alert-success" role="alert">
+        <span> {{session('message')}} </span>
+    </div>
+	@endif
+	<div class="row mt-3">
+		<div class="col-md-12">
+			<div class="card">
+				<div class="card-header">
+					<div class="card-title">Gestion de partes del producto</div>
+				</div>
+				<div class="card-body">
+					<form action="{{route('products.parts.store', $product->id)}}" method="POST">
+						{{ csrf_field() }}
+						{{ method_field('PUT') }}
+						<div class="row">
+							<div class="form-group">
+								@foreach($product->measurements as $index => $measure)
+									<div class="form-check form-check-inline">
+										<input class="form-check-input" type="radio" name="measurement" id="measurement{{$measure->id}}" value="{{$measure->id}}" {{$index == 0 ? 'checked' : ''}}>
+										<label class="form-check-label" for="measurement{{$measure->id}}">{{$measure->name}}</label>
+									</div>
+								@endforeach
 							</div>
+							<table class="table table-striped table-bordered table-sm">
+								<tbody>
+									<tr>
+										<td>
+											<div class="form-group">
+												<input class="form-control form-control-sm" type="text" name="part_nro" placeholder="N° parte" required>
+											</div>
+										</td>
+										@foreach($product->dimensions as $dimen)
+										<td>
+											<div class="form-group">
+												<input class="form-control form-control-sm" type="text" name="{{$dimen->slug}}" placeholder="{{$dimen->sigla}}" required>
+											</div>
+										</td>
+										@endforeach
+									</tr>
+								</tbody>
+							</table>
+	
+							<div class="form-group">
+									<button type="submit" class="btn btn-orange btn-sm"><i class="fa fa-save"></i> Agregar</button>
+							</div>
+	
 						</div>
-						<h6>Agregar Parte</h6>
-						<table class="table table-striped table-bordered table-sm">
-							<tbody>
-								<tr>
-									<td>
-										<div class="form-group">
-											<input class="form-control form-control-sm" type="text" name="part_nro" placeholder="nro part">
-										</div>
-									</td>
-									<td>						  				
-										<input type="file" class="form-control-file" name="file_pdf" id="exampleFormControlFile1">
-									</td>
-									
-
-									<td width="8%">
-										<button type="submit" class="btn btn-orange btn-sm"><i class="fa fa-save"></i> Guardar</button>
-									</td>						  			
-								</tr>
-							</tbody>
-						</table>
-						<div id="dimensions">
-								{{-- <td>
-									<div class="form-group">
-										<input class="form-control form-control-sm" type="text" placeholder="Ød1">
-									</div>
-								</td>
-								<td>
-									<div class="form-group">
-										<input class="form-control form-control-sm" type="text" placeholder="ØD1">
-									</div>
-								</td><td>
-									<div class="form-group">
-										<input class="form-control form-control-sm" type="text" placeholder="L1">
-									</div>
-								</td> --}}
-							</div>
 
 					</form>
-					
-					<h6>Lista de partes ingresadas</h6>
-					<table class="table table-striped table-bordered table-sm">
-						 <thead>
-						    <tr>
-						      <th scope="col">Tipo</th>
+					<hr>
+					<div class="row">
+						<h6>Lista de partes ingresadas</h6>
+						<table class="table table-striped table-bordered table-sm">
+								<thead>
+								<tr>
+									<th scope="col">N° parte</th>
+									@foreach ($product->dimensions as $dimen2)
+										<th scope="col">{{$dimen2->sigla}}</th>
+									@endforeach
+									<th>U. Medida</th>
+									<th width="10%" scope="col">Acción</th>
+								</tr>
+								</thead>
+								<tbody>
+									@foreach ($product->parts()->orderBy('id','DESC')->get() as $part)
+										<tr>
+											<td> {{$part->part_nro}} </td>
+											
+											@foreach (json_decode($part->dimensions) as $index => $part_dimen)
+												<td> {{$part_dimen}}</td>
+											@endforeach
+											<td> {{$part->measurement->name}} </td>
+											<td align="center">							  	
+												<a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+											</td>
 
-						      <th scope="col">Ød1</th>
-						      <th scope="col">ØD1</th>
-							  <th scope="col">L1</th>
-							  <th>U. Medida</th>
+										</tr>
+									@endforeach
+									
+								</tbody>
+						</table>
+					</div>
+				</div>
+				<div class="card-footer">
 
-						      <th width="10%" scope="col">Acción</th>
-						    </tr>
-						  </thead>
-						  <tbody>
-						  	<td><a href="#" class="orange-text"><i class="far fa-file-pdf fa-2x"></i></a> 0754300</td>
-						  	<td>16</td>
-						  	<td>26</td>
-						  	<td>8</td>
-							<td>METRIC</td>
-						  	<td align="center">							  	
-							  	<a href="#" class="btn btn-sm btn-danger"><i class="fas fa-times"></i></a>
-						  	</td>
-						  	
-						  </tbody>
-					</table>					
-				</section>
-			</div>
-			<div class="modal-footer">
-				{{-- <button type="submit" class="btn btn-orange col-md-4 mx-auto"><i class="fa fa-save"></i> Guardar</button> --}}
+				</div>
 			</div>
 		</div>
 	</div>
 </div>
+@endsection
