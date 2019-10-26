@@ -80,6 +80,7 @@
             <li><a href="{{route('videos.index')}}"><i class="fas fa-sliders-h"></i> Videos</a></li>
             <li><a href="{{route('catalog.index')}}"><i class="fas fa-sliders-h"></i> Catálogos</a></li>
             <li><a href="{{route('slide.index')}}"><i class="fas fa-sliders-h"></i> Slides</a></li>
+            <li><a href="{{route('iso.index')}}"><i class="fas fa-sliders-h"></i> Certificaciones</a></li>
           </ul>
         </div>
         
