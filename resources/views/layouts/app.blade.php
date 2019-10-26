@@ -81,6 +81,7 @@
             <li><a href="{{route('catalog.index')}}"><i class="fas fa-sliders-h"></i> Catálogos</a></li>
             <li><a href="{{route('slide.index')}}"><i class="fas fa-sliders-h"></i> Slides</a></li>
             <li><a href="{{route('iso.index')}}"><i class="fas fa-sliders-h"></i> Certificaciones</a></li>
+            <li><a href="{{route('sede.index')}}"><i class="fas fa-sliders-h"></i> Sedes</a></li>
           </ul>
         </div>
         

@@ -10,6 +10,7 @@ use App\Catalog;
 use App\Profile;
 use App\Slide;
 use App\Video;
+use App\Sede;
 use App\TypeApplication;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -132,7 +133,12 @@ class FrontController extends Controller
         $videos=Video::with('category')->orderBy('created_at','DESC')->paginate(9);
         return response()->json($videos);
     }
-    public function getContact(){
+    public function getContactView(){
         return view('web.contact');
+    }
+    public function getSedes(Request $request)
+    {
+        $sedes=Sede::orderBy('created_at', 'DESC')->paginate(9);
+        return response()->json($sedes);
     }
 }

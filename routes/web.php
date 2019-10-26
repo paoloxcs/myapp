@@ -29,7 +29,8 @@ Route::get('evento','FrontController@getEvent')->name('event');
 Route::get('videos','FrontController@getVideosView')->name('videos');
 Route::get('videos-data', 'FrontController@getVideos');
 
-Route::get('contacto','FrontController@getContact')->name('contact');
+Route::get('contacto','FrontController@getContactView')->name('contact');
+Route::get('sedes-data','FrontController@getSedes');
 
 Route::get('nosotros', function () {
     return view('web.about');
@@ -153,6 +154,13 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::post('isos','IsoController@store');
 			Route::put('isos/{id}', 'IsoController@update');
 			Route::get('isos/{id}/destroy','IsoController@destroy');
+
+			//Ruta para Sedes
+			Route::get('sedes','SedeController@index')->name('sede.index');
+			Route::get('sedes-data','SedeController@getSedes');
+			Route::post('sedes','SedeController@store');
+			Route::put('sedes/{id}','SedeController@update');
+			Route::get('sedes/{id}/destroy','SedeController@destroy');
 		});
 
 		
