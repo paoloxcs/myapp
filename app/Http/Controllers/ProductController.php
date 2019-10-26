@@ -5,8 +5,10 @@ namespace App\Http\Controllers;
 use stdClass;
 use Validator;
 use App\Product;
+use App\Category;
 use App\Dimension;
 use App\Measurement;
+use App\ProductPart;
 use App\Compatibility;
 use Illuminate\Http\Request;
 use App\ProductCompatibility;
@@ -72,8 +74,11 @@ class ProductController extends Controller
 
     public function edit($id)
     {
-        $product = Product::findOrFail($id);
-        return view('panel.product.edit', compact('product'));
+        $categories = Category::all();
+        $measurements = Measurement::all();
+        $dimensions = Dimension::all();
+        $product = Product::with('measurements','dimensions')->findOrFail($id);
+        return view('panel.product.edit', compact('categories','product','measurements','dimensions'));
     }
 
     public function editCompatibility($id)
@@ -156,6 +161,15 @@ class ProductController extends Controller
 
         return back()->with(['message' => 'Registro guardado']);
 
+    }
+
+    // Metodo para borrar parte del producto
+    public function destroyPart($part_id)
+    {
+        $part = ProductPart::findOrFail($part_id);
+        $part->delete();
+
+        return back()->with(['message' => 'Registro eliminado']);
     }
 
     public function getMeasurements()
