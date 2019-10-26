@@ -7,7 +7,9 @@ use Illuminate\Database\Eloquent\Model;
 class ProductPart extends Model
 {
     protected $table = 'product_parts';
-    protected $fillable = ['key_field','value_field','measurement_id','product_id'];
+    protected $fillable = ['part_nro','dimensions','measurement_id','product_id'];
+
+    public $timestamps = false;
 
     // Ralcion con producto
     public function product()

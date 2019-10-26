@@ -42,7 +42,6 @@
 	</div>
 	@include('panel.product.create')
 	@include('panel.product.fluid')
-	@include('panel.product.parts')
 </div>
 @endsection
 @section('scripts')
@@ -80,9 +79,9 @@
 							</td>
 							<td>${product.created_at}</td>
 							<td>
-								<a href="/panel/products/${product.id}/edit" class="btn btn-info btn-sm" title="Editar"><i class="fas fa-pen"></i></a>
-								<a href="/panel/products/${product.id}/compatibility" class="btn btn-orange btn-sm" title="Compatibilidad de fluidos"><i class="fas fa-water"></i></a>
-								<button class="btn btn-secondary btn-sm" onclick="getParts(${product.id})" title="Gestionar partes"><i class="fas fa-cogs"></i></button>
+								<a href="/panel/products/${product.id}/edit" class="btn btn-info btn-sm" title="Editar"><i class="fas fa-pen"></i> Editar</a>
+								<a href="/panel/products/${product.id}/compatibility" class="btn btn-orange btn-sm" title="Compatibilidad de fluidos"><i class="fas fa-water"></i> Compatibilidad</a>
+								<a href="/panel/products/${product.id}/parts" class="btn btn-secondary btn-sm" title="Gestionar partes"><i class="fas fa-cogs"></i> Partes</a>
 								<button class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
 							</td>
 						</tr>
@@ -175,6 +174,7 @@
 		getMeasurements();
 		props.modal_create.modal();
 	}
+	
 	function saveProduct(form) {
 		// Funciona
 		event.preventDefault();
@@ -207,141 +207,6 @@
 
 		});
 
-	}
-	function getFluid(product_id){
-		//Funciona - incompleta
-		console.log(product_id);
-		props.ruta = '/panel/compatibilities-data';
-		$.ajax({
-			url: props.ruta,
-			type: 'GET',
-			dataType: 'JSON',
-			success: resp =>{
-				$('#compatibilities').empty();
-				resp.forEach((compat, index) =>{
-					
-					if(compat.level === 1){
-						$('#compatibilities').append(`
-							<table class="table table-striped table-bordered table-sm">
-								<thead>
-									<tr>
-									<th scope="col">${compat.name}</th>
-									<th scope="col">Dinámico</th>
-									<th scope="col">Estático</th>
-									</tr>
-								</thead>
-								<tbody>
-									${renderChilds(resp,compat.id)}
-								</tbody>
-							</table>
-						`);
-
-					}
-				});
-			},
-			error: err =>{
-				console.log(err);
-			}
-		});
-		props.modal_fluid.modal();
-	}
-
-	function renderChilds(compatibilities, compat_id) {
-		let childs = compatibilities.filter(compat =>{
-			return compat.parent_id === compat_id;
-		});
-
-		let template = '';
-		childs.forEach(child =>{
-			template += `
-			<tr>
-				<td scope="row"> ${child.name}</td>
-				<td>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="oil" id="oil1" value="option1" checked>
-					<label class="form-check-label" for="oil1">
-					<i class="fas fa-check text-success"></i>
-					</label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="oil" id="oil2" value="option2">
-					<label class="form-check-label" for="oil2">
-					<i class="fas fa-dot-circle text-primary"></i>
-					</label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="oil" id="oil3" value="option3">
-					<label class="form-check-label" for="exampleRadios3">
-						<i class="fas fa-times text-danger"></i>
-					</label>
-				</div>
-				</td>
-				<td>
-
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="other" id="other1" value="option1" checked>
-					<label class="form-check-label" for="other1">
-					<i class="fas fa-check text-success"></i>
-					</label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="other" id="other2" value="option2">
-					<label class="form-check-label" for="other2">
-					<i class="fas fa-dot-circle text-primary"></i>
-					</label>
-				</div>
-				<div class="form-check">
-					<input class="form-check-input" type="radio" name="other" id="other3" value="option3">
-					<label class="form-check-label" for="other3">
-						<i class="fas fa-times text-danger"></i>
-					</label>
-				</div>					      	
-				</td>
-			</tr>
-			`;
-		});
-		
-	return template;
-
-	}
-	function getParts(profile_id){
-		// Aun no funciona
-		$('#prof-id').val(profile_id);
-		props.ruta = `/panel/profiles/${profile_id}/parts`;
-		$.ajax({
-			url: props.ruta,
-			type: 'GET',
-			dataType: 'JSON',
-			success: resp =>{
-				// Limpiar y agregar unidades de medida del perfil.
-				$('#unit_measurements').empty();
-				resp.unit_measurements.forEach((unit,index) =>{
-					$('#unit_measurements').append(`
-					<div class="form-check form-check-inline">
-						<input class="form-check-input" type="radio" name="unit_measurememt" id="inlineRadio${index}" value="${unit.name}" ${unit.enabled == 1 ? 'checked': 'disabled'} >
-						<label class="form-check-label" for="inlineRadio${index}">${unit.name}</label>
-					</div>
-					`);
-				});
-
-				// Limpiar y agregar dimensiones del perfil.
-				$('#dimensions').empty();
-				resp.dimensions.forEach((dimen, index) =>{
-					$('#dimensions').append(`
-					<td>
-						<div class="form-group">
-							<input class="form-control form-control-sm" type="text" placeholder="${dimen.dimension.sigla}">
-						</div>
-					</td>
-					`);
-				});
-
-			},
-			error: err =>{
-				console.log(err);
-			}
-		});
-		props.modal_part.modal();
 	}
 </script>
 @endsection

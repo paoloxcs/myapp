@@ -91,12 +91,18 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::put('products/compatibility/{id}','ProductController@storeCompatibility')->name('products.compatibility');
 
 
+			// Gestion de partes del producto
+			Route::get('products/{id}/parts','ProductController@ediParts');
+			Route::put('products/parts/{id}','ProductController@storeParts')->name('products.parts.store');
+
+
 			// Lista toda las dimensiones
 			Route::get('dimensions-data','ProductController@getDimensions');
 			// Lista de unidades de medida
 			Route::get('measurements-data','ProductController@getMeasurements');
 			// Lista compatibilidades disponibles
 			Route::get('compatibilities-data','ProductController@getCompatibilities');
+
 
 
 
