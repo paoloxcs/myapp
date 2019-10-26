@@ -94,6 +94,7 @@ Route::group(['middleware'=>'auth'],function(){
 			// Gestion de partes del producto
 			Route::get('products/{id}/parts','ProductController@ediParts');
 			Route::put('products/parts/{id}','ProductController@storeParts')->name('products.parts.store');
+			Route::get('parts/{part_id}/destroy','ProductController@destroyPart')->name('parts.destroy');
 
 
 			// Lista toda las dimensiones

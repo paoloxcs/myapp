@@ -76,7 +76,7 @@
 											@endforeach
 											<td> {{$part->measurement->name}} </td>
 											<td align="center">							  	
-												<a href="#" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
+												<a href="{{route('parts.destroy', $part->id)}}" onclick="return confirm('¿Seguro de eliminar el registro?')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a>
 											</td>
 
 										</tr>

@@ -67,58 +67,6 @@
 									</div>
 									<hr>
 								</div>
-								
-								{{-- <div class="col-md-12">
-									<h6><i class="fa fa-check"></i> Condiciones de operación</h6>
-									<div class="row">
-										<div class="col-xs-12 col-md-6">
-											<div class="form-group">
-												<label for="max_pressure">Presión máxima</label>
-												<div class="input-group input-group-sm">
-													<input type="text" name="max_pressure" class="form-control">
-													<div class="input-group-append">
-														<span class="input-group-text">bar</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-6">
-											<div class="form-group">
-												<label for="max_speed">Velocidad máxima</label>
-												<div class="input-group input-group-sm">
-													<input type="text" name="max_speed" class="form-control">
-													<div class="input-group-append">
-														<span class="input-group-text">mt/sec</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-									<div class="row">
-										<div class="col-xs-12 col-md-6">
-											<div class="form-group">
-												<label for="min_temp">Temperatura mínima</label>
-												<div class="input-group input-group-sm">
-													<input type="text" name="min_temp" class="form-control">
-													<div class="input-group-append">
-														<span class="input-group-text">°C</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="col-xs-12 col-md-6">
-											<div class="form-group">
-												<label for="max_temp">Temperatura máxima</label>
-												<div class="input-group input-group-sm">
-													<input type="text" name="max_temp" class="form-control">
-													<div class="input-group-append">
-														<span class="input-group-text">°C</span>
-													</div>
-												</div>
-											</div>
-										</div>
-									</div>
-								</div> --}}
 							</div>
 						</div>
 						<div class="col-xs-12 col-md-6">
