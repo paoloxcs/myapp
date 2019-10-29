@@ -20,8 +20,8 @@
 			      </div>
 			      <div id="colapso1" class="collapse show" aria-labelledby="head2" data-parent="#accordionExample">
 			        <div class="card-body d-flex flexwrapper">
-			  	      @foreach($category->profiles as $profile)
-			  	        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('productos/'.$category->slug.'/'.$profile->slug)}}">{{$profile->type}}</a></section>
+			  	      @foreach($category->products as $product)
+			  	        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('productos/'.$category->slug.'/'.$product->slug)}}">{{$product->type}}</a></section>
 			  	      @endforeach
 			        </div>
 			      </div>
@@ -62,31 +62,31 @@
 			</div>
 
 			<div class="row mt-3 d-flex flex-wrap">
-				@foreach($category->profiles as $profile)
+				@foreach($category->products as $product)
 					<section class="profile">
-						<a href="{{url('productos/'.$category->slug.'/'.$profile->slug)}}">
+						<a href="{{url('productos/'.$category->slug.'/'.$product->slug)}}">
 							<div class="row d-flex align-items-center">
-								<div class="col-6"><img src="{{$profile->url_image}}" class="img-fluid img-thumbnail" alt=""></div>
-								<div class="col-6"><h3>{{$profile->type}}</h3></div>
+								<div class="col-6"><img src="{{$product->url_image}}" class="img-fluid img-thumbnail" alt=""></div>
+								<div class="col-6"><h3>{{$product->name}}</h3></div>
 							</div>
 							<div class="row mt-2">
 								<div class="col-12">
-									<table class="table table-sm table-condensed table-borderless">
+									{{-- <table class="table table-sm table-condensed table-borderless">
 										<tbody>
 											<tr>
 												<td><small>Presión Máxima</small></td>
-												<td><small class="orange-text">{{$profile->max_pressure}} Bar</small></td>
+												<td><small class="orange-text">{{$product->max_pressure}} Bar</small></td>
 											</tr>
 											<tr>
 												<td><small>Rango Temperatura</small></td>
-												<td><small class="orange-text">{{$profile->min_temp_range}}° a {{$profile->max_temp_range}}°</small></td>
+												<td><small class="orange-text">{{$product->min_temp_range}}° a {{$product->max_temp_range}}°</small></td>
 											</tr>
 											<tr>
 												<td><small>Velocidad Máxima</small></td>
-												<td><small class="orange-text">{{$profile->max_speed}}mt/sec</small></td>
+												<td><small class="orange-text">{{$product->max_speed}}mt/sec</small></td>
 											</tr>
 										</tbody>
-									</table>
+									</table> --}}
 									
 								</div>
 							</div>

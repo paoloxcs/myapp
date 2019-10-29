@@ -20,8 +20,8 @@
 			      </div>
 			      <div id="colapso1" class="collapse show" aria-labelledby="head2" data-parent="#accordionExample">
 			        <div class="card-body d-flex flexwrapper">
-			  	      @foreach($category->profiles as $prof)
-			  	        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('productos/'.$category->slug.'/'.$prof->slug)}}">{{$prof->type}}</a></section>
+			  	      @foreach($category->products as $product)
+			  	        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('productos/'.$category->slug.'/'.$product->slug)}}">{{$product->name}}</a></section>
 			  	      @endforeach
 			        </div>
 			      </div>
@@ -45,7 +45,7 @@
 
 		<section class="col-xs-12 col-sm-12 col-md-9">
 			<div class="row">
-				<section class="col-12"><h3><strong>{{$profile->type}}</h3></strong></section>
+				<section class="col-12"><h3><strong>{{$product->name}}</h3></strong></section>
 			</div>
 
 			<div class="row mt-2">
@@ -56,10 +56,10 @@
 
 			<div class="row mt-4">
 				<section class="col-9">
-					<p class="graytext">{!! nl2br($profile->body) !!}</p>					
+					<p class="graytext">{!! nl2br($product->body) !!}</p>					
 				</section>
 				<section class="col-3">
-					<img src="{{$profile->url_image}}" class="img-fluid img-thumbnail" alt="">
+					<img src="{{$product->url_image}}" class="img-fluid img-thumbnail" alt="">
 				</section>
 			</div>
 
@@ -80,10 +80,10 @@
 					  		<form>
 							<div class="col-auto mb-2">
 								<label for="unit_measurement">Unida de medida</label><br>
-								@foreach($profile->unit_measurements as $index => $unit_m)
+								@foreach($product->measurements as $index => $measurement)
 									<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="unit_measurememt" id="inlineRadio{{$index}}" value="{{$unit_m->id}}" {{$unit_m->enabled == 1 ? 'checked' : 'disabled'}}>
-									<label class="form-check-label" for="inlineRadio{{$index}}">{{$unit_m->name}}</label>
+									<input class="form-check-input" type="radio" name="unit_measurememt" id="inlineRadio{{$index}}" value="{{$measurement->id}}" {{$index == 0 ? 'checked' : 'disabled'}}>
+									<label class="form-check-label" for="inlineRadio{{$index}}">{{$measurement->name}}</label>
 									</div>
 								@endforeach
 							</div>
@@ -98,7 +98,7 @@
 								  </div>
 								
 
-					  		    @foreach($profile->dimensions as $dimen)
+					  		    {{-- @foreach($product->dimensions as $dimen)
 					  		    <div class="col-auto">					  		      
 					  		      <div class="input-group mb-2">
 					  		        <div class="input-group-prepend">
@@ -107,7 +107,7 @@
 					  		        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="valor">
 					  		      </div>
 					  		    </div>
-								  @endforeach
+								  @endforeach --}}
 
 					  		    <div class="col-auto">
 					  		      <button type="submit" class="btn btn-orange mb-2">Actualizar</button>
@@ -121,12 +121,12 @@
 					  		<section class="col-12">
 					  		<table class="table">
 					  		  <thead class="thead-dark">
-					  		    <tr>
+					  		    {{-- <tr>
 					  		      <th scope="col">Nro Parte</th>
-					  		      @foreach($profile->dimensions as $dimen2)
+					  		      @foreach($product->dimensions as $dimen2)
 					  		      <th scope="col">{{$dimen2->dimension->sigla}}</th>					  		      
 					  		      @endforeach
-					  		    </tr>
+					  		    </tr> --}}
 					  		  </thead>
 					  		  <tbody id="parts">
 					  		  	
@@ -146,12 +146,12 @@
 
 					  			<div class="col-auto mb-2">
 					  				<label for="unit_measurement">Unida de medida</label><br>
-					  				@foreach($profile->unit_measurements as $index => $unit_m)
+					  				{{-- @foreach($product->unit_measurements as $index => $measurement)
 					  					<div class="form-check form-check-inline">
-					  					<input class="form-check-input" type="radio" name="unit_measurememt" id="inlineRadio{{$index}}" value="{{$unit_m->id}}" {{$unit_m->enabled == 1 ? 'checked' : 'disabled'}}>
-					  					<label class="form-check-label" for="inlineRadio{{$index}}">{{$unit_m->name}}</label>
+					  					<input class="form-check-input" type="radio" name="unit_measurememt" id="inlineRadio{{$index}}" value="{{$measurement->id}}" {{$measurement->enabled == 1 ? 'checked' : 'disabled'}}>
+					  					<label class="form-check-label" for="inlineRadio{{$index}}">{{$measurement->name}}</label>
 					  					</div>
-					  				@endforeach
+					  				@endforeach --}}
 					  			</div>
 
 					  			<ul class="list-group">
@@ -172,29 +172,29 @@
 				  				
 				  				{{-- <h6 class="graytext mt-4"><strong>Presión Máxima</strong></h6>
 				  				<div class="progress" style="height: 10px;">				  					
-				  				  <div class="progress-bar bg-orange" role="progressbar" style="width: {{ceil($profile->max_pressure/10)}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>				  				  
+				  				  <div class="progress-bar bg-orange" role="progressbar" style="width: {{ceil($product->max_pressure/10)}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>				  				  
 				  				</div>
-				  				<p class="graytext"><small>{{$profile->max_pressure}} bar | {{round($profile->max_pressure / 0.06895,2)}} p.s.i.</small></p>
+				  				<p class="graytext"><small>{{$product->max_pressure}} bar | {{round($product->max_pressure / 0.06895,2)}} p.s.i.</small></p>
 					  				
 				  				<h6 class="graytext mt-4"><strong>Rango de temperatura</strong></h6>
 
 				  				<div class="progress" style="height: 10px;">				  				  
-				  				  <div class="progress-bar bg-info" role="progressbar" style="width: {{ceil((($profile->min_temp_range*-1)*100)/150)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="150"></div>
-				  				  <div class="progress-bar bg-orange" role="progressbar" style="width: {{ceil(($profile->max_temp_range*100)/150)}}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="150"></div>
+				  				  <div class="progress-bar bg-info" role="progressbar" style="width: {{ceil((($product->min_temp_range*-1)*100)/150)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="150"></div>
+				  				  <div class="progress-bar bg-orange" role="progressbar" style="width: {{ceil(($product->max_temp_range*100)/150)}}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="150"></div>
 				  				</div>
 				  				<div class="col-12 d-flex justify-content-between">
-				  					<p class="graytext"><small>{{$profile->min_temp_range}}°C | {{round(($profile->min_temp_range*1.8))+32}}°F</small></p>
-				  					<p class="graytext"><small>{{$profile->max_temp_range}}°C | {{round(($profile->max_temp_range*1.8))+32}}°F</small></p>
+				  					<p class="graytext"><small>{{$product->min_temp_range}}°C | {{round(($product->min_temp_range*1.8))+32}}°F</small></p>
+				  					<p class="graytext"><small>{{$product->max_temp_range}}°C | {{round(($product->max_temp_range*1.8))+32}}°F</small></p>
 				  					
 				  				</div>
 
 				  				<h6 class="graytext mt-4"><strong>Velocidad máxima</strong></h6>			  				
 
 				  				<div class="progress" style="height: 10px;">	  				  
-				  				  <div class="progress-bar position-relative bg-orange" role="progressbar" style="width: {{$profile->max_speed*10}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">				  				  	
+				  				  <div class="progress-bar position-relative bg-orange" role="progressbar" style="width: {{$product->max_speed*10}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">				  				  	
 				  				  </div>
 				  				</div>
-				  				<p class="graytext"><small>{{$profile->max_speed}} m/sec | {{round(($profile->max_speed*3.28084),2)}} ft/s</small></p>	 --}}				  									  			
+				  				<p class="graytext"><small>{{$product->max_speed}} m/sec | {{round(($product->max_speed*3.28084),2)}} ft/s</small></p>	 --}}				  									  			
 					  		</section>					  		
 					  	</div>
 
@@ -202,23 +202,23 @@
 					  <div class="tab-pane fade" id="compatible" role="tabpanel" aria-labelledby="compatible-tab">
 					  	<div class="row mt-4">
 					  		<section class="col-12">
-					  			<p><strong>Leyenda:</strong>
+					  			{{-- <p><strong>Leyenda:</strong>
 					  				@foreach($fluid_keys as $fkey)
 					  					<span class="mx-3"><i class="fa {{$fkey->sigla=='R'?'fa-check text-success':($fkey->sigla=='P'?'fa-dot-circle text-primary':'fa-times text-danger')}}"></i> &nbsp; {{$fkey->name}}</span>
 					  				@endforeach
-					  			</p>
+					  			</p> --}}
 					  		</section>
 					  		<section class="col-12">
 					  			<table class="table table-sm">					  				
 					  		  		<thead class="thead-dark">
-					  		  			<tr>
+					  		  			{{-- <tr>
 					  		  				<th> &nbsp; </th>
 					  		  				@foreach($type_applications as $typeapp)
 					  		  				<th>{{$typeapp->name}}</th>
 					  		  				@endforeach
-					  		  			</tr>
+					  		  			</tr> --}}
 					  		  		</thead>
-					  		  		<tbody>
+					  		  		{{-- <tbody>
 					  		  			@foreach($fluid_groups as $group)
 					  		  				<tr>
 					  		  					<td>
@@ -240,7 +240,7 @@
 					  		  				</tr>
 					  		  				@endforeach
 					  		  			@endforeach
-					  		  		</tbody>
+					  		  		</tbody> --}}
 					  		  	</table>
 					  		</section>
 					  	</div>
@@ -261,10 +261,10 @@
 </script>
 <script>
 	$(document).ready(function(){
-		getParts();
+		//getParts();
 	});
 	let props = {
-		profile_id : {{$profile->id}},
+		profile_id : {{$product->id}},
 		tbParts : $("#parts"),
 		ruta : '',
 	}

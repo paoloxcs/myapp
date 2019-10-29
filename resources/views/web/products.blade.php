@@ -19,8 +19,8 @@
 			    </div>
 			    <div id="colapso{{$index}}" class="collapse {{$index == 0 ? 'show' : ''}}" aria-labelledby="head2" data-parent="#accordionExample">
 			      <div class="card-body d-flex flexwrapper">
-				      @foreach($category->profiles as $profile)
-				        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('productos/'.$category->slug.'/'.$profile->slug)}}">{{$profile->type}}</a></section>
+				      @foreach($category->products as $product)
+				        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('productos/'.$category->slug.'/'.$product->slug)}}">{{$product->name}}</a></section>
 				      @endforeach
 			      </div>
 			    </div>

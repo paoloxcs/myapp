@@ -2,17 +2,18 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\FluidGroup;
-use App\FluidKey;
 use App\Post;
-use App\Catalog;
-use App\Profile;
+use App\Sede;
 use App\Slide;
 use App\Video;
-use App\Sede;
-use App\TypeApplication;
+use App\Catalog;
+use App\Product;
+use App\Profile;
+use App\Category;
+use App\FluidKey;
 use Carbon\Carbon;
+use App\FluidGroup;
+use App\TypeApplication;
 use Illuminate\Http\Request;
 
 
@@ -35,13 +36,13 @@ class FrontController extends Controller
 
     public function getProducts()
     {
-        $categories = Category::with('profiles')->get();
+        $categories = Category::with('products')->get();
         // return response()->json($categories);
     	return view('web.products', compact('categories'));
     }
     public function getProductsOfCategory($categ_slug)
     {
-        $category = Category::where('slug',$categ_slug)->with('profiles')->first();
+        $category = Category::where('slug',$categ_slug)->with('products')->first();
         if($category){
             return view('web.category', compact('category'));
         }
@@ -49,33 +50,24 @@ class FrontController extends Controller
 
         // return response()->json($category);
     }
-    public function getProduct($categ_slug,$profile_slug)
+    public function getProduct($categ_slug,$product_slug)
     {
-        $category = Category::where('slug',$categ_slug)->with('profiles')->first();
-        
-        $profile = Profile::where('slug',$profile_slug)->with(['dimensions' => function($q){
-            $q->orderBy('id','ASC')->with('dimension');
-        }])->with('unit_measurements')->first();
-
-        $type_applications = TypeApplication::orderBy('id','ASC')->get();
-        $fluid_keys = FluidKey::all();
-        $fluid_groups = FluidGroup::with(['items.profile_compatibilities' => function($q) use($profile){
-            $q->orderBy('type_application_id','ASC')->where('profile_id',$profile->id)->with('fluid_key');
-        }])->get();
+        $category = Category::where('slug',$categ_slug)->with('products')->first();
+        $product = Product::where('slug', $product_slug)->with('dimensions','compatibilities','measurements','operating_conditions')->first();
 
         // return response()->json($profile);
-        return view('web.product', compact('category','profile','type_applications','fluid_keys','fluid_groups'));
+        return view('web.product', compact('category','product'));
     }
     
-    public function getParts($profile_id)
+    public function getParts($product_id)
     {
-        $profile = Profile::where('id',$profile_id)->with(['parts'=> function($q){
-            $q->with(['dimensions_profile' => function($query){
-                $query->orderBy('id','ASC')->with('dimension');
-            }]);
-        }])->first();
+        // $profile = Profile::where('id',$profile_id)->with(['parts'=> function($q){
+        //     $q->with(['dimensions_profile' => function($query){
+        //         $query->orderBy('id','ASC')->with('dimension');
+        //     }]);
+        // }])->first();
 
-        return response()->json($profile->parts);
+        // return response()->json($profile->parts);
     }
     //Catálogos
     public function getCatalogsViews()
