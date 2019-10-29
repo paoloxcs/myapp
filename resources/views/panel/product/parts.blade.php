@@ -14,7 +14,7 @@
 					<div class="card-title">Gestion de partes del producto</div>
 				</div>
 				<div class="card-body">
-					<form action="{{route('products.parts.store', $product->id)}}" method="POST">
+					<form action="{{route('products.parts.store', $product->id)}}" method="POST" enctype="multipart/form-data">
 						{{ csrf_field() }}
 						{{ method_field('PUT') }}
 						<div class="row">
@@ -41,6 +41,11 @@
 											</div>
 										</td>
 										@endforeach
+										<td>
+											<div class="form-group">
+												<input data-validate="true" type="file" name="ruta" accept="pdf/*">
+											</div>	
+										</td>
 									</tr>
 								</tbody>
 							</table>

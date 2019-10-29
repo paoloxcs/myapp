@@ -152,11 +152,16 @@ class ProductController extends Controller
             $object->{'dimension_'.$index} = $request[$dimen->slug];
         }
 
+        //Subiendo Documento
+        $ruta = uniqid().'.'.$request->file('ruta')->getClientOriginalExtension();
+        $request->file('ruta')->move(public_path().'/docs/',$ruta);
+
         // Guardar en la base de datos 
         $product->parts()->create([
             'part_nro' => $request->part_nro,
             'dimensions' => json_encode($object), // el campo dimensions de la tabla partes recibe un objeto JSON
-            'measurement_id' => $request->measurement
+            'measurement_id' => $request->measurement,
+            'ruta' => $ruta
         ]);
 
         return back()->with(['message' => 'Registro guardado']);
@@ -167,6 +172,10 @@ class ProductController extends Controller
     public function destroyPart($part_id)
     {
         $part = ProductPart::findOrFail($part_id);
+        //Buscando el documento anexo
+        if($part->ruta && file_exists(public_path().'/docs/'.$part->ruta)){
+            unlink(public_path().'/docs/'.$part->ruta);
+        }
         $part->delete();
 
         return back()->with(['message' => 'Registro eliminado']);
