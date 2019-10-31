@@ -142,10 +142,10 @@
 					  <div class="tab-pane fade" id="conditions" role="tabpanel" aria-labelledby="conditions-tab">
 					  	<div class="row mt-4">
 					  		<section class="col-12">
-					  			<h5>Condiciones Operativas</h5>
+					  			{{-- <h5>Condiciones Operativas</h5> --}}
 
 					  			<div class="col-auto mb-2">
-					  				<label for="unit_measurement">Unida de medida</label><br>
+					  				{{-- <label for="unit_measurement">Unida de medida</label><br> --}}
 					  				{{-- @foreach($product->unit_measurements as $index => $measurement)
 					  					<div class="form-check form-check-inline">
 					  					<input class="form-check-input" type="radio" name="unit_measurememt" id="inlineRadio{{$index}}" value="{{$measurement->id}}" {{$measurement->enabled == 1 ? 'checked' : 'disabled'}}>
@@ -153,22 +153,24 @@
 					  					</div>
 					  				@endforeach --}}
 					  			</div>
-
-					  			<ul class="list-group">
-					  			  <li class="list-group-item d-flex justify-content-between align-items-center">
-					  			    Presión Máxima
-					  			    <span class="badge badge-primary badge-pill"> 250 bar </span>
-					  			  </li>
-					  			  <li class="list-group-item d-flex justify-content-between align-items-center">
-					  			  Rango de Temperatura					  			    
-					  			    <span class="badge badge-primary badge-pill">-30°C</span>
-					  			    <span class="badge badge-primary badge-pill">-22°C</span>
-					  			  </li>
-					  			  <li class="list-group-item d-flex justify-content-between align-items-center">
-					  			    Velocidad máxima
-					  			    <span class="badge badge-primary badge-pill"> 0.5 m/sec</span>
-					  			  </li>
-					  			</ul>	  		
+								@foreach ($product->operating_conditions as $opera)
+									<ul class="list-group">
+										<li class="list-group-item d-flex justify-content-between align-items-center">
+											<span>Presión Máxima <small class="badge badge-info">{{$opera->measurement->sigla}}</small></span>	 
+											<span class="badge badge-secondary badge-pill"> {{$opera->max_pressure}} </span>
+										</li>
+										<li class="list-group-item d-flex justify-content-between align-items-center">
+											<span>Rango de Temperatura <small class="badge badge-info">{{$opera->measurement->sigla}}</small></span> 					  			    
+											<span class="badge badge-secondary badge-pill">{{$opera->min_temp}}</span>
+											<span class="badge badge-secondary badge-pill">{{$opera->max_temp}}</span>
+										</li>
+										<li class="list-group-item d-flex justify-content-between align-items-center">
+											<span>Velocidad máxima <small class="badge badge-info">{{$opera->measurement->sigla}}</small></span> 
+											<span class="badge badge-secondary badge-pill">{{$opera->max_speed}}</span>
+										</li>
+									</ul>	  		
+									
+								@endforeach
 				  				
 				  				{{-- <h6 class="graytext mt-4"><strong>Presión Máxima</strong></h6>
 				  				<div class="progress" style="height: 10px;">				  					

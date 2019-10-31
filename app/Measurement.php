@@ -22,6 +22,12 @@ class Measurement extends Model
         return $this->hasMany(ProductPart::class);
     }
 
+    // Relacion con condiciones de operatividad del producto
+    public function product_operating_conditions()
+    {
+        return $this->hasMany(ProductOperatingCondition::class);
+    }
+
 
     
 }
