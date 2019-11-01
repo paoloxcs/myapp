@@ -35,12 +35,13 @@
                                                     <td scope="row">{{$compat2->name}}</td>
                                                     <input type="hidden" name="compats[]" value="{{$compat2->id}}">
                                                     
-                                                    @if($compat2->hasCompatibilitiesWithProduct($product->id))
+                                                    @if($product->compatibilities->contains('compatibility_id', $compat2->id))
                                                         @foreach ($product->compatibilities as $index => $prod_compat)
                                                         @if($prod_compat->compatibility_id == $compat2->id)
                                                             @if($prod_compat->type_field === 'DYNAMIC')
                                                                 <td>
-                                                                    <span>{{$prod_compat->type_field}}</span>
+                                                                    {{-- <span>{{$prod_compat->type_field}}</span> --}}
+                                                                    <span>Dinámica</span>
                                                                     <div class="form-check" title="Recomendado">
                                                                         <input class="form-check-input" type="radio" name="compat_dynamic_{{$compat2->id}}" id="drecomended{{$index}}" 
                                                                         value="1" {{$prod_compat->value_field == 1 ? 'checked' : ''}}>
@@ -65,7 +66,7 @@
                                                                 </td>
                                                             @else
                                                                 <td>
-                                                                    <span>{{$prod_compat->type_field}}</span>
+                                                                    <span>Estática</span>
                                                                     <div class="form-check" title="Recomendado">
                                                                         <input class="form-check-input" type="radio" name="compat_static_{{$compat2->id}}" id="srecomended{{$index}}" 
                                                                         value="1" {{$prod_compat->value_field == 1 ? 'checked' : ''}}>
@@ -94,6 +95,7 @@
                                                         
                                                     @else
                                                         <td>
+                                                            <span>Dinámica</span>
                                                             <div class="form-check" title="Recomendado">
                                                             <input class="form-check-input" type="radio" name="compat_dynamic_{{$compat2->id}}" id="drecomended{{$compat2->id}}" value="1" checked>
                                                                 <label class="form-check-label" for="drecomended{{$compat2->id}}">
@@ -114,6 +116,7 @@
                                                             </div>
                                                         </td>
                                                         <td>
+                                                            <span>Estática</span>
                                                             <div class="form-check" title="Recomendado">
                                                                 <input class="form-check-input" type="radio" name="compat_static_{{$compat2->id}}" id="srecomended{{$compat2->id}}" value="1" checked>
                                                                 <label class="form-check-label" for="srecomended{{$compat2->id}}">

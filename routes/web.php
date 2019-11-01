@@ -38,7 +38,7 @@ Route::get('nosotros', function () {
 
 
 // Peticion asyncrona
-Route::get('profile/{id}/parts','FrontController@getParts');
+Route::get('products/{id}/parts','FrontController@getParts');
 
 // Rutas de autenticación
 Auth::routes();

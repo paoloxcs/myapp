@@ -13,6 +13,7 @@ use App\Category;
 use App\FluidKey;
 use Carbon\Carbon;
 use App\FluidGroup;
+use App\Compatibility;
 use App\TypeApplication;
 use Illuminate\Http\Request;
 
@@ -53,21 +54,21 @@ class FrontController extends Controller
     public function getProduct($categ_slug,$product_slug)
     {
         $category = Category::where('slug',$categ_slug)->with('products')->first();
+        $compatibilities = Compatibility::all();
         $product = Product::where('slug', $product_slug)->with('dimensions','compatibilities','measurements','operating_conditions')->first();
 
         // return response()->json($profile);
-        return view('web.product', compact('category','product'));
+        return view('web.product', compact('category','product','compatibilities'));
     }
     
     public function getParts($product_id)
     {
-        // $profile = Profile::where('id',$profile_id)->with(['parts'=> function($q){
-        //     $q->with(['dimensions_profile' => function($query){
-        //         $query->orderBy('id','ASC')->with('dimension');
-        //     }]);
-        // }])->first();
+        
+        $product = Product::with(['parts' => function($query){
+            $query->orderBy('id','DESC');
+        }])->findOrFail($product_id);
 
-        // return response()->json($profile->parts);
+        return response()->json($product->parts);
     }
     //Catálogos
     public function getCatalogsViews()

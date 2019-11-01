@@ -16,15 +16,4 @@ class Compatibility extends Model
     {
         return $this->hasMany(ProductCompatibility::class);
     }
-
-
-    public function hasCompatibilitiesWithProduct($product_id)
-    {
-        $results = $this->product_compatibilities->whereIn('product_id',$product_id);
-        if(count($results) > 0) return true;
-
-        return false;
-
-        
-    }
 }

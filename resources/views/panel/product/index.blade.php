@@ -41,7 +41,6 @@
 		</div>
 	</div>
 	@include('panel.product.create')
-	@include('panel.product.fluid')
 </div>
 @endsection
 @section('scripts')

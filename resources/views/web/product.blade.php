@@ -2,6 +2,9 @@
 @section('title')
 {{$category->name}}
 @endsection
+@section('styles')
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+@endsection
 @section('content')
 
 <div class="container">
@@ -78,7 +81,7 @@
 					  		<section class="col-12">
 					  		<h5>Filtros</h5>
 					  		<form>
-							<div class="col-auto mb-2">
+							<div class="mb-2">
 								<label for="unit_measurement">Unida de medida</label><br>
 								@foreach($product->measurements as $index => $measurement)
 									<div class="form-check form-check-inline">
@@ -93,7 +96,7 @@
 					  		        <div class="input-group-prepend">
 					  		          <div class="input-group-text"> Nro parte </div>
 					  		        </div>
-					  		        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="99999999">
+					  		        <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="">
 					  		      </div>
 								  </div>
 								
@@ -110,7 +113,7 @@
 								  @endforeach --}}
 
 					  		    <div class="col-auto">
-					  		      <button type="submit" class="btn btn-orange mb-2">Actualizar</button>
+					  		      <button type="submit" class="btn btn-orange mb-2"><i class="fa fa-search"></i> Buscar</button>
 					  		    </div>
 					  		  </div>
 					  		</form>
@@ -119,14 +122,15 @@
 
 					  	<div class="row mt-4">
 					  		<section class="col-12">
-					  		<table class="table">
+					  		<table class="table" id="parts-table">
 					  		  <thead class="thead-dark">
-					  		    {{-- <tr>
-					  		      <th scope="col">Nro Parte</th>
-					  		      @foreach($product->dimensions as $dimen2)
-					  		      <th scope="col">{{$dimen2->dimension->sigla}}</th>					  		      
-					  		      @endforeach
-					  		    </tr> --}}
+								<tr>
+									<th scope="col">N° parte</th>
+									@foreach ($product->dimensions as $dimen2)
+										<th scope="col">{{$dimen2->sigla}}</th>
+									@endforeach
+									<th width="10%" scope="col">&nbsp;</th>
+								</tr>
 					  		  </thead>
 					  		  <tbody id="parts">
 					  		  	
@@ -170,33 +174,7 @@
 										</li>
 									</ul>	  		
 									
-								@endforeach
-				  				
-				  				{{-- <h6 class="graytext mt-4"><strong>Presión Máxima</strong></h6>
-				  				<div class="progress" style="height: 10px;">				  					
-				  				  <div class="progress-bar bg-orange" role="progressbar" style="width: {{ceil($product->max_pressure/10)}}%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>				  				  
-				  				</div>
-				  				<p class="graytext"><small>{{$product->max_pressure}} bar | {{round($product->max_pressure / 0.06895,2)}} p.s.i.</small></p>
-					  				
-				  				<h6 class="graytext mt-4"><strong>Rango de temperatura</strong></h6>
-
-				  				<div class="progress" style="height: 10px;">				  				  
-				  				  <div class="progress-bar bg-info" role="progressbar" style="width: {{ceil((($product->min_temp_range*-1)*100)/150)}}%" aria-valuenow="10" aria-valuemin="0" aria-valuemax="150"></div>
-				  				  <div class="progress-bar bg-orange" role="progressbar" style="width: {{ceil(($product->max_temp_range*100)/150)}}%" aria-valuenow="60" aria-valuemin="0" aria-valuemax="150"></div>
-				  				</div>
-				  				<div class="col-12 d-flex justify-content-between">
-				  					<p class="graytext"><small>{{$product->min_temp_range}}°C | {{round(($product->min_temp_range*1.8))+32}}°F</small></p>
-				  					<p class="graytext"><small>{{$product->max_temp_range}}°C | {{round(($product->max_temp_range*1.8))+32}}°F</small></p>
-				  					
-				  				</div>
-
-				  				<h6 class="graytext mt-4"><strong>Velocidad máxima</strong></h6>			  				
-
-				  				<div class="progress" style="height: 10px;">	  				  
-				  				  <div class="progress-bar position-relative bg-orange" role="progressbar" style="width: {{$product->max_speed*10}}%" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">				  				  	
-				  				  </div>
-				  				</div>
-				  				<p class="graytext"><small>{{$product->max_speed}} m/sec | {{round(($product->max_speed*3.28084),2)}} ft/s</small></p>	 --}}				  									  			
+								@endforeach				  									  			
 					  		</section>					  		
 					  	</div>
 
@@ -204,46 +182,62 @@
 					  <div class="tab-pane fade" id="compatible" role="tabpanel" aria-labelledby="compatible-tab">
 					  	<div class="row mt-4">
 					  		<section class="col-12">
-					  			{{-- <p><strong>Leyenda:</strong>
-					  				@foreach($fluid_keys as $fkey)
-					  					<span class="mx-3"><i class="fa {{$fkey->sigla=='R'?'fa-check text-success':($fkey->sigla=='P'?'fa-dot-circle text-primary':'fa-times text-danger')}}"></i> &nbsp; {{$fkey->name}}</span>
-					  				@endforeach
-					  			</p> --}}
+					  			<p><strong>Leyenda:</strong>
+					  				
+					  				<span class="mx-3"><i class="fa fa-check text-success"></i> &nbsp; Recomendado</span>
+					  				<span class="mx-3"><i class="fa fa-dot-circle text-primary"></i> &nbsp; Posible</span>
+					  				<span class="mx-3"><i class="fa fa-times text-danger"></i> &nbsp; No adecuado</span>
+					  				
+					  			</p>
 					  		</section>
 					  		<section class="col-12">
-					  			<table class="table table-sm">					  				
-					  		  		<thead class="thead-dark">
-					  		  			{{-- <tr>
-					  		  				<th> &nbsp; </th>
-					  		  				@foreach($type_applications as $typeapp)
-					  		  				<th>{{$typeapp->name}}</th>
-					  		  				@endforeach
-					  		  			</tr> --}}
-					  		  		</thead>
-					  		  		{{-- <tbody>
-					  		  			@foreach($fluid_groups as $group)
-					  		  				<tr>
-					  		  					<td>
-					  		  						<strong><span class="orange-text">{{$group->name}}</span></strong>
-					  		  					</td>
-					  		  					<td> &nbsp; </td>
-					  		  					<td> &nbsp; </td>
-					  		  				</tr>
-					  		  				@foreach($group->items as $item)
-					  		  				<tr>
-					  		  						<td><small class="graytext">{{ $item->name}}</small></td>
-					  		  						@foreach($item->profile_compatibilities as $comp)
-					  		  						<td align="center">
-					  		  							<i class="fa {{$comp->fluid_key->sigla=='R'?'fa-check text-success':($comp->fluid_key->sigla=='P'?'fa-dot-circle text-primary':'fa-times text-danger')}}">
-					  		  							</i>
-					  		  							{{$comp->fluid_key->sigla}}
-					  		  						</td>
-					  		  						@endforeach
-					  		  				</tr>
-					  		  				@endforeach
-					  		  			@endforeach
-					  		  		</tbody> --}}
-					  		  	</table>
+								@foreach($compatibilities as  $compat)
+								@if($compat->level == 1)
+								<table class="table table-striped table-bordered table-sm">
+										<thead>
+											<tr>
+											<th scope="col">{{$compat->name}}</th>
+											<th scope="col" colspan="2">Aplicación</th>
+											
+											</tr>
+										</thead>
+										<tbody>
+											@foreach($compatibilities as $compat2)
+											@if($compat2->parent_id == $compat->id)
+												<tr>
+													<td scope="row">{{$compat2->name}}</td>
+													<input type="hidden" name="compats[]" value="{{$compat2->id}}">
+													
+													@if($product->compatibilities->contains('compatibility_id', $compat2->id))
+														@foreach ($product->compatibilities as $index => $prod_compat)
+														@if($prod_compat->compatibility_id == $compat2->id)
+															@if($prod_compat->type_field === 'DYNAMIC')
+																<td align="center">
+																	<p><small>Dinámica</small></p>
+																	<i class="fa {{$prod_compat->value_field == 1 ? 'fa-check text-success' : ($prod_compat->value_field == 2 ? 'fa-dot-circle text-primary':'fa-times text-danger')}}">
+																	</i>
+																</td>
+															@else
+															<td align="center">
+																	<p><small>Estática</small></p>
+																	<i class="fa {{$prod_compat->value_field == 1 ? 'fa-check text-success' : ($prod_compat->value_field == 2 ? 'fa-dot-circle text-primary':'fa-times text-danger')}}">
+																	</i>
+																</td>
+															@endif
+														@endif
+														@endforeach
+														
+													@endif
+													
+												</tr>
+											@endif
+												
+											@endforeach
+											
+										</tbody>
+									</table>
+								@endif
+								@endforeach
 					  		</section>
 					  	</div>
 					  </div>
@@ -258,46 +252,61 @@
 </div>
 @endsection
 @section('scripts')
-<script src="{{asset('js/calculator.js')}}">
-	
-</script>
+<script src="{{asset('js/calculator.js')}}"></script> 
+<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+
 <script>
 	$(document).ready(function(){
-		//getParts();
+		getParts();
+		
 	});
 	let props = {
-		profile_id : {{$product->id}},
+		product_id : {{$product->id}},
 		tbParts : $("#parts"),
-		ruta : '',
+		ruta : ''
 	}
 	function getParts() {
-		props.ruta = `/profile/${props.profile_id}/parts`;
+		
+		props.ruta = `/products/${props.product_id}/parts`;
 		$.ajax({
 			url: props.ruta,
 			type: 'GET',
 			dataType: 'JSON',
 			success: resp =>{
+
 				props.tbParts.empty();
 				resp.forEach(part =>{
+
 					props.tbParts.append(`
 						<tr>
 							<td>${part.part_nro}</td>
-							${renderValues(part.dimensions_profile)}
-
+							${renderValues(part.dimensions)}
+							<td>
+								<button class="btn btn-outline-orange btn-sm">Solicitar</button>
+							</td>
 						</tr>
 						`);
+
 				});
+				
+				
 			},
 			error: err =>{
 				console.log(err);
 			}
 		});
 	}
-	function renderValues(dimension_values) {
+
+	function renderValues(dimensions) {
+
+		let json_data = JSON.parse(dimensions);
+
 		let html = '';
-		dimension_values.forEach(value =>{
-			html += `<td>${value.pivot.value_field} - ${value.dimension.sigla}</td>`;
-		});
+
+		for(let key in json_data){
+			html += `<td>${json_data[key]}</td>`;
+		}
+
 		return html;
 	}
 </script>

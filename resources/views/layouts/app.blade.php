@@ -21,6 +21,7 @@
     
     <link rel="stylesheet" href="{{asset('vendor/toastr/build/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/modalimg.css')}}">
+    @yield('styles')
 </head>
 <body>
   <div class="main-container">

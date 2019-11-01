@@ -19,7 +19,7 @@ class CreateProductPartsTable extends Migration
             $table->longText('dimensions')->nullable();
             $table->unsignedInteger('measurement_id');
             $table->unsignedInteger('product_id');
-            $table->string('ruta', 45);
+            $table->string('ruta', 45)->nullable();
             $table->foreign('measurement_id')->references('id')->on('measurements')->onDelete('cascade');
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
             
