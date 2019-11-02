@@ -13,6 +13,7 @@ use App\Compatibility;
 use Illuminate\Http\Request;
 use App\ProductCompatibility;
 use App\ProductOperatingCondition;
+use App\ProductDoc;
 
 class ProductController extends Controller
 {
@@ -223,6 +224,44 @@ class ProductController extends Controller
         $product = Product::with('dimensions','measurements','parts')->findOrFail($id);
         return view('panel.product.parts', compact('product'));
     }
+
+    //Método que permite retonar la vista de los documentos anexos por perfil
+    public function getDocs($id)
+    {
+        $product= Product::with('docs')->findOrFail($id);
+        return view('panel.product.docs', compact('product'));
+    }
+
+    //Método que permite guardar los documentos anexos por perfil
+    public function storeDocs(Request $request, $id)
+    {
+        $product = Product::with('docs')->find($id);
+        $validation = \Validator::make($request->all(),[
+            'name' => 'required|string',
+            'ruta' => 'required|mimes:pdf|max:10000'
+        ]);
+        if($validation->fails()){
+            return response()->json(['errors'=>$validation->errors()],422);
+        }
+        $ruta = uniqid().'.'.$request->file('ruta')->getClientOriginalExtension();
+        $request->file('ruta')->move(public_path().'/docs/',$ruta);
+        $product->docs()->create([
+            'name' => $request->name,
+            'url_doc' => $ruta,
+        ]);
+        return back()->with(['message' => 'Registro guardado']);
+    }
+    //Método para eliminar el documento anexo al perfil
+    public function destroyDoc($doc_id)
+    {
+        $doc = ProductDoc::findOrFail($doc_id);
+        if($doc->url_doc && file_exists(public_path().'/docs/'.$doc->url_doc)){
+            unlink(public_path().'/docs/'.$doc->url_doc);
+        }
+        $doc->delete();
+        return back()->with(['message' => 'Se eliminó el documento']);
+    }
+
 
     // Metodo que permite guardar partes del producto
     public function storeParts(Request $request, $id)

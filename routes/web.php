@@ -102,6 +102,11 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::put('products/parts/{id}','ProductController@storeParts')->name('products.parts.store');
 			Route::get('parts/{part_id}/destroy','ProductController@destroyPart')->name('parts.destroy');
 
+			// Administración de Documentos por Perfil
+			Route::get('products/{id}/docs','ProductController@getDocs');
+			Route::put('products/docs/{id}','ProductController@storeDocs')->name('products.docs.store');
+			Route::get('docs/{doc_id}/destroy','ProductController@destroyDoc')->name('docs.destroy');
+
 
 			// Lista toda las dimensiones
 			Route::get('dimensions-data','ProductController@getDimensions');
