@@ -76,7 +76,7 @@
 							<td>
 							${product.status === 1 ? 'Activo': 'Inactivo'}
 							</td>
-							<td>${product.created_at}</td>
+							<td>${getFecha(product.created_at)}</td>
 							<td>
 								<a href="/panel/products/${product.id}/edit" class="btn btn-info btn-sm" title="Editar"><i class="fas fa-pen"></i> Editar</a>
 								<a href="/panel/products/${product.id}/compatibility" class="btn btn-orange btn-sm" title="Compatibilidad de fluidos"><i class="fas fa-water"></i> Compatibilidad</a>
@@ -92,6 +92,12 @@
 				console.log(err);
 			}
 		});
+	}
+
+	//function para obtner fecha
+	function getFecha(date_string) {
+		let date = new Date(date_string);
+		return `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
 	}
 
 

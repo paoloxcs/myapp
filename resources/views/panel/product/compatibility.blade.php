@@ -14,7 +14,10 @@
                     {{ method_field('PUT') }}
                     {{ csrf_field() }}
                     <div class="card-header">
-                        <div class="card-title">Compatibilidad de producto: <strong> {{$product->name}} </strong></div>
+                        <div class="card-title">
+                            Compatibilidad de producto: <strong> {{$product->name}} </strong>
+                            <a href="{{route('products.index')}}" class="btn btn-orange btn-sm float-right"><i class="fa fa-arrow-left"></i> Regresar</a>
+                        </div>
                     </div>
                     <div class="card-body">
                         <div class="row">

@@ -2,12 +2,21 @@
 @section('title','Editar producto')
 @section('content')
 <div class="container">
+        @if(session('message'))
+        <div class="alert alert-success" role="alert">
+            <span> {{session('message')}} </span>
+        </div>
+        @endif
     <div class="row mt-3">
         <div class="col-md-12">
             <div class="card">
-                <form action="#">
+                <form action="{{route('products.update', $product->id)}}" method="POST" enctype="multipart/form-data">
+                    {{csrf_field()}}
+                    {{method_field('PUT')}}
                     <div class="card-header">
-                        <div class="card-title">Editar producto: <strong>{{$product->name}}</strong></div>
+                        <div class="card-title">
+                            <h5>Editar producto: <strong>{{$product->name}}</strong><a href="{{route('products.index')}}" class="btn btn-orange btn-sm float-right"><i class="fa fa-arrow-left"></i> Regresar</a></h5>
+                        </div>
                     </div>
                     <div class="card-body">
                         <h6><i class="fa fa-check"></i> Datos básicos</h6>
@@ -98,60 +107,20 @@
                                             </div>
     
                                         </div>
+                                        
                                         <hr>
+                                        <div class="form-group">
+                                            <h6><i class="fa fa-check"></i> Estado del producto</h6><br>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="status" id="active" value="1" {{$product->status == 1 ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="active">Activo</label>
+                                            </div>
+                                            <div class="form-check form-check-inline">
+                                                <input class="form-check-input" type="radio" name="status" id="inactive" value="0" {{$product->status == 0 ? 'checked' : ''}}>
+                                                <label class="form-check-label" for="inactive">Inactivo</label>
+                                            </div>
+                                        </div>
                                     </div>
-                                    
-                                    {{-- <div class="col-md-12">
-                                        <h6><i class="fa fa-check"></i> Condiciones de operación</h6>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="max_pressure">Presión máxima</label>
-                                                    <div class="input-group input-group-sm">
-                                                        <input type="text" name="max_pressure" class="form-control">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">bar</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="max_speed">Velocidad máxima</label>
-                                                    <div class="input-group input-group-sm">
-                                                        <input type="text" name="max_speed" class="form-control">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">mt/sec</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div class="row">
-                                            <div class="col-xs-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="min_temp">Temperatura mínima</label>
-                                                    <div class="input-group input-group-sm">
-                                                        <input type="text" name="min_temp" class="form-control">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">°C</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="col-xs-12 col-md-6">
-                                                <div class="form-group">
-                                                    <label for="max_temp">Temperatura máxima</label>
-                                                    <div class="input-group input-group-sm">
-                                                        <input type="text" name="max_temp" class="form-control">
-                                                        <div class="input-group-append">
-                                                            <span class="input-group-text">°C</span>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div> --}}
                                 </div>
                             </div>
                             <div class="col-xs-12 col-md-6">
@@ -168,6 +137,91 @@
                     </div>
                 </form>
                 
+            </div>
+            <hr>
+            <div class="card">
+                <div class="card-header">
+                    <div class="card-title"><h5>Condiciones de operación</h5></div>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <form action="{{route('product.operating.condition', $product->id)}}" method="POST">
+                            {{ csrf_field() }}
+                            {{method_field('PUT')}}
+                            <div class="col-12">
+                                <div class="form-group">
+                                    @foreach($product->measurements as $index => $measure)
+                                    @if(!$product->operating_conditions->contains('measurement_id', $measure->id))
+                                    <div class="form-check form-check-inline">
+                                        <input class="form-check-input" type="radio" name="measurement" id="measurement{{$measure->id}}" value="{{$measure->id}}" {{$index == 0 ? 'checked' : ''}}>
+                                        <label class="form-check-label" for="measurement{{$measure->id}}">{{$measure->name}}</label>
+                                    </div>
+                                    @endif
+                                    @endforeach
+                                </div>
+                                <div class="input-group">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Presión máxima</span>
+                                    </div>
+                                    <input type="text" name="max_pressure" class="form-control" placeholder="300 Bar">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Velocidad máxima</span>
+                                    </div>
+                                    <input type="text" name="max_speed" class="form-control" placeholder="0.5m/sec">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Temp. mínima</span>
+                                    </div>
+                                    <input type="text" name="min_temp" class="form-control" placeholder="-30°C">
+                                    <div class="input-group-append">
+                                        <span class="input-group-text">Temp. máxima</span>
+                                    </div>
+                                    <input type="text" name="max_temp" class="form-control" placeholder="100°C">
+                                    <div class="input-group-append">
+                                        <button type="submit" class="btn btn-blue btn-sm"><i class="fa fa-plus"></i> Agregar</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+
+                    </div>
+                    <hr>
+                    <div class="row">
+                        <div class="col-12">
+                            <div class="table-responsive">
+                                <table class="table table-hover table-condensed table-sm table-bordered">
+                                    <thead>
+                                        <th>Id</th>
+                                        <th>Presión máxima</th>
+                                        <th>Velocidad máxima</th>
+                                        <th>Temp. mínima</th>
+                                        <th>Temp. máxima</th>
+                                        <th>Unidad de mediad</th>
+                                        <th>Acción</th>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($product->operating_conditions as $opera)
+                                            <tr>
+                                                <td>{{$opera->id}}</td>
+                                                <td>{{$opera->max_pressure}}</td>
+                                                <td>{{$opera->max_speed}}</td>
+                                                <td>{{$opera->min_temp}}</td>
+                                                <td>{{$opera->max_temp}}</td>
+                                                <td>{{$opera->measurement->name}}</td>
+                                                <td>
+                                                    <a href="{{route('operating.condition.destroy', $opera->id)}}" onclick="return confirm('¿Seguro de quitar el registro?')" class="btn btn-danger btn-sm">Quitar</a>
+                                                </td>
+                                                
+                                            </tr>       
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-footer">
+
+                </div>
             </div>
         </div>
     </div>

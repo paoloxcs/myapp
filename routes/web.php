@@ -82,11 +82,16 @@ Route::group(['middleware'=>'auth'],function(){
 		
 		// Ruta para productos
 		Route::group(['middleware'=>'permision:manage_products'],function(){
-			Route::get('products','ProductController@index')->name('profiles.index');
+			Route::get('products','ProductController@index')->name('products.index');
 			Route::get('products-data','ProductController@getProducts');
 			Route::post('products','ProductController@store');
 
 			Route::get('products/{id}/edit', 'ProductController@edit');
+			Route::put('products/{id}', 'ProductController@update')->name('products.update');
+
+			// Ruta para agregar condiciones de operacion del producto
+			Route::put('products/{id}/operating-condition', 'ProductController@storeOperatingCondition')->name('product.operating.condition');
+			Route::get('operating-condition/{id}/destroy', 'ProductController@destroyOperatingCondition')->name('operating.condition.destroy');
 
 			Route::get('products/{id}/compatibility', 'ProductController@editCompatibility');
 			Route::put('products/compatibility/{id}','ProductController@storeCompatibility')->name('products.compatibility');
@@ -104,13 +109,6 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::get('measurements-data','ProductController@getMeasurements');
 			// Lista compatibilidades disponibles
 			Route::get('compatibilities-data','ProductController@getCompatibilities');
-
-
-
-
-			// Ruta para listar partes del perfil | Panel
-			Route::get('productpart/{id}', 'ProductPartController@index');
-			//Route::get('products/{id}/parts', 'ProductController@getParts');
 			
 		});
 		

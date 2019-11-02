@@ -12,6 +12,7 @@ use App\ProductPart;
 use App\Compatibility;
 use Illuminate\Http\Request;
 use App\ProductCompatibility;
+use App\ProductOperatingCondition;
 
 class ProductController extends Controller
 {
@@ -32,6 +33,7 @@ class ProductController extends Controller
         $dimensions = Dimension::all();
         return response()->json($dimensions);
     }
+
 
 
     public function store(Request $request)
@@ -77,8 +79,92 @@ class ProductController extends Controller
         $categories = Category::all();
         $measurements = Measurement::all();
         $dimensions = Dimension::all();
-        $product = Product::with('measurements','dimensions')->findOrFail($id);
+        $product = Product::with('measurements','dimensions','operating_conditions')->findOrFail($id);
         return view('panel.product.edit', compact('categories','product','measurements','dimensions'));
+    }
+
+    //Metodo para actualizar el producto
+    public function update(Request $request, $id)
+    {
+        $this->validate($request,[
+            'name'      =>  'required',
+            'summary'   =>  'required|string',
+            'body'      =>  'required|string',
+            'category'  =>  'required|numeric',
+            'dimensions'    =>  'required',
+            'measurements'  => 'required'
+        ]);
+
+        $product = Product::findOrFail($id);
+        if($request->file('url_image')){
+            $img_original = $product->getOriginal('url_image');
+    
+            if($img_original && file_exists(public_path('/allimages/'.$img_original))){
+                unlink(public_path('/allimages/'.$img_original));
+            }
+
+            $extension= $request->file('url_image')->getClientOriginalExtension();
+            $img_name = uniqid().'.'.$extension;
+            $request->file('url_image')->move(public_path('/allimages/'),$img_name);
+
+            $product->url_image = $img_name;
+        }
+
+        if($request->name != $product->name){
+            $product->name = $request->name;
+            $product->slug = str_slug($request->name).'.'.str_random(4);
+        }
+
+        $product->summary = $request->summary;
+        $product->body = $request->body;
+        $product->category_id = $request->category;
+        $product->status = $request->status;
+
+        $product->save();
+
+
+        // Crear relacion con unidades de medida
+        $product->measurements()->sync($request->measurements);
+        // Crear relacion con dimensiones
+        $product->dimensions()->sync($request->dimensions);
+
+        return back()->with(['message' => 'Actualización exitosa']);
+
+
+    }
+
+
+    // Metodo para guardar condiciones de operacion
+    public function storeOperatingCondition(Request $request, $id)
+    {
+        $this->validate($request, [
+            'measurement' => 'required',
+            'max_pressure' => 'required|string',
+            'max_speed' => 'required|string',
+            'min_temp' => 'required|string',
+            'max_temp' => 'required|string',
+        ]);
+
+        $product = Product::findOrFail($id);
+        $product->operating_conditions()->create([
+            'max_pressure' => $request->max_pressure,
+            'min_temp' => $request->min_temp,
+            'max_temp' => $request->max_temp,
+            'max_speed' => $request->max_speed,
+            'measurement_id' => $request->measurement
+        ]);
+
+        return back()->with(['message' => 'Registro hecho']);
+
+    }
+
+    //Metodo para quitar una condicion de operacion
+    public function destroyOperatingCondition($operating_id)
+    {
+        $op_condition = ProductOperatingCondition::findOrFail($operating_id);
+        $op_condition->delete();
+
+        return back()->with(['message' => 'Se eliminó un registro']);
     }
 
     public function editCompatibility($id)

@@ -11,7 +11,10 @@
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
-					<div class="card-title">Gestion de partes del producto</div>
+					<div class="card-title">
+						Partes del producto: <strong>{{$product->name}}</strong>
+						<a href="{{route('products.index')}}" class="btn btn-orange btn-sm float-right"><i class="fa fa-arrow-left"></i> Regresar</a>
+					</div>
 				</div>
 				<div class="card-body">
 					<form action="{{route('products.parts.store', $product->id)}}" method="POST" enctype="multipart/form-data">

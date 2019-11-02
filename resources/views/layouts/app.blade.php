@@ -75,7 +75,7 @@
             <li><a href="{{route('categories.index')}}"><i class="fas fa-sliders-h"></i> Categorías</a></li>
             <li><a href="{{route('brands.index')}}"><i class="fas fa-sliders-h"></i> Marcas</a></li>
             <li><a href="{{route('markets.index')}}"><i class="fas fa-sliders-h"></i> Mercados</a></li>
-            <li><a href="{{route('profiles.index')}}"><i class="fas fa-sliders-h"></i> Productos</a></li>
+            <li><a href="{{route('products.index')}}"><i class="fas fa-sliders-h"></i> Productos</a></li>
             <li><a href="{{route('posts.index')}}"><i class="fas fa-sliders-h"></i> Posts</a></li>
 
             <li><a href="{{route('videos.index')}}"><i class="fas fa-sliders-h"></i> Videos</a></li>

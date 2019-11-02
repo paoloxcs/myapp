@@ -37,13 +37,18 @@ class FrontController extends Controller
 
     public function getProducts()
     {
-        $categories = Category::with('products')->get();
+        $categories = Category::with(['products' => function($query){
+            $query->where('status', 1);
+        }])->get();
         // return response()->json($categories);
     	return view('web.products', compact('categories'));
     }
     public function getProductsOfCategory($categ_slug)
     {
-        $category = Category::where('slug',$categ_slug)->with('products')->first();
+        $category = Category::where('slug',$categ_slug)->with(['products' => function($query){
+            $query->where('status', 1);
+        }])->first();
+
         if($category){
             return view('web.category', compact('category'));
         }
@@ -53,9 +58,16 @@ class FrontController extends Controller
     }
     public function getProduct($categ_slug,$product_slug)
     {
-        $category = Category::where('slug',$categ_slug)->with('products')->first();
+        $category = Category::where('slug',$categ_slug)
+        ->with(['products' => function($query){
+            $query->where('status', 1);
+        }])->first();
+        
         $compatibilities = Compatibility::all();
-        $product = Product::where('slug', $product_slug)->with('dimensions','compatibilities','measurements','operating_conditions')->first();
+        $product = Product::where([
+                ['slug', $product_slug],
+                ['status', 1]
+            ])->with('dimensions','compatibilities','measurements','operating_conditions')->first();
 
         // return response()->json($profile);
         return view('web.product', compact('category','product','compatibilities'));
@@ -77,7 +89,7 @@ class FrontController extends Controller
     }
     public function getCatalogs(Request $request)
     {
-        $catalogs=Catalog::with('brand')->orderBy('edicion','DESC')->paginate(9);
+        $catalogs = Catalog::with('brand')->orderBy('edicion','DESC')->paginate(9);
         return response()->json($catalogs);
     }
     public function getAllEditions(Request $request)
