@@ -20,22 +20,22 @@
 						{{ csrf_field() }}
 						{{ method_field('PUT') }}
 						<div class="row">
-						<section class="col-12 col-md-5">
-							<div class="form-group">
-								<input type="text" name="name" class="form-control" placeholder="Nombre del Documento">
-							</div>
-						</section>
-						<section class="col-12 col-md-5">
-							<div class="form-group">
-								<input data-validate="true" type="file" name="ruta" accept="pdf/*">
-							</div>
-						</section>
-						<section class="col-12 col-md-2">
+							<div class="col-12">
+								<div class="input-group">
+										<input type="text" name="name" class="form-control" placeholder="Nombre del Documento">
+										<div class="input-group-append">
+											<span class="input-group-text">&nbsp;</span>
+										</div>
+										<input data-validate="true" type="file" class="form-control" name="ruta" accept="application/pdf">
+										<div class="input-group-append">
+											<button type="submit" class="btn btn-blue"><i class="fa fa-save"></i> Agregar </button>
+										</div>
 
-							<button type="submit" class="btn btn-orange btn-block"><i class="fa fa-save"></i> Agregar </button>
-						</section>
+								</div>
+							</div>
 						</div>
 					</form>
+					<hr>
 					<div class="row mt-2">
 						<div class="col-12">
 							<table class="table table-striped table-bordered table-sm">

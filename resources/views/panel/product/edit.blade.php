@@ -7,6 +7,14 @@
             <span> {{session('message')}} </span>
         </div>
         @endif
+        @if($errors->any())
+        
+        @foreach ($errors->all() as  $error)
+            <p class="text-warning">{{$error}}</p>
+            
+        @endforeach
+        
+        @endif
     <div class="row mt-3">
         <div class="col-md-12">
             <div class="card">
@@ -107,7 +115,25 @@
                                             </div>
     
                                         </div>
-                                        
+                                        <hr>
+                                        <div class="form-group">
+                                            <h6><i class="fa fa-check"></i> Mercados al que pertenece</h6><br>
+                                            
+                                            @foreach ($markets as $index => $market)
+                                            @if ($product->markets->contains('id', $market->id))
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="markets[]" id="market_{{$index}}" value="{{$market->id}}" checked>
+                                                    <label class="form-check-label" for="market_{{$index}}">{{$market->name}}</label>
+                                                </div>
+                                            @else
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="markets[]" id="market_{{$index}}" value="{{$market->id}}">
+                                                    <label class="form-check-label" for="market_{{$index}}">{{$market->name}}</label>
+                                                </div>
+                                            @endif
+                                                
+                                            @endforeach
+                                        </div>
                                         <hr>
                                         <div class="form-group">
                                             <h6><i class="fa fa-check"></i> Estado del producto</h6><br>

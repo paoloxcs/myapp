@@ -4,16 +4,17 @@ namespace App\Http\Controllers;
 
 use stdClass;
 use Validator;
+use App\Market;
 use App\Product;
 use App\Category;
 use App\Dimension;
+use App\ProductDoc;
 use App\Measurement;
 use App\ProductPart;
 use App\Compatibility;
 use Illuminate\Http\Request;
 use App\ProductCompatibility;
 use App\ProductOperatingCondition;
-use App\ProductDoc;
 
 class ProductController extends Controller
 {
@@ -80,22 +81,26 @@ class ProductController extends Controller
         $categories = Category::all();
         $measurements = Measurement::all();
         $dimensions = Dimension::all();
-        $product = Product::with('measurements','dimensions','operating_conditions')->findOrFail($id);
-        return view('panel.product.edit', compact('categories','product','measurements','dimensions'));
+        $markets = Market::all();
+        $product = Product::with('measurements','dimensions','operating_conditions','markets')->findOrFail($id);
+        return view('panel.product.edit', compact('categories','product','measurements','dimensions','markets'));
     }
 
     //Metodo para actualizar el producto
     public function update(Request $request, $id)
     {
+        
         $this->validate($request,[
             'name'      =>  'required',
             'summary'   =>  'required|string',
             'body'      =>  'required|string',
             'category'  =>  'required|numeric',
             'dimensions'    =>  'required',
-            'measurements'  => 'required'
+            'measurements'  => 'required',
+            'markets'   =>  'required'
         ]);
 
+        
         $product = Product::findOrFail($id);
         if($request->file('url_image')){
             $img_original = $product->getOriginal('url_image');
@@ -128,6 +133,8 @@ class ProductController extends Controller
         $product->measurements()->sync($request->measurements);
         // Crear relacion con dimensiones
         $product->dimensions()->sync($request->dimensions);
+        // Crear relacion con mercados
+        $product->markets()->sync($request->markets);
 
         return back()->with(['message' => 'Actualización exitosa']);
 
@@ -183,7 +190,7 @@ class ProductController extends Controller
             
             $compat1 = ProductCompatibility::firstOrCreate(
                 [
-                    'name' => 'compat_static_'.$compat_id
+                    'unique_key' => 'compat'.$compat_id.'static'.$id
                 ],
                 [
                 'type_field' => 'STATIC',
@@ -198,7 +205,7 @@ class ProductController extends Controller
 
             $compat2 = ProductCompatibility::firstOrCreate(
                 [
-                    'name' => 'compat_dynamic_'.$compat_id,
+                    'unique_key' => 'compat'.$compat_id.'dynamic'.$id
                 ],
                 [
                 'type_field' => 'DYNAMIC',

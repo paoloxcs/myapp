@@ -23,8 +23,8 @@
 			      </div>
 			      <div id="colapso1" class="collapse show" aria-labelledby="head2" data-parent="#accordionExample">
 			        <div class="card-body d-flex flexwrapper">
-			  	      @foreach($category->products as $product)
-			  	        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('productos/'.$category->slug.'/'.$product->slug)}}">{{$product->name}}</a></section>
+			  	      @foreach($category->products as $prod)
+			  	        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('productos/'.$category->slug.'/'.$prod->slug)}}">{{$prod->name}}</a></section>
 			  	      @endforeach
 			        </div>
 			      </div>
@@ -52,8 +52,13 @@
 			</div>
 
 			<div class="row mt-2">
-				<section class="col-3"><a href="#" class="orange-link"><i class="far fa-file-pdf"></i> Data en Métrica</a></section>
-				<section class="col-3"><a href="#" class="orange-link"><i class="far fa-file-pdf"></i> Data en Pulgadas</a></section>
+				@foreach ($product->docs as $doc)
+					<section class="col-3">
+						<a target="_blank" href="/docs/{{$doc->url_doc}}" class="orange-link">
+							<i class="far fa-file-pdf"></i> {{$doc->name}}
+						</a>
+					</section>
+				@endforeach
 				<section class="col-3"><a href="#" class="orange-link"><i class="far fa-question-circle"></i> Hacer una pregunta</a></section>
 			</div>
 

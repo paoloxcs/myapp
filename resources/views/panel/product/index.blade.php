@@ -81,7 +81,7 @@
 								<a href="/panel/products/${product.id}/edit" class="btn btn-info btn-sm" title="Editar"><i class="fas fa-pen"></i> Editar</a>
 								<a href="/panel/products/${product.id}/compatibility" class="btn btn-orange btn-sm" title="Compatibilidad de fluidos"><i class="fas fa-water"></i> Compatibilidad</a>
 								<a href="/panel/products/${product.id}/parts" class="btn btn-secondary btn-sm" title="Gestionar partes"><i class="fas fa-cogs"></i> Partes</a>
-								<a href="/panel/products/${product.id}/docs" class="btn btn-warning btn-sm" title="Gestionar Documentos"><i class="fas fa-file-upload"></i> Documentos</a>
+								<a href="/panel/products/${product.id}/docs" class="btn btn-blue btn-sm" title="Gestionar Documentos"><i class="far fa-file-pdf"></i></a>
 								<button class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
 							</td>
 						</tr>

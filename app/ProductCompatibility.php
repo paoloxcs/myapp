@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class ProductCompatibility extends Model
 {
     protected $table = 'product_compatibilities';
-    protected $fillable = ['name','type_field','value_field','compatibility_id','product_id'];
+    protected $fillable = ['unique_key','type_field','value_field','compatibility_id','product_id'];
     public $timestamps = false;
 
     // Relacion con la compatibilidad
