@@ -11,6 +11,7 @@ use App\Dimension;
 use App\ProductDoc;
 use App\Measurement;
 use App\ProductPart;
+use App\ProductMaterial;
 use App\Compatibility;
 use Illuminate\Http\Request;
 use App\ProductCompatibility;
@@ -238,7 +239,6 @@ class ProductController extends Controller
         $product= Product::with('docs')->findOrFail($id);
         return view('panel.product.docs', compact('product'));
     }
-
     //Método que permite guardar los documentos anexos por perfil
     public function storeDocs(Request $request, $id)
     {
@@ -267,6 +267,41 @@ class ProductController extends Controller
         }
         $doc->delete();
         return back()->with(['message' => 'Se eliminó el documento']);
+    }
+
+    //Método que permite retornar la vista de los materiales disponibles por perfil
+    public function getMaterials($id)
+    {
+        $product=Product::with('materials')->findOrFail($id);
+        return view('panel.product.material', compact('product'));
+    }
+    //Método que permite guardar los materiales disponibles por perfil
+    public function storeMaterials(Request $request, $id)
+    {
+        $product = Product::with('materials')->find($id);
+        $validation = \Validator::make($request->all(),[
+            'name' => 'required|string',
+            'type' => 'required|string',
+            'colour' => 'required|string',
+            'options' => 'required|string'
+        ]);
+        if($validation->fails()){
+            return response()->json(['errors'=>$validation->errors()],422);
+        }
+        $product->materials()->create([
+            'name' => $request->name,
+            'type' => $request->type,
+            'colour' => $request->colour,
+            'options' => $request->options
+        ]);
+        return back()->with(['message' => 'Registro guardado']);
+    }
+    //Método para eliminar el material agregado por perfil
+    public function destroyMaterial($material_id)
+    {
+        $material = ProductMaterial::findOrFail($material_id);
+        $material->delete();
+        return back()->with(['message' => 'Se eliminó el material']);
     }
 
 

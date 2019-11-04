@@ -107,6 +107,11 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::put('products/docs/{id}','ProductController@storeDocs')->name('products.docs.store');
 			Route::get('docs/{doc_id}/destroy','ProductController@destroyDoc')->name('docs.destroy');
 
+			//Gestión de los materiales disponibles por Perfil
+			Route::get('products/{id}/materials', 'ProductController@getMaterials');
+			Route::put('products/materials/{id}','ProductController@storeMaterials')->name('products.materials.store');
+			Route::get('materials/{material_id}/destroy','ProductController@destroyMaterial')->name('materials.destroy');
+
 
 			// Lista toda las dimensiones
 			Route::get('dimensions-data','ProductController@getDimensions');
