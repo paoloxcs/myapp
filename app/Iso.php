@@ -11,8 +11,8 @@ class Iso extends Model
     public $timestamps = false;
 
     // Relacion con partes
-    public function parts()
+    public function product()
     {
-        return $this->belongsToMany(ProductPart::class,'iso_part','iso_id','part_id');
+        return $this->belongsToMany(Product::class,'iso_product','iso_id','product_id');
     }
 }

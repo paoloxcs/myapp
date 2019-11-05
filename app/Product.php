@@ -61,6 +61,11 @@ class Product extends Model
     {
         return url('/').'/allimages/'.$value;
     }
+    // Relacion isos
+    public function isos()
+    {
+        return $this->belongsToMany(Iso::class,'iso_product','product_id','iso_id');
+    }
 
 
 }

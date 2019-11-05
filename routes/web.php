@@ -112,6 +112,10 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::put('products/materials/{id}','ProductController@storeMaterials')->name('products.materials.store');
 			Route::get('materials/{material_id}/destroy','ProductController@destroyMaterial')->name('materials.destroy');
 
+			//Administración de Certificados por Perfil
+			Route::get('products/{id}/isos', 'ProductController@getIsos');
+			Route::put('products/isos/{id}','ProductController@storeProductIso')->name('products.isos.store');
+
 
 			// Lista toda las dimensiones
 			Route::get('dimensions-data','ProductController@getDimensions');

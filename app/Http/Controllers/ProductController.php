@@ -9,6 +9,7 @@ use App\Product;
 use App\Category;
 use App\Dimension;
 use App\ProductDoc;
+use App\Iso;
 use App\Measurement;
 use App\ProductPart;
 use App\ProductMaterial;
@@ -304,6 +305,24 @@ class ProductController extends Controller
         return back()->with(['message' => 'Se eliminó el material']);
     }
 
+    //Método para listar los certificados asociados por Perfil
+    public function getIsos($id)
+    {
+
+        $isos = Iso::orderBy('name','asc')->get();
+        $product=Product::with('isos')->findOrFail($id);
+        return view('panel.product.iso', compact('product', 'isos'));
+    }
+    //Método para agregar una certificación a un Perfil
+    public function storeProductIso(Request $request, $id)
+    {
+        $product = Product::with('isos')->find($id);
+        $product->isos()->create([
+            'iso_id' => $request->iso,
+            'product_id' => $product->id,
+        ]);
+        return back()->with(['message' => 'Registro guardado']);
+    }
 
     // Metodo que permite guardar partes del producto
     public function storeParts(Request $request, $id)
