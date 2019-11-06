@@ -115,6 +115,10 @@ Route::group(['middleware'=>'auth'],function(){
 			//Administración de Certificados por Perfil
 			Route::get('products/{id}/isos', 'ProductController@getIsos');
 			Route::put('products/isos/{id}','ProductController@storeProductIso')->name('products.isos.store');
+			Route::get('isos/{iso_id}/destroy','ProductController@destroyProductIso')->name('isos.destroy');
+
+			
+
 
 
 			// Lista toda las dimensiones

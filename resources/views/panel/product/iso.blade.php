@@ -46,6 +46,15 @@
 									<th>Acción</th>
 								</tr>
 							</thead>
+							<tbody>								
+								@foreach($product->isos as $iso)
+								<tr>
+									<td>{{$iso->id}}</td>
+									<td>{{$iso->name}}</td>
+									<td><a href="{{route('isos.destroy', $iso->id)}}" onclick="return confirm('¿Seguro de eliminar el registro?')" class="btn btn-sm btn-danger"><i class="fas fa-trash"></i></a></td>
+								</tr>
+								@endforeach
+							</tbody>
 						</table>
 					</div>
 				</div>

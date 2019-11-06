@@ -215,15 +215,9 @@ class ProductController extends Controller
                 'value_field' => $request["compat_dynamic_$compat_id"],
                 'compatibility_id' => $compat_id
             ]);
-
-
             $compat2->value_field = $request["compat_dynamic_$compat_id"];
             $compat2->save();
-
-
         }
-
-
         return back()->with(['message' => 'Los cambios se guardaron con éxito']);
     }
 
@@ -304,11 +298,9 @@ class ProductController extends Controller
         $material->delete();
         return back()->with(['message' => 'Se eliminó el material']);
     }
-
     //Método para listar los certificados asociados por Perfil
     public function getIsos($id)
     {
-
         $isos = Iso::orderBy('name','asc')->get();
         $product=Product::with('isos')->findOrFail($id);
         return view('panel.product.iso', compact('product', 'isos'));
@@ -317,13 +309,19 @@ class ProductController extends Controller
     public function storeProductIso(Request $request, $id)
     {
         $product = Product::with('isos')->find($id);
-        $product->isos()->create([
+        $product->isos()->syncWithoutDetaching([
             'iso_id' => $request->iso,
             'product_id' => $product->id,
         ]);
         return back()->with(['message' => 'Registro guardado']);
     }
-
+    //Método para eliminar una certificación a un Perfil
+    public function destroyProductIso($iso_id)
+    {
+        $product = Product::with('isos')->find($iso_id);
+        $product->isos()->detach();
+        return back()->with(['message' => 'Registro guardado']);
+    }
     // Metodo que permite guardar partes del producto
     public function storeParts(Request $request, $id)
     {
@@ -363,7 +361,6 @@ class ProductController extends Controller
             unlink(public_path().'/docs/'.$part->ruta);
         }
         $part->delete();
-
         return back()->with(['message' => 'Registro eliminado']);
     }
 
