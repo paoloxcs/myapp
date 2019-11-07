@@ -299,29 +299,24 @@ class ProductController extends Controller
         return back()->with(['message' => 'Se eliminó el material']);
     }
     //Método para listar los certificados asociados por Perfil
-    public function getIsos($id)
+    public function getIsos($id) //Id de Producto
     {
         $isos = Iso::orderBy('name','asc')->get();
         $product=Product::with('isos')->findOrFail($id);
+
+        
         return view('panel.product.iso', compact('product', 'isos'));
     }
     //Método para agregar una certificación a un Perfil
     public function storeProductIso(Request $request, $id)
     {
-        $product = Product::with('isos')->find($id);
-        $product->isos()->syncWithoutDetaching([
-            'iso_id' => $request->iso,
-            'product_id' => $product->id,
-        ]);
+
+        $product = Product::find($id);
+        $product->isos()->sync($request->isos);
+
         return back()->with(['message' => 'Registro guardado']);
     }
-    //Método para eliminar una certificación a un Perfil
-    public function destroyProductIso($iso_id)
-    {
-        $product = Product::with('isos')->find($iso_id);
-        $product->isos()->detach();
-        return back()->with(['message' => 'Registro guardado']);
-    }
+    
     // Metodo que permite guardar partes del producto
     public function storeParts(Request $request, $id)
     {

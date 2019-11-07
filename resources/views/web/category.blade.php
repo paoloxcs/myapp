@@ -20,8 +20,8 @@
 			      </div>
 			      <div id="colapso1" class="collapse show" aria-labelledby="head2" data-parent="#accordionExample">
 			        <div class="card-body d-flex flexwrapper">
-			  	      @foreach($category->products as $product)
-			  	        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('productos/'.$category->slug.'/'.$product->slug)}}">{{$product->type}}</a></section>
+			  	      @foreach($category->products as $prod)			  	      
+			  	        <section class="category"><i class="fas fa-caret-right"></i> <a class="white" href="{{url('products/'.$category->slug.'/'.$prod->slug)}}">{{$prod->name}}</a></section>
 			  	      @endforeach
 			        </div>
 			      </div>
@@ -71,22 +71,31 @@
 							</div>
 							<div class="row mt-2">
 								<div class="col-12">
-									{{-- <table class="table table-sm table-condensed table-borderless">
+									
+									@foreach($product->operating_conditions as $index => $opera)
+									<pre>
+										{{$opera->measurement->sigla}}
+									</pre>
+									<table class="table table-sm table-condensed table-borderless">
 										<tbody>
+
 											<tr>
 												<td><small>Presión Máxima</small></td>
-												<td><small class="orange-text">{{$product->max_pressure}} Bar</small></td>
+												<td><small class="orange-text">{{$opera->max_pressure}} Bar</small></td>
 											</tr>
 											<tr>
 												<td><small>Rango Temperatura</small></td>
-												<td><small class="orange-text">{{$product->min_temp_range}}° a {{$product->max_temp_range}}°</small></td>
+												<td><small class="orange-text">{{$opera->min_temp}}° a {{$opera->max_temp}}°</small></td>
 											</tr>
 											<tr>
 												<td><small>Velocidad Máxima</small></td>
-												<td><small class="orange-text">{{$product->max_speed}}mt/sec</small></td>
+												<td><small class="orange-text">{{$opera->max_speed}}mt/sec</small></td>
 											</tr>
 										</tbody>
-									</table> --}}
+									</table>
+
+									@endforeach
+
 									
 								</div>
 							</div>

@@ -46,7 +46,9 @@ class FrontController extends Controller
     public function getProductsOfCategory($categ_slug)
     {
         $category = Category::where('slug',$categ_slug)->with(['products' => function($query){
-            $query->where('status', 1);
+            $query->where('status', 1)->with(['operating_conditions' => function($query){
+                $query->with('measurement');
+            }]);
         }])->first();
 
         if($category){
@@ -67,7 +69,7 @@ class FrontController extends Controller
         $product = Product::where([
                 ['slug', $product_slug],
                 ['status', 1]
-            ])->with('dimensions','compatibilities','measurements','operating_conditions','docs')->first();
+            ])->with('dimensions','compatibilities','measurements','operating_conditions','docs', 'parts')->first();
 
         return view('web.product', compact('category','product','compatibilities'));
     }

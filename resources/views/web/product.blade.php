@@ -82,49 +82,7 @@
 					</nav>
 					<div class="tab-content" id="nav-tabContent">
 					  <div class="tab-pane fade show active" id="specs" role="tabpanel" aria-labelledby="nav-home-tab">
-					  	<div class="row mt-4">
-					  		<section class="col-12">
-					  		<h5>Filtros</h5>
-					  		<form>
-							<div class="mb-2">
-								<label for="unit_measurement">Unida de medida</label><br>
-								@foreach($product->measurements as $index => $measurement)
-									<div class="form-check form-check-inline">
-									<input class="form-check-input" type="radio" name="unit_measurememt" id="inlineRadio{{$index}}" value="{{$measurement->id}}" {{$index == 0 ? 'checked' : 'disabled'}}>
-									<label class="form-check-label" for="inlineRadio{{$index}}">{{$measurement->name}}</label>
-									</div>
-								@endforeach
-							</div>
-					  		  <div class="form-row align-items-center">
-					  		    <div class="col-auto">
-					  		      <div class="input-group mb-2">
-					  		        <div class="input-group-prepend">
-					  		          <div class="input-group-text"> Nro parte </div>
-					  		        </div>
-					  		        <input type="number" class="form-control" id="inlineFormInputGroup" placeholder="">
-					  		      </div>
-								  </div>
-								
-
-					  		    {{-- @foreach($product->dimensions as $dimen)
-					  		    <div class="col-auto">					  		      
-					  		      <div class="input-group mb-2">
-					  		        <div class="input-group-prepend">
-					  		          <div class="input-group-text"> {{$dimen->dimension->sigla}} </div>
-					  		        </div>
-					  		        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="valor">
-					  		      </div>
-					  		    </div>
-								  @endforeach --}}
-
-					  		    <div class="col-auto">
-					  		      <button type="submit" class="btn btn-orange mb-2"><i class="fa fa-search"></i> Buscar</button>
-					  		    </div>
-					  		  </div>
-					  		</form>
-					  		</section>
-					  	</div>
-
+					  	
 					  	<div class="row mt-4">
 					  		<section class="col-12">
 					  		<table class="table" id="parts-table">
@@ -134,10 +92,26 @@
 									@foreach ($product->dimensions as $dimen2)
 										<th scope="col">{{$dimen2->sigla}}</th>
 									@endforeach
-									<th width="10%" scope="col">&nbsp;</th>
+									<th> Medida </th>
+									<th width="10%" scope="col">Acción</th>
 								</tr>
 					  		  </thead>
-					  		  <tbody id="parts">
+					  		  <tbody>
+					  		  	@foreach ($product->parts()->orderBy('id','DESC')->get() as $part)
+					  		  		<tr>
+					  		  			<td> {{$part->part_nro}} </td>
+					  		  			
+					  		  			@foreach (json_decode($part->dimensions) as $index => $part_dimen)
+					  		  				<td> {{$part_dimen}}</td>
+					  		  			@endforeach
+					  		  			<td> {{$part->measurement->sigla}}</td>
+
+					  		  			<td>
+					  		  				<button class="btn btn-outline-orange btn-sm">Solicitar</button>
+					  		  			</td>
+
+					  		  		</tr>
+					  		  	@endforeach
 					  		  	
 					  		  </tbody>
 					  		 
@@ -262,57 +236,8 @@
 
 <script>
 	$(document).ready(function(){
-		getParts();
+		$('#parts-table').DataTable();
 		
 	});
-	let props = {
-		product_id : {{$product->id}},
-		tbParts : $("#parts"),
-		ruta : ''
-	}
-	function getParts() {
-		
-		props.ruta = `/products/${props.product_id}/parts`;
-		$.ajax({
-			url: props.ruta,
-			type: 'GET',
-			dataType: 'JSON',
-			success: resp =>{
-
-				props.tbParts.empty();
-				resp.forEach(part =>{
-
-					props.tbParts.append(`
-						<tr>
-							<td>${part.part_nro}</td>
-							${renderValues(part.dimensions)}
-							<td>
-								<button class="btn btn-outline-orange btn-sm">Solicitar</button>
-							</td>
-						</tr>
-						`);
-
-				});
-				
-				
-			},
-			error: err =>{
-				console.log(err);
-			}
-		});
-	}
-
-	function renderValues(dimensions) {
-
-		let json_data = JSON.parse(dimensions);
-
-		let html = '';
-
-		for(let key in json_data){
-			html += `<td>${json_data[key]}</td>`;
-		}
-
-		return html;
-	}
 </script>
 @endsection

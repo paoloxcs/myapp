@@ -21,6 +21,13 @@ class CreateProductMaterialesTable extends Migration
             $table->string('colour',60)->nullable();
             $table->integer('product_id')->unsigned();
             $table->foreign('product_id')->references('id')->on('products')->onDelete('cascade');
+
+
+            //Campos opcionales a pedido del cliente
+            $table->string('custom1', 255)->nullable();
+            $table->string('custom2', 255)->nullable();
+            $table->string('custom3', 255)->nullable();
+
             //$table->timestamps();
         });
     }
