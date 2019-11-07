@@ -287,7 +287,10 @@ class ProductController extends Controller
             'name' => $request->name,
             'type' => $request->type,
             'colour' => $request->colour,
-            'options' => $request->options
+            'options' => $request->options,
+            'custom1' => $request->custom1,
+            'custom2' => $request->custom2,
+            'custom3' => $request->custom3
         ]);
         return back()->with(['message' => 'Registro guardado']);
     }

@@ -29,8 +29,7 @@
 									<th>Nombre</th>
 									<th>Dirección</th>
 									<th>Distrito</th>
-									<th>Ciudad</th>
-									<th>Mapa</th>
+									<th>Ciudad</th>									
 									<th>Acción</th>
 								</thead>
 								<tbody id="sedes">
@@ -89,8 +88,7 @@
 							<td> ${sede.name}</td>
 							<td> ${sede.address}</td>
 							<td> ${sede.district}</td>
-							<td> ${sede.city}</td>
-							<td width="130"> ${sede.maps_code}</td>
+							<td> ${sede.city}</td>							
 							<td>
 								<button class="btn btn-orange btn-sm" onclick='editSede(${JSON.stringify(sede)})'> Editar </button>
 								<button class="btn btn-danger btn-sm" onclick="destroySede(${sede.id})"> Eliminar </button>

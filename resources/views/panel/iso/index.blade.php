@@ -26,8 +26,7 @@
 							<table class="table table-sm table-hover table-condensed table-bordered">
 								<thead>
 									<th>Id</th>
-									<th>Nombre</th>
-									<th>Descripción</th>
+									<th>Nombre</th>									
 									<th>Acción</th>
 								</thead>
 								<tbody id="isos">
@@ -76,8 +75,7 @@
 					props.tbIsos.append(`
 						<tr>
 							<td> ${iso.id} </td>
-							<td> ${iso.name} </td>
-							<td> ${iso.description} </td>
+							<td title="${iso.description}"> ${iso.name} </td>							
 							<td>
 							<button class="btn btn-orange btn-sm" onclick='editIso(${JSON.stringify(iso)})'> Editar </button>
 							<button class="btn btn-danger btn-sm" onclick="destroyIso(${iso.id})"> Eliminar </button>

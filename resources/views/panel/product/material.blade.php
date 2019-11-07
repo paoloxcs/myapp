@@ -35,9 +35,24 @@
 									<input type="text" name="colour" class="form-control" placeholder="Color del Material">
 								</div>
 							</section>
-							<section class="col-12 col-md-10">
+							<section class="col-12 col-md-12">
 								<div class="form-group">
 									<textarea name="options" id="options" class="form-control" rows="2">Ingrese detalles del material</textarea>
+								</div>
+							</section>
+							<section class="col-12 col-md-4">
+								<div class="form-group">
+									<input type="text" name="custom1" class="form-control" placeholder="Columna opcional 1">
+								</div>
+							</section>
+							<section class="col-12 col-md-4">
+								<div class="form-group">
+									<input type="text" name="custom2" class="form-control" placeholder="Columna opcional 2">
+								</div>
+							</section>
+							<section class="col-12 col-md-4">
+								<div class="form-group">
+									<input type="text" name="custom3" class="form-control" placeholder="Columna opcional 3">
 								</div>
 							</section>
 							<section class="col-12 col-md-2 text-center">

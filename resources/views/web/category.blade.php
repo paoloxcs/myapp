@@ -46,7 +46,7 @@
 
 			</div>
 
-			<div class="row mt-3">
+			{{-- <div class="row mt-3">
 				<div class="form-check form-check-inline">
 				  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1" checked>
 				  <label class="form-check-label" for="inlineRadio1">Todos</label>
@@ -59,7 +59,7 @@
 				  <input class="form-check-input" type="radio" name="inlineRadioOptions" id="inlineRadio3" value="option3">
 				  <label class="form-check-label" for="inlineRadio3">Inch</label>
 				</div>
-			</div>
+			</div> --}}
 
 			<div class="row mt-3 d-flex flex-wrap">
 				@foreach($category->products as $product)
@@ -70,30 +70,51 @@
 								<div class="col-6"><h3>{{$product->name}}</h3></div>
 							</div>
 							<div class="row mt-2">
-								<div class="col-12">
-									
+								<div class="col-12">								
+
 									@foreach($product->operating_conditions as $index => $opera)
 									<pre>
-										{{$opera->measurement->sigla}}
+										{{-- {{$opera->measurement->sigla}} --}}
+										{{-- {{$product->id}} --}}
 									</pre>
-									<table class="table table-sm table-condensed table-borderless">
-										<tbody>
+									{{$opera->measurement->sigla}}
+									@if($index==0)
+										<table class="table table-sm table-condensed table-borderless">
+											<tbody>
 
-											<tr>
-												<td><small>Presión Máxima</small></td>
-												<td><small class="orange-text">{{$opera->max_pressure}} Bar</small></td>
-											</tr>
-											<tr>
-												<td><small>Rango Temperatura</small></td>
-												<td><small class="orange-text">{{$opera->min_temp}}° a {{$opera->max_temp}}°</small></td>
-											</tr>
-											<tr>
-												<td><small>Velocidad Máxima</small></td>
-												<td><small class="orange-text">{{$opera->max_speed}}mt/sec</small></td>
-											</tr>
-										</tbody>
-									</table>
+												<tr>
+													<td><small>Presión Máxima</small></td>
+													<td><small class="orange-text">{{$opera->max_pressure}}</small></td>
+												</tr>
+												<tr>
+													<td><small>Rango Temperatura</small></td>
+													<td><small class="orange-text">{{$opera->min_temp}} a {{$opera->max_temp}}</small></td>
+												</tr>
+												<tr>
+													<td><small>Velocidad Máxima</small></td>
+													<td><small class="orange-text">{{$opera->max_speed}}</small></td>
+												</tr>
+											</tbody>
+										</table>
+									@else
+										<table class="table table-sm table-condensed table-borderless">
+											<tbody>
 
+												<tr>
+													<td><small>Presión Máxima</small></td>
+													<td><small class="orange-text">{{$opera->max_pressure}} Bar</small></td>
+												</tr>
+												<tr>
+													<td><small>Rango Temperatura</small></td>
+													<td><small class="orange-text">{{$opera->min_temp}}° a {{$opera->max_temp}}°</small></td>
+												</tr>
+												<tr>
+													<td><small>Velocidad Máxima</small></td>
+													<td><small class="orange-text">{{$opera->max_speed}}mt/sec</small></td>
+												</tr>
+											</tbody>
+										</table>
+									@endif
 									@endforeach
 
 									

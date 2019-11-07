@@ -75,9 +75,10 @@
 				<section class="col-12">
 					<nav>
 					  <div class="nav nav-tabs" id="nav-tab" role="tablist">
-					    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#specs" role="tab" aria-controls="specs" aria-selected="true">Especificación del producto</a>
-					    <a class="nav-item nav-link" id="conditions-tab" data-toggle="tab" href="#conditions" role="tab" aria-controls="conditions" aria-selected="false">Condiciones de operación</a>
-					    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#compatible" role="tab" aria-controls="compatible" aria-selected="false">Compatibilidad de fluídos</a>
+					    <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#specs" role="tab" aria-controls="specs" aria-selected="true"><small>Especificación del producto</small></a>
+					    <a class="nav-item nav-link" id="conditions-tab" data-toggle="tab" href="#conditions" role="tab" aria-controls="conditions" aria-selected="false"><small>Condiciones de operación</small></a>
+					    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#compatible" role="tab" aria-controls="compatible" aria-selected="false"><small>Compatibilidad de fluídos</small></a>
+					    <a class="nav-item nav-link" id="nav-contact-tab" data-toggle="tab" href="#material" role="tab" aria-controls="material" aria-selected="false"><small>Materiales disponibles</small></a>
 					  </div>
 					</nav>
 					<div class="tab-content" id="nav-tabContent">
@@ -220,6 +221,50 @@
 					  		</section>
 					  	</div>
 					  </div>
+
+					  <div class="tab-pane fade" id="material" role="tabpanel" aria-labelledby="material-tab">
+					  	<div class="row mt-4">
+					  		<section class="col-12">
+					  			<p><strong>Material:</strong>
+
+					  				@foreach($product->materials as $mat)
+									<h5 class="orange-text">{{$mat->name}}</h5>
+					  				<table class="table table-bordered">
+					  				  <thead class="thead-dark">
+					  				    <tr>					  				      
+					  				      <th scope="col"><small>Tipo</small></th>
+					  				      <th scope="col"><small>Color</small></th>
+					  				      <th scope="col"><small>Opciones</small></th>
+					  				    </tr>
+					  				  </thead>
+					  				  <tbody>
+					  				    <tr>					  				      
+					  				      <td><small>{{$mat->type}}</small></td>
+					  				      <td><small>{{$mat->colour}}</small></td>
+					  				      <td><small>{{$mat->options}}</small></td>
+					  				    </tr>
+					  				  </tbody>
+					  				</table>
+					  				<p><strong>Información Adicional</strong></p>
+					  				<ul>
+					  					@if($mat->custom1!='')
+					  						<li>{{$mat->custom1}}</li>
+					  					@endif
+
+					  					@if($mat->custom2!='')
+					  						<li>{{$mat->custom2}}</li>
+					  					@endif
+					  					@if($mat->custom3!='')
+					  						<li>{{$mat->custom3}}</li>
+					  					@endif
+					  					
+					  					
+					  				</ul>
+					  				@endforeach
+					  		</section>
+					  	</div>
+					  </div>
+
 					</div>
 				</section>
 			</div>			
