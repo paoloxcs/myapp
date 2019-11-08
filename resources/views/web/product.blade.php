@@ -108,14 +108,90 @@
 					  		  			<td> {{$part->measurement->sigla}}</td>
 
 					  		  			<td>
-					  		  				<button class="btn btn-outline-orange btn-sm">Solicitar</button>
-					  		  			</td>
+					  		  				{{-- <button class="btn btn-outline-orange btn-sm">Solicitar</button> --}}
 
+					  		  				<button type="button" class="btn btn-outline-orange btn-sm" data-toggle="modal" data-target="#formPart{{$part->id}}">
+					  		  				  Solicitar
+					  		  				</button>
+					  		  				{{-- Modal Quote --}}
+					  		  				<div class="modal fade" id="formPart{{$part->id}}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+					  		  				  <div class="modal-dialog" role="document">
+					  		  				    <div class="modal-content">
+					  		  				      <div class="modal-header">
+					  		  				        <h5 class="modal-title" id="exampleModalLabel">Solicitar Información para {{$part->part_nro}}</h5>
+					  		  				        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+					  		  				          <span aria-hidden="true">&times;</span>
+					  		  				        </button>
+					  		  				      </div>
+					  		  				      <form>
+					  		  				      <div class="modal-body">
+					  		  				       	<div class="row">
+					  		  				       		<div class="col-12">
+					  		  				       			<div class="form-group">
+					  		  				       			  <label for="comment"><small>Comentario</small></label>
+					  		  				       			  <textarea name="comment" id="comment" class="form-control form-control-sm" rows="3">Desearía más información sobre la Parte  {{$part->part_nro}}</textarea>
+					  		  				       			</div>					  		  				       			
+					  		  				       		</div>
+					  		  				       	</div>
+					  		  				       	<div class="row">
+					  		  				       		<div class="col-12">
+					  		  				       			<div class="form-group">
+					  		  				       				<label for="name"><small>Nombres y Apellidos</small></label>
+					  		  				       				<input type="name" name="name" class="form-control form-control-sm" placeholder="Ingrese sus nombres completos">
+					  		  				       			</div>
+					  		  				       		</div>
+					  		  				       	</div>
+					  		  				       	<div class="row">
+					  		  				       		<div class="col-12">
+					  		  				       			<div class="form-group">
+					  		  				       				<label for="email"><small>Correo electrónico</small></label>
+					  		  				       				<input type="email" name="email" class="form-control form-control-sm" placeholder="Ingreso un correo electrónico">
+					  		  				       			</div>
+					  		  				       		</div>
+					  		  				       	</div>
+
+					  		  				       	<div class="row">
+					  		  				       		<div class="col-12 col-md-6">
+					  		  				       			<div class="form-group">
+					  		  				       				<label for="mobile"><small>Telf</small></label>
+					  		  				       				<input type="text" name="mobile" class="form-control form-control-sm" placeholder="Ingreso un nro de teléfono/móvil">
+					  		  				       			</div>
+					  		  				       		</div>
+					  		  				       		<div class="col-12 col-md-6">
+					  		  				       			<div class="form-group">
+					  		  				       				<label for="company"><small>Empresa</small></label>
+					  		  				       				<input type="text" name="company" class="form-control form-control-sm" placeholder="Ingreso el nombre de la empresa en la que trabaja">
+					  		  				       			</div>
+					  		  				       		</div>
+					  		  				       	</div>
+					  		  				       	<div class="row">
+					  		  				       		<div class="col-12">
+					  		  				       			<div class="form-group form-check">
+					  		  				       			  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+					  		  				       			  <label class="form-check-label" for="exampleCheck1"><small>Doy mi consentimiento para recibir comunicaciones sobre productos, servicios y eventos por de parte de CASDEL.</small></label>
+					  		  				       			</div>
+					  		  				       			
+					  		  				       		</div>
+					  		  				       	</div>
+					  		  				       	
+					  		  				      </div>
+					  		  				      <div class="modal-footer">
+					  		  				      	<div class="row">
+					  		  				      		<div class="col-12">
+					  		  				      			<button type="submit" class="btn btn-orange btn-sm">Enviar</button>
+					  		  				      			<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+					  		  				      		</div>
+					  		  				      	</div>				  		  				        
+					  		  				      </div>
+					  		  				      </form>
+					  		  				    </div>
+					  		  				  </div>
+					  		  				</div>
+					  		  				{{-- Modal Quote --}}
+					  		  			</td>
 					  		  		</tr>
 					  		  	@endforeach
-					  		  	
 					  		  </tbody>
-					  		 
 					  		</table>
 					  		</section>
 					  		

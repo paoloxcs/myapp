@@ -1,8 +1,8 @@
 # Restan
 
 Búsqueda
-Isos
-Agregar Materiales - parte Front Producto
+Isos - hecho
+Agregar Materiales - parte Front Producto - hecho
 Agregar Formulario de Solicitud de Parte
-Vista de Productos por Categoría
+Vista de Productos por Categoría - hecho
 

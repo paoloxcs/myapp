@@ -62,7 +62,203 @@
 			</div> --}}
 
 			<div class="row mt-3 d-flex flex-wrap">
+				{{-- <section class="profile">
+					<a href="#">
+						<div class="row d-flex align-items-center">
+							<div class="col-6"><img src="http://localhost:8000/allimages/5dc44e11bf40f.jpg" class="img-fluid img-thumbnail" alt=""></div>
+							<div class="col-6"><h3>15</h3></div>
+						</div>
+						<div class="row mt-2">
+							<div class="col-12">
+								
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+								  <li class="nav-item">
+								    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">Home</a>
+								  </li>
+								  <li class="nav-item">
+								    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+								  </li>
+								</ul>
+
+								
+								<div class="tab-content" id="myTabContent">
+								  <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+								  	<table class="table table-sm table-condensed table-borderless">
+								  		<tbody>
+								  			<tr>
+								  				<td><small>Presión Máxima</small></td>
+								  				<td><small class="orange-text">300 Bar</small></td>
+								  			</tr>
+								  			<tr>
+								  				<td><small>Rango Temperatura</small></td>
+								  				<td><small class="orange-text">-30°C a 150°C</small></td>
+								  			</tr>
+								  			<tr>
+								  				<td><small>Velocidad Máxima</small></td>
+								  				<td><small class="orange-text">0.5m/sec</small></td>
+								  			</tr>
+								  		</tbody>
+								  	</table>									  	
+								  </div>
+								  <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+								  	<table class="table table-sm table-condensed table-borderless">
+								  		<tbody>
+								  			<tr>
+								  				<td><small>Presión Máxima</small></td>
+								  				<td><small class="orange-text">5000 P.S.I</small></td>
+								  			</tr>
+								  			<tr>
+								  				<td><small>Rango Temperatura</small></td>
+								  				<td><small class="orange-text">-400°F a 550°F</small></td>
+								  			</tr>
+								  			<tr>
+								  				<td><small>Velocidad Máxima</small></td>
+								  				<td><small class="orange-text">0.75ft/sec</small></td>
+								  			</tr>
+								  		</tbody>
+								  	</table>									  	
+								  </div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</section>
+
+				<section class="profile">
+					<a href="#">
+						<div class="row d-flex align-items-center">
+							<div class="col-6"><img src="http://localhost:8000/allimages/5dc44e11bf40f.jpg" class="img-fluid img-thumbnail" alt=""></div>
+							<div class="col-6"><h3>15</h3></div>
+						</div>
+						<div class="row mt-2">
+							<div class="col-12">
+								
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+								  <li class="nav-item">
+								    <a class="nav-link active" id="home-tab" data-toggle="tab" href="#home2" role="tab" aria-controls="home" aria-selected="true">Home</a>
+								  </li>
+								  <li class="nav-item">
+								    <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile2" role="tab" aria-controls="profile" aria-selected="false">Profile</a>
+								  </li>
+								</ul>
+
+								
+								<div class="tab-content" id="myTabContent">
+								  <div class="tab-pane fade show active" id="home2" role="tabpanel" aria-labelledby="home-tab">
+								  	<table class="table table-sm table-condensed table-borderless">
+								  		<tbody>
+								  			<tr>
+								  				<td><small>Presión Máxima</small></td>
+								  				<td><small class="orange-text">300 Bar</small></td>
+								  			</tr>
+								  			<tr>
+								  				<td><small>Rango Temperatura</small></td>
+								  				<td><small class="orange-text">-30°C a 150°C</small></td>
+								  			</tr>
+								  			<tr>
+								  				<td><small>Velocidad Máxima</small></td>
+								  				<td><small class="orange-text">0.5m/sec</small></td>
+								  			</tr>
+								  		</tbody>
+								  	</table>									  	
+								  </div>
+								  <div class="tab-pane fade" id="profile2" role="tabpanel" aria-labelledby="profile-tab">
+								  	<table class="table table-sm table-condensed table-borderless">
+								  		<tbody>
+								  			<tr>
+								  				<td><small>Presión Máxima</small></td>
+								  				<td><small class="orange-text">5000 P.S.I</small></td>
+								  			</tr>
+								  			<tr>
+								  				<td><small>Rango Temperatura</small></td>
+								  				<td><small class="orange-text">-400°F a 550°F</small></td>
+								  			</tr>
+								  			<tr>
+								  				<td><small>Velocidad Máxima</small></td>
+								  				<td><small class="orange-text">0.75ft/sec</small></td>
+								  			</tr>
+								  		</tbody>
+								  	</table>									  	
+								  </div>
+								</div>
+							</div>
+						</div>
+					</a>
+				</section> --}}
 				@foreach($category->products as $product)
+				<section class="profile">
+					<a href="{{url('productos/'.$category->slug.'/'.$product->slug)}}">
+						<div class="row d-flex align-items-center">
+							<div class="col-6"><img src="{{$product->url_image}}" class="img-fluid img-thumbnail" alt=""></div>
+							<div class="col-6"><h3>{{$product->name}}</h3></div>
+						</div>
+						<div class="row mt-2">
+							@foreach($product->operating_conditions as $index => $opera)
+							<ul class="nav nav-tabs" id="myTab" role="tablist">
+							@if($index==0)
+							<li class="nav-item">
+							  <a class="nav-link" id="home-tab" data-toggle="tab" href="#{{$opera->measurement->sigla}}{{$product->id}}" role="tab" aria-controls="home" aria-selected="true"><small>{{$opera->measurement->sigla}}</small></a>
+							</li>
+							@else
+							<li class="nav-item">
+							  <a class="nav-link" id="profile-tab" data-toggle="tab" href="#{{$opera->measurement->sigla}}{{$product->id}}" role="tab" aria-controls="profile" aria-selected="false"><small>{{$opera->measurement->sigla}}</small></a>
+							</li>
+							@endif
+							</ul>
+							{{-- <p>{{$opera->measurement->sigla}}</p> --}}
+							@endforeach
+
+							<div class="tab-content" id="myTabContent">
+
+							@foreach($product->operating_conditions as $index2 => $content)
+							@if($index2==0)
+							<div class="tab-pane fade show active" id="{{$content->measurement->sigla}}{{$product->id}}" role="tabpanel" aria-labelledby="home-tab">
+								<table class="table table-sm table-condensed table-borderless">
+									<tbody>
+										<tr>
+											<td><small>Presión Máxima</small></td>
+											<td><small class="orange-text">{{$content->max_pressure}}</small></td>
+										</tr>
+										<tr>
+											<td><small>Rango Temperatura</small></td>
+											<td><small class="orange-text">{{$content->min_temp}} a {{$content->max_temp}}</small></td>
+										</tr>
+										<tr>
+											<td><small>Velocidad Máxima</small></td>
+											<td><small class="orange-text">{{$content->max_speed}}</small></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							@else
+							<div class="tab-pane fade show" id="{{$content->measurement->sigla}}{{$product->id}}" role="tabpanel" aria-labelledby="home-tab">
+								<table class="table table-sm table-condensed table-borderless">
+									<tbody>
+										<tr>
+											<td><small>Presión Máxima</small></td>
+											<td><small class="orange-text">{{$content->max_pressure}}</small></td>
+										</tr>
+										<tr>
+											<td><small>Rango Temperatura</small></td>
+											<td><small class="orange-text">{{$content->min_temp}} a {{$content->max_temp}}</small></td>
+										</tr>
+										<tr>
+											<td><small>Velocidad Máxima</small></td>
+											<td><small class="orange-text">{{$content->max_speed}}</small></td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
+							@endif
+								{{-- <p>{{$content->measurement->name}}</p> --}}
+							@endforeach
+							</div>
+						</div>
+						{{-- <p>ID Único de Producto {{$product->id}}</p> --}}
+					</a>
+				</section>				
+				@endforeach
+				{{-- @foreach($category->products as $product)
 					<section class="profile">
 						<a href="{{url('productos/'.$category->slug.'/'.$product->slug)}}">
 							<div class="row d-flex align-items-center">
@@ -70,12 +266,11 @@
 								<div class="col-6"><h3>{{$product->name}}</h3></div>
 							</div>
 							<div class="row mt-2">
-								<div class="col-12">								
-
+								<div class="col-12">
 									@foreach($product->operating_conditions as $index => $opera)
 									<pre>
-										{{-- {{$opera->measurement->sigla}} --}}
-										{{-- {{$product->id}} --}}
+										 {{$opera->measurement->sigla}}
+										 {{$product->id}}
 									</pre>
 									{{$opera->measurement->sigla}}
 									@if($index==0)
@@ -123,7 +318,7 @@
 							
 						</a>
 					</section>
-				@endforeach
+				@endforeach --}}
 				
 			</div>
 
