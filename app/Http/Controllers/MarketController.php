@@ -91,8 +91,9 @@ class MarketController extends Controller
         ]);
         $market = Market::find($id);
         if ($request->file('url_image')) {
-            if(file_exists(public_path().'/allimages/'.$market->url_image)){
-                unlink(public_path().'/allimages/'.$market->url_image);
+            $path_img_original = $market->getOriginal('url_image');
+            if(file_exists(public_path().'/allimages/'.$path_img_original)){
+                unlink(public_path().'/allimages/'.$path_img_original);
             }
             
             $url_image = uniqid().'.'.$request->file('url_image')->getClientOriginalExtension();
@@ -121,8 +122,9 @@ class MarketController extends Controller
     public function destroy($id)
     {
         $market = Market::find($id);
-        if(file_exists(public_path().'/allimages/'.$market->url_image)){
-            unlink(public_path().'/allimages/'.$market->url_image);
+        $path_img_original = $market->getOriginal('url_image');
+        if(file_exists(public_path().'/allimages/'.$path_img_original)){
+            unlink(public_path().'/allimages/'.$path_img_original);
         }
         $market->delete();
 

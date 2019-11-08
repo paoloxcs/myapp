@@ -107,8 +107,9 @@ class BrandController extends Controller
 
         $brand = Brand::find($id);
         if ($request->file('url_image') && $request->file('url_image') != null ) {
-            if (file_exists(public_path().'/allimages/'.$brand->url_image)) {
-                unlink(public_path().'/allimages/'.$brand->url_image);
+            $path_img_original = $brand->getOriginal('url_image');
+            if (file_exists(public_path().'/allimages/'.$path_img_original)) {
+                unlink(public_path().'/allimages/'.$path_img_original);
             }
             $url_image = uniqid().'.'.$request->file('url_image')->getClientOriginalExtension();
             $request->file('url_image')->move(public_path().'/allimages/',$url_image);
@@ -135,8 +136,9 @@ class BrandController extends Controller
     public function destroy($id)
     {
         $brand = Brand::find($id);
-        if (file_exists(public_path().'/allimages/'.$brand->url_image)) {
-            unlink(public_path().'/allimages/'.$brand->url_image);
+        $path_img_original = $brand->getOriginal('url_image');
+        if (file_exists(public_path().'/allimages/'.$path_img_original)) {
+            unlink(public_path().'/allimages/'.$path_img_original);
         }
         $brand->delete();
         return response()->json(['message'=>'Registro eliminado'],200);

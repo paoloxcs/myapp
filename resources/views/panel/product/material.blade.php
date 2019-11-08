@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title','Más detalles del Perfil')
+@section('title','Más detalles del producto')
 @section('content')
 <div class="container">
 	@if(session('message'))
@@ -22,22 +22,22 @@
 						<div class="row">
 							<section class="col-12 col-md-4">
 								<div class="form-group">
-									<input type="text" name="name" class="form-control" placeholder="Nombre del Material">
+									<input type="text" name="name" class="form-control" placeholder="Nombre">
 								</div>
 							</section>
 							<section class="col-12 col-md-4">
 								<div class="form-group">
-									<input type="text" name="type" class="form-control" placeholder="Tipo del Material">
+									<input type="text" name="type" class="form-control" placeholder="Tipo">
 								</div>
 							</section>
 							<section class="col-12 col-md-4">
 								<div class="form-group">
-									<input type="text" name="colour" class="form-control" placeholder="Color del Material">
+									<input type="text" name="colour" class="form-control" placeholder="Color">
 								</div>
 							</section>
 							<section class="col-12 col-md-12">
 								<div class="form-group">
-									<textarea name="options" id="options" class="form-control" rows="2">Ingrese detalles del material</textarea>
+									<textarea name="options" id="options" class="form-control" rows="2" placeholder="Opciones"></textarea>
 								</div>
 							</section>
 							<section class="col-12 col-md-4">
@@ -55,7 +55,7 @@
 									<input type="text" name="custom3" class="form-control" placeholder="Columna opcional 3">
 								</div>
 							</section>
-							<section class="col-12 col-md-2 text-center">
+							<section class="col-12">
 								<button type="submit" class="btn btn-blue"><i class="fa fa-save"></i> Agregar </button>
 							</section>
 						</div>

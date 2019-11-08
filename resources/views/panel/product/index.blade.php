@@ -78,11 +78,12 @@
 							</td>
 							<td>${getFecha(product.created_at)}</td>
 							<td>
-								<a href="/panel/products/${product.id}/edit" class="btn btn-info btn-sm" title="Editar"><i class="fas fa-pen"></i> Editar</a>
-								<a href="/panel/products/${product.id}/compatibility" class="btn btn-orange btn-sm" title="Compatibilidad de fluidos"><i class="fas fa-water"></i> Compatibilidad</a>
-								<a href="/panel/products/${product.id}/parts" class="btn btn-secondary btn-sm" title="Gestionar partes"><i class="fas fa-cogs"></i> Partes</a>
+								<a href="/panel/products/${product.id}/edit" class="btn btn-info btn-sm" title="Editar"><i class="fas fa-pen"></i></a>
+								<a href="/panel/products/${product.id}/compatibility" class="btn btn-orange btn-sm" title="Compatibilidad de fluidos"><i class="fas fa-water"></i> </a>
+								<a href="/panel/products/${product.id}/parts" class="btn btn-secondary btn-sm" title="Gestionar partes"><i class="fas fa-cogs"></i></a>
 								<a href="/panel/products/${product.id}/docs" class="btn btn-blue btn-sm" title="Gestionar Documentos"><i class="far fa-file-pdf"></i></a>
 								<a href="/panel/products/${product.id}/materials" class="btn btn-success btn-sm" title="Gestionar Materiales"><i class="fas fa-tools"></i></a>
+								<a href="/panel/products/${product.id}/isos" class="btn btn-info btn-sm" title="Gestionar Isos"><i class="fas fa-cubes"></i></a>
 								<button class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
 							</td>
 						</tr>

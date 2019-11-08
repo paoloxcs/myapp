@@ -22,9 +22,4 @@ class ProductPart extends Model
     {
         return $this->belongsTo(Measurement::class, 'measurement_id');
     }
-    // Relacion isos
-    public function isos()
-    {
-        return $this->belongsToMany(Iso::class,'iso_part','part_id','iso_id');
-    }
 }

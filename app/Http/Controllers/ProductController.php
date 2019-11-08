@@ -304,7 +304,7 @@ class ProductController extends Controller
     //Método para listar los certificados asociados por Perfil
     public function getIsos($id) //Id de Producto
     {
-        $isos = Iso::orderBy('name','asc')->get();
+        $isos = Iso::all();
         $product=Product::with('isos')->findOrFail($id);
 
         

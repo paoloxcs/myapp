@@ -47,7 +47,8 @@ class PostController extends Controller
             'slug'  =>  str_slug($request->title),
             'summary'   =>  $request->summary,
             'body'  =>  $request->body,
-            'user_id'   =>  Auth()->user()->id
+            'user_id'   =>  Auth()->user()->id,
+            'post_type' => $request->post_type
         ]);
 
         //Subir foto principal
@@ -91,6 +92,7 @@ class PostController extends Controller
         $post->body = $request->body;
         $post->summary = $request->summary;
         $post->status = $request->status;
+        $post->post_type = $request->post_type;
         $post->save();
 
         return response()->json(['message'=>'Actualización exitosa'], 200);
@@ -166,9 +168,9 @@ class PostController extends Controller
     public function destroyPhoto($id)
     {
         $photo = PostImage::find($id);
-
-        if (file_exists(public_path().'/allimages/'.$photo->url_image)) {
-            unlink(public_path().'/allimages/'.$photo->url_image);
+        $path_img_original = $photo->getOriginal('url_image');
+        if (file_exists(public_path().'/allimages/'.$path_img_original)) {
+            unlink(public_path().'/allimages/'.$path_img_original);
         }
 
         $photo->delete();

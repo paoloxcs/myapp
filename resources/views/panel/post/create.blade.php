@@ -13,11 +13,19 @@
    			  <input type="hidden" name="_token" value="{{ csrf_token() }}">
               
    			  <div class="row">
-   			  	<div class="col-md-12">
+   			  	<div class="col-xs-12 col-md-4">
    			  		<div class="form-group">
-   			  			<input type="text" name="title" class="form-control" placeholder="Título de la noticia">
+   			  			<select name="post_type" class="form-control">
+							<option value="N">Moticia</option>
+							<option value="E">Evento</option>
+						</select>
    			  		</div>
-   			  	</div>
+				</div>
+				<div class="col-xs-12 col-md-8">
+					<div class="form-group">
+						<input type="text" name="title" class="form-control" placeholder="Título de la noticia">
+					</div>
+				</div>
    			  </div>
 
    			  <div class="form-group">

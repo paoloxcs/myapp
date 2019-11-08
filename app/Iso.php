@@ -10,7 +10,7 @@ class Iso extends Model
 
     public $timestamps = false;
 
-    // Relacion con partes
+    // Relacion con productos
     public function product()
     {
         return $this->belongsToMany(Product::class,'iso_product','iso_id','product_id');

@@ -10,17 +10,23 @@
    			  </button>
    			</div>
    			<div class="modal-body">
-   			  <input type="hidden" name="_token" value="{{ csrf_token() }}">
-              <input type="hidden" name="_method" value="PUT">
-              <input type="hidden" name="post_id">
-   			  <div class="row">
-   			  	<div class="col-md-12">
-   			  		<div class="form-group">
-                     <label for="title">Título</label>
-   			  			<input type="text" name="title" class="form-control" placeholder="Título de la noticia">
-   			  		</div>
-   			  	</div>
-   			  </div>
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input type="hidden" name="_method" value="PUT">
+			<input type="hidden" name="post_id">
+			<div class="row">
+				<div class="col-xs-12 col-md-4">
+					<div class="form-group">
+						<select name="post_type" class="form-control">
+							
+						</select>
+					</div>
+				</div>
+				<div class="col-xs-12 col-md-8">
+					<div class="form-group">
+						<input type="text" name="title" class="form-control" placeholder="Título de la noticia">
+					</div>
+				</div>
+			</div>
 
    			  <div class="form-group">
    			  	<label for="bodyedit">Contenido de la noticia</label>
