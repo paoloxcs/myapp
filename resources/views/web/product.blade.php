@@ -86,6 +86,11 @@
 					  	
 					  	<div class="row mt-4">
 					  		<section class="col-12">
+					  			@if(session('msg'))
+					  			<div class="alert alert-success">
+					  				{{session('msg')}}
+					  			</div>									
+					  			@endif
 					  		<table class="table" id="parts-table">
 					  		  <thead class="thead-dark">
 								<tr>
@@ -123,8 +128,10 @@
 					  		  				          <span aria-hidden="true">&times;</span>
 					  		  				        </button>
 					  		  				      </div>
-					  		  				      <form>
+					  		  				      <form action="{{route('sendquotepart')}}" method="POST">
+					  		  				      {{csrf_field()}}
 					  		  				      <div class="modal-body">
+					  		  				      	<input type="hidden" name="part_nro" value="{{$part->part_nro}}">
 					  		  				       	<div class="row">
 					  		  				       		<div class="col-12">
 					  		  				       			<div class="form-group">

@@ -36,6 +36,8 @@ Route::get('nosotros', function () {
     return view('web.about');
 });
 
+//Solicitar Info de Part
+Route::post('sendquotepart', 'FrontController@sendQuotePart')->name('sendquotepart');
 
 // Peticion asyncrona
 Route::get('products/{id}/parts','FrontController@getParts');

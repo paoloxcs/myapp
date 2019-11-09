@@ -1,0 +1,31 @@
+<table>
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Teléfono/Móvil</th>
+			<th>Correo Electrónico</th>
+			<th>Companía</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{$data['name']}}</td>
+			<td>{{$data['mobile']}}</td>
+			<td>{{$data['email']}}</td>
+			<td>{{$data['company']}}</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+<table>
+	<thead>
+		<tr>			
+			<th>Consulta</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{$data['comment']}}</td>
+		</tr>
+	</tbody>
+</table>

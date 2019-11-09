@@ -17,6 +17,9 @@ use App\Compatibility;
 use App\TypeApplication;
 use Illuminate\Http\Request;
 
+use App\Mail\QuotePart;
+use Illuminate\Support\Facades\Mail;
+
 
 class FrontController extends Controller
 {
@@ -146,5 +149,38 @@ class FrontController extends Controller
     {
         $sedes=Sede::orderBy('created_at', 'DESC')->paginate(9);
         return response()->json($sedes);
+    }
+
+    //Funcionamiento de Mailers
+    //Enviando solicitud de info para una parte
+    public function sendQuotePart(Request $request)
+    {
+        // dd($request->all());
+        $this->validate($request,[
+            'name'=>'required|string|max:80',
+            'comment'=>'required|string',
+            'email'=>'required|email',
+            'mobile'=>'required|string|max:15',
+            'company'=>'required|string|max:80',
+        ],[
+            'name.required'=>'Este campo es requerido',
+            'mobile.required'=>'El teléfono es requerido',
+            'email.required'=>'El correo electrónico es requerido',
+            'comment.required'=>'Escriba aqui su consulta',
+            'company.required'=>'Este campo es requerido'
+        ]);
+
+        $data=[
+            'name'=>$request->name,
+            'mobile'=>$request->mobile,
+            'email'=>$request->email,
+            'comment'=>$request->comment,
+            'company'=>$request->company,
+            'part_nro'=>$request->part_nro
+        ];
+        Mail::to('paolo_xc@hotmail.com')->cc('postmaster2@constructivo.com')
+        ->send(new QuotePart($data));
+        // Session::flash('msg', 'Su información fue enviada con éxito.'); //para otra vista/ruta
+        return back()->with('msg', 'Su información fue enviada con éxito.');
     }
 }
