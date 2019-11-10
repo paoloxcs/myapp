@@ -15,7 +15,7 @@
 
 		<section class="col-xs-12 col-sm-12 col-md-9">
 
-			<img src="{{asset('allimages/'.$post->getMainImage()->url_image)}}" class="fullimage mb-2" alt="Empleo formal en la minería creció 10.9%">
+			<img src="{{$post->getMainImage()->url_image}}" class="fullimage mb-2" alt="Empleo formal en la minería creció 10.9%">
 
 			{!!$post->body!!}
 
@@ -78,28 +78,7 @@
 			</a>
 		</section>
 		@endforeach
-
-		{{-- <section class="col-xs-12 col sm-12 col-md-4">
-			<a class="new" href="{{route('new')}}">
-				<img src="http://www.casdel.com.pe/images/noticias/thumbnail_1537558031.jpg" alt="">
-				Empleo formal en la minería creció 10.9% <br>
-				<span>20-02-2019</span>
-			</a>
-		</section>
-
-		<section class="col-xs-12 col sm-12 col-md-4">
-			<a class="new" href="{{route('new')}}">
-				<img src="http://www.casdel.com.pe/images/noticias/thumbnail_1537558031.jpg" alt="">
-				Empleo formal en la minería creció 10.9% <br>
-				<span>20-02-2019</span>
-			</a>
-		</section> --}}
 	</div>
-
-
-		
-
-
 </div>
 
 

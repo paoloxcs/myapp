@@ -150,23 +150,13 @@
 	<div class="row mt-5">
 		@foreach($news as $index => $new)		
 		<section class="col-xs-12 col-sm-12 col-md-4 text-center">
-			{{-- <a href="{{$new->$image->url_image}}"> --}}
-				<img src="{{$new->url_image}}" class="img-fluid" alt="{{$new->title}}">
-			{{-- </a> --}}
+			<a href="{{url('noticia/'.$new->slug)}}">
+				<img src="{{$new->getMainImage()->url_image}}" class="img-fluid" alt="{{$new->title}}">
+			</a>
 			<h5 class="text-blue">{{$new->title}}</h3>
 			<small>{{date('d/M/Y g:ia',strtotime($new->created_at))}}</small>
 		</section>
 		@endforeach
-		{{-- <section class="col-xs-12 col-sm-12 col-md-4 text-center">
-			<img src="{{asset('images/new2.jpg')}}" class="img-fluid" alt="">
-			<h5 class="text-blue">Lorem ipsum dolor sit amet, consectetur.</h3>
-			<small>17, Enero</small>
-		</section>
-		<section class="col-xs-12 col-sm-12 col-md-4 text-center">
-			<img src="{{asset('images/new3.jpg')}}" class="img-fluid" alt="">
-			<h5 class="text-blue">Lorem ipsum dolor sit amet, consectetur.</h3>
-			<small>17, Enero</small>
-		</section> --}}
 	</div>
 </div>
 @endsection

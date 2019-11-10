@@ -47,7 +47,7 @@
 					props.postList.append(`
 						<div class="news-item">
 							<a href="/noticia/${post.slug}">
-								<img src="/allimages/${getImageMain(post.images)}" alt="">
+								<img src="${getImageMain(post.images)}" alt="">
 							</a>
 							<small>${dateFormat(post.created_at)}</small>
 							<h4 class="title">

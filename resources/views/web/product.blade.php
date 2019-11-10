@@ -3,7 +3,7 @@
 {{$category->name}}
 @endsection
 @section('styles')
-<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.css"/>
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.20/css/jquery.dataTables.min.css"/>
 @endsection
 @section('content')
 
@@ -84,15 +84,15 @@
 					<div class="tab-content" id="nav-tabContent">
 					  <div class="tab-pane fade show active" id="specs" role="tabpanel" aria-labelledby="nav-home-tab">
 					  	
-					  	<div class="row mt-4">
-					  		<section class="col-12">
+					  	<div class=" mt-4">
+					  		<section class="">
 					  			@if(session('msg'))
 					  			<div class="alert alert-success">
 					  				{{session('msg')}}
 					  			</div>									
 					  			@endif
-					  		<table class="table" id="parts-table">
-					  		  <thead class="thead-dark">
+					  		<table class="table table-hover table-bordered" style="width:100%" id="parts-table">
+					  		  <thead class="">
 								<tr>
 									<th scope="col">N° parte</th>
 									@foreach ($product->dimensions as $dimen2)
@@ -360,7 +360,7 @@
 @endsection
 @section('scripts')
 <script src="{{asset('js/calculator.js')}}"></script> 
-<script type="text/javascript" src="https://cdn.datatables.net/v/dt/dt-1.10.20/datatables.min.js"></script>
+<script type="text/javascript" src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
 
 <script>
 	$(document).ready(function(){
