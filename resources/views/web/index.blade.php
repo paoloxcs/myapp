@@ -2,11 +2,7 @@
 @section('title','Sellos Hidráulicos | Orings | Retenes Radiales | Sellos Neumáticos | Fajas de Transmisión | Retenes')
 @section('content')
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-	<!-- <ol class="carousel-indicators">
-	  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-	  <li data-target="#myCarousel" data-slide-to="1"></li>
-	  <li data-target="#myCarousel" data-slide-to="2"></li>
-	</ol> -->
+
 	<div class="carousel-inner">
 	<!-- Programación de slides dinámicos -->
 	  @foreach($slides as $index => $slide)
@@ -18,8 +14,8 @@
 	    <img class="first-slide" src="{{asset('images/'.$slide->url_image)}}" alt="{{$slide->slidename}}">
 	    <div class="container">
 	      <div class="carousel-caption text-left">
-	        <h1 class="text-xlg">{{$slide->headerline}}</h1>
-	        <p>{{$slide->slidetext}}</p>
+	        <h1 class="text-xlg bg-slide-title">{{$slide->headerline}}</h1>
+	        <p class="bg-slide-subtitle">{{$slide->slidetext}}</p>
 	        @if($slide->actionlink!='')
 	        <p>
 	        	<a class="btn btn-lg btn-orange" target="_blank" href="{{$slide->actionlink}}" role="button">{{$slide->textlink}}</a>
