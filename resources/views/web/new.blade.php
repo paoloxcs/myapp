@@ -19,7 +19,6 @@
 
 			{!!$post->body!!}
 
-
 			<div class="mt-3">
 				<h5>Fotos adicionales</h5>
 				<div class="card">
