@@ -19,17 +19,22 @@
 
 			{!!$post->body!!}
 
-			{{-- <p>De acuerdo con el tipo de empleador, los puestos de trabajo generados por las compañías (empresas mineras) constituyeron el 33.5% del total.</p>
-
-			<p>Los puestos de trabajo generados por las contratistas (empresas mineras y empresas conexas) representaron el 66.5% restante.</p>
-
-			<p>Por otro lado, el MEM aprobó, mediante Resolución Ministerial Nº 354-2018-MEM/DM, la creación de los comités de gestión e información minero-energética como un mecanismo de coordinación y articulación de alcance regional, en relación con el desarrollo sostenible de las actividades mineras y energéticas.</p>
-
-			<p>El ministro de Energía y Minas, Francisco Ísmodes, adelantó que los referidos comités buscan atender las preocupaciones ambientales y asegurar el cumplimiento de los compromisos del Estado y empresa privada en las zonas mineras. </p>
-
-			<p>“La conformación de estos comités permitirá al Gobierno nacional tener una coordinación más estrecha con los gobiernos regionales en la gestión de los nuevos proyectos mineros y energéticos. Facultará, además, a informar de manera proactiva a la población sobre los alcances de las actividades que se desarrollan y velar por el cumplimiento de los compromisos y las buenas prácticas medioambientales”, expresó.</p>
-
-			<p><strong>Fuente: El Peruano</strong></p> --}}
+			<div class="mt-3">
+				<h5>Fotos adicionales</h5>
+				<div class="card">
+					<div class="card-body">
+						<div class="row">
+							@foreach ($post->images as $image)
+							@if($image->is_main != 1)
+								<div class="col-xs-6 col-md-3">
+									<img src="{{$image->url_image}}" alt="{{$post->title}}">
+								</div>
+							@endif
+							@endforeach
+						</div>
+					</div>
+				</div>
+			</div>
 
 			<p>Compartir este post:</p>
 			<div class="mt-2 d-flex">			
@@ -46,6 +51,8 @@
 					<i class="fab fa-linkedin-in"></i>
 				</a>
 			</div>
+			
+
 		</section>
 
 		<section class="col-xs-12 col-sm-12 col-md-3">
