@@ -2,6 +2,11 @@
 @section('title','Productos')
 @section('content')
 <div class="container">
+	@if(session('message'))
+	<div class="alert alert-success" role="alert">
+		<span> {{session('message')}} </span>
+	</div>
+	@endif
 	<div class="row mt-3">
 		<div class="col-md-12">
 			<div class="card">
@@ -84,7 +89,7 @@
 								<a href="/panel/products/${product.id}/docs" class="btn btn-blue btn-sm" title="Gestionar Documentos"><i class="far fa-file-pdf"></i></a>
 								<a href="/panel/products/${product.id}/materials" class="btn btn-success btn-sm" title="Gestionar Materiales"><i class="fas fa-tools"></i></a>
 								<a href="/panel/products/${product.id}/isos" class="btn btn-info btn-sm" title="Gestionar Isos"><i class="fas fa-cubes"></i></a>
-								<button class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></button>
+								<a href="/panel/products/${product.id}/destroy" onclick="return confirm('¿Seguro de eliminar el registro?')" class="btn btn-danger btn-sm" title="Eliminar"><i class="fas fa-trash"></i></a>
 							</td>
 						</tr>
 						`);
