@@ -373,28 +373,22 @@ class ProductController extends Controller
         return response()->json($compatibilities, 200);
     }
 
-    // public function generateTemplateExcelParts(Request $request)
-    // {
-    //     Excel::create('plantilla-partes-del-perfil', function($excel){
+    /**
+     * Metodo para eliminar el producto
+     * Parametro: id del producto
+     */
+    public function destroy($id)
+    {
+        $product = Product::findOrFail($id);
 
-    //         $profile = Profile::find($request->profile_id);
-            
-    //         $excel->sheet('', function($sheet){
+        $path_img_original = $product->getOriginal('url_image');
+        if($path_img_original && file_exists(public_path('/allimages/'.$path_img_original))){
+            unlink(public_path('/allimages/'.$path_img_original));
+        }
 
+        $product->delete();
 
-
-    //             $sheet->row(1, [
-    //                 'Tipo',
-    //                 'Resumen',
-    //                 'Información',
-    //                 'Nombre de imagen',
-    //                 'Estado',
-    //                 'Categoría'
-    //             ]);
-                
-    //         });
-
-    //     })->export('xls');
-    // }
+        return back()->with(['message' => 'Registro eliminado']);
+    }
 
 }

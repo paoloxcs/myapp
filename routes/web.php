@@ -90,6 +90,8 @@ Route::group(['middleware'=>'auth'],function(){
 
 			Route::get('products/{id}/edit', 'ProductController@edit');
 			Route::put('products/{id}', 'ProductController@update')->name('products.update');
+			//Ruta para eliminar el producto
+			Route::get('products/{id}/destroy','ProductController@destroy')->name('products.destroy');
 
 			// Ruta para agregar condiciones de operacion del producto
 			Route::put('products/{id}/operating-condition', 'ProductController@storeOperatingCondition')->name('product.operating.condition');
