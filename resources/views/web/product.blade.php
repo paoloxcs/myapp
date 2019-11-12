@@ -105,7 +105,7 @@
 					  		  <tbody>
 					  		  	@foreach ($product->parts()->orderBy('id','DESC')->get() as $part)
 					  		  		<tr>
-					  		  			<td> {{$part->part_nro}} </td>
+					  		  			<td> <a href="/docs/{{$part->ruta}}" target="_blank" class="orange-text"><i class="far fa-file-pdf"></i></a> {{$part->part_nro}} </td>
 					  		  			
 					  		  			@foreach (json_decode($part->dimensions) as $index => $part_dimen)
 					  		  				<td> {{$part_dimen}}</td>

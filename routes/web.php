@@ -24,7 +24,7 @@ Route::get('noticias-data','FrontController@getNews');
 Route::get('noticia/{slug}','FrontController@getNew')->name('new');
 Route::get('eventos','FrontController@getEventsView')->name('events');
 Route::get('eventos-data','FrontController@getEvents');
-Route::get('evento','FrontController@getEvent')->name('event');
+Route::get('evento/{slug}','FrontController@getEvent')->name('event');
 
 Route::get('videos','FrontController@getVideosView')->name('videos');
 Route::get('videos-data', 'FrontController@getVideos');
