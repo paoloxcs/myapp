@@ -131,8 +131,10 @@ class FrontController extends Controller
     public function getEventsView(){
         return view('web.events');
     }
-    public function getEvent(){
-        return view('web.event');
+    public function getEvent($slug){
+            $post=Post::where('slug',$slug)->first();
+            $relations=Post::where('id','<>',$post->id)->orderBy('id','DESC')->limit(3)->get();
+            return view('web.event',compact('post','relations'));
     }
     public function getVideosView(){
         return view('web.videos');

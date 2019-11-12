@@ -29,6 +29,8 @@
 
 			<p>“La conformación de estos comités permitirá al Gobierno nacional tener una coordinación más estrecha con los gobiernos regionales en la gestión de los nuevos proyectos mineros y energéticos. Facultará, además, a informar de manera proactiva a la población sobre los alcances de las actividades que se desarrollan y velar por el cumplimiento de los compromisos y las buenas prácticas medioambientales”, expresó.</p>
 
+			{{dd($post->images->url_image)}}
+
 			<p><strong>Fuente: El Peruano</strong></p> --}}
 
 			<p>Compartir este post:</p>
