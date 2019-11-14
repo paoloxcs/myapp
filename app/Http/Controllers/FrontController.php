@@ -187,6 +187,13 @@ class FrontController extends Controller
         return back()->with('msg', 'Su información fue enviada con éxito.');
     }
 
+    /* Test de vista de búsqueda*/
+    public function getSearchResults(){
+        return view('web.productfinder');
+    }
+
+
+
     /**
      * Metodo para que devuelve resultados de busqueda
      */

@@ -29,6 +29,8 @@ Route::get('evento/{slug}','FrontController@getEvent')->name('event');
 Route::get('videos','FrontController@getVideosView')->name('videos');
 Route::get('videos-data', 'FrontController@getVideos');
 
+Route::get('product-finder','FrontController@getSearchResults')->name('productfinder');
+
 Route::get('contacto','FrontController@getContactView')->name('contact');
 Route::get('sedes-data','FrontController@getSedes');
 
