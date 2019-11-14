@@ -13,11 +13,12 @@ use App\Category;
 use App\FluidKey;
 use Carbon\Carbon;
 use App\FluidGroup;
+use App\ProductPart;
 use App\Compatibility;
+use App\Mail\QuotePart;
+
 use App\TypeApplication;
 use Illuminate\Http\Request;
-
-use App\Mail\QuotePart;
 use Illuminate\Support\Facades\Mail;
 
 
@@ -184,5 +185,33 @@ class FrontController extends Controller
         ->send(new QuotePart($data));
         // Session::flash('msg', 'Su información fue enviada con éxito.'); //para otra vista/ruta
         return back()->with('msg', 'Su información fue enviada con éxito.');
+    }
+
+    /**
+     * Metodo para que devuelve resultados de busqueda
+     */
+    public function searchQuery(Request $request)
+    {
+        // Creacion de variables a partir de parametros
+        $prod_name = $request->has('prod_name') ? $request->prod_name : '';
+        $part_number = $request->has('part_number') ? $request->part_number : 0;
+        $max_pressure = $request->has('max_pressure') ? $request->max_pressure : 0;
+        $max_speed = $request->has('max_speed') ? $request->max_speed : 0;
+
+
+        //Busqueda de productos
+        $products = Product::where('name', 'like', $prod_name.'%')->get();
+
+        //Busqueda de partes
+        $part = ProductPart::where('part_nro', $part_number)->first();
+
+
+        return response()->json([
+            'products'   => $products,
+            'part'  => $part
+        ], 200);
+        
+
+
     }
 }

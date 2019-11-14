@@ -36,6 +36,9 @@ Route::get('nosotros', function () {
     return view('web.about');
 });
 
+// Ruta para busqueda de productos
+Route::get('search', 'FrontController@searchQuery');
+
 //Solicitar Info de Part
 Route::post('sendquotepart', 'FrontController@sendQuotePart')->name('sendquotepart');
 
