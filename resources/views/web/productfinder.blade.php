@@ -28,80 +28,80 @@
 			    	  	<form action="">
 			    	  		<div class="row mt-1">
 			    	  			<section class="col-12">
-				    	  			<label for="category">Categoría</label>
-				    	  			<select name="category" class="form-control" id="">
+				    	  			<label for="category"><small>Categoría</small></label>
+				    	  			<select name="category" class="form-control form-control-sm" id="">
 				    	  				<option value="1">Rod Seals</option>
 				    	  				<option value="2">Single Action Piston</option>
 				    	  			</select>
 			    	  			</section>
 			    	  		</div>
 
-			    	  		<div class="row">
+			    	  		<div class="row mt-1">
 			    	  			<section class="col-12">
-			    	  				<p>Diámetros</p>
+			    	  				<small>Diámetros</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control" placeholder="0d1">
+			    	  				<input type="text" class="form-control form-control-sm" placeholder="0d1">
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control" placeholder="0D1">
+			    	  				<input type="text" class="form-control form-control-sm" placeholder="0D1">
 			    	  			</section>
 			    	  		</div>
 
-			    	  		<div class="row">
+			    	  		<div class="row mt-1">
 			    	  			<section class="col-12">
-			    	  				<p>Longitud y Largo</p>
+			    	  				<small>Longitud y Largo</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control" placeholder="L1">
+			    	  				<input type="text" class="form-control form-control-sm" placeholder="L1">
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control" placeholder="SL">
+			    	  				<input type="text" class="form-control form-control-sm" placeholder="SL">
 			    	  			</section>
 			    	  		</div>
 
-			    	  		<div class="row">
+			    	  		<div class="row mt-2">
 			    	  			<section class="col-12">
-			    	  				Presión de Operación
+			    	  				<small>Presión de Operación</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control" placeholder="Max">
-			    	  			</section>
-			    	  			<section class="col-12">
-			    	  				Temperaturas de Operatividad
-			    	  			</section>
-			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control" placeholder="Max">
-			    	  			</section>
-			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control" placeholder="Min">
+			    	  				<input type="text" class="form-control form-control-sm" placeholder="Max">
 			    	  			</section>
 			    	  			<section class="col-12">
-			    	  				Velocidad de Operación
+			    	  				<small>Temperaturas de Operatividad</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control" placeholder="Max">
+			    	  				<input type="text" class="form-control form-control-sm" placeholder="Max">
+			    	  			</section>
+			    	  			<section class="col-6">
+			    	  				<input type="text" class="form-control form-control-sm" placeholder="Min">
+			    	  			</section>
+			    	  			<section class="col-12">
+			    	  				<small>Velocidad de Operación</small>
+			    	  			</section>
+			    	  			<section class="col-6">
+			    	  				<input type="text" class="form-control form-control-sm" placeholder="Max">
 			    	  			</section>
 			    	  		</div>
 
-			    	  		<div class="row">
+			    	  		<div class="row mt-2">
 			    	  			<section class="col-12">
-			    	  				Fluido de Operatividad
+			    	  				<h6>Fluido de Operatividad</h6>
 			    	  			</section>
 			    	  			<section class="col-12">
 			    	  				<label for="application">
-			    	  					Aplicación
+			    	  					<small>Aplicación</small>
 			    	  				</label>
-			    	  				<select name="application" class="form-control" id="">
+			    	  				<select name="application" class="form-control form-control-sm" id="">
 			    	  					<option value="1">Estática</option>
 			    	  					<option value="1">Dinámica</option>
 			    	  				</select>
 			    	  			</section>
 			    	  			<section class="col-12">
 			    	  				<label for="fluid">
-			    	  					Tipo de Fluido
+			    	  					<small>Tipo de Fluido</small>
 			    	  				</label>
-			    	  				<select name="fluid" class="form-control" id="">
+			    	  				<select name="fluid" class="form-control form-control-sm" id="">
 			    	  					<option value="1">basados en aceite mineral</option>
 			    	  					<option value="2">basados en agua</option>
 			    	  				</select>
@@ -123,7 +123,7 @@
 			    	  	<form action="">
 			    	  		<div class="row mt-1">
 				    	  		<section class="col-12">
-				    	  			<input type="text" class="form-control" placeholder="Nro de Parte">
+				    	  			<input type="text" class="form-control form-control-sm" placeholder="Nro de Parte">
 				    	  		</section>
 			    	  		</div>
 
