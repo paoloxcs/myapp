@@ -18,6 +18,8 @@ class CreateSedesTable extends Migration
             $table->string('name');
             $table->text('address');
             $table->string('district');
+            $table->string('telf');
+            $table->string('anexo');
             $table->string('city');
             $table->longText('maps_code');
             $table->timestamps();
