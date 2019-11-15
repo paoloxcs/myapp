@@ -308,42 +308,33 @@
 					  <div class="tab-pane fade" id="material" role="tabpanel" aria-labelledby="material-tab">
 					  	<div class="row mt-4">
 					  		<section class="col-12">
-					  			<p><strong>Material:</strong>
-
-					  				@foreach($product->materials as $mat)
-									<h5 class="orange-text">{{$mat->name}}</h5>
+								  <h4>Materiales</h4>
 					  				<table class="table table-bordered">
 					  				  <thead class="thead-dark">
 					  				    <tr>					  				      
-					  				      <th scope="col"><small>Tipo</small></th>
-					  				      <th scope="col"><small>Color</small></th>
 					  				      <th scope="col"><small>Opciones</small></th>
+					  				      <th scope="col"><small>Nombre</small></th>
+											<th scope="col"><small>Tipo</small></th>
+											<th scope="col"><small>Color</small></th>
+											<th scope="col"><small>Inf. adicional</small></th>
 					  				    </tr>
 					  				  </thead>
 					  				  <tbody>
+										@foreach($product->materials as $mat)
 					  				    <tr>					  				      
-					  				      <td><small>{{$mat->type}}</small></td>
-					  				      <td><small>{{$mat->colour}}</small></td>
 					  				      <td><small>{{$mat->options}}</small></td>
-					  				    </tr>
+					  				      <td><small>{{$mat->name}}</small></td>
+											<td><small>{{$mat->type}}</small></td>
+											<td><small>{{$mat->colour}}</small></td>
+											<td>
+												<span class="badge badge-secondary">{{$mat->custom1}}</span>
+												<span class="badge badge-secondary">{{$mat->custom2}}</span>
+												<span class="badge badge-secondary">{{$mat->custom3}}</span>
+											</td>
+										  </tr>
+										  @endforeach
 					  				  </tbody>
 					  				</table>
-					  				<p><strong>Información Adicional</strong></p>
-					  				<ul>
-					  					@if($mat->custom1!='')
-					  						<li>{{$mat->custom1}}</li>
-					  					@endif
-
-					  					@if($mat->custom2!='')
-					  						<li>{{$mat->custom2}}</li>
-					  					@endif
-					  					@if($mat->custom3!='')
-					  						<li>{{$mat->custom3}}</li>
-					  					@endif
-					  					
-					  					
-					  				</ul>
-					  				@endforeach
 					  		</section>
 					  	</div>
 					  </div>
