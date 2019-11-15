@@ -32,24 +32,25 @@ class User extends Authenticatable
         return $this->name.' '.$this->last_name;
     }
 
-    public function rule()
+    public function role()
     {
-        return $this->belongsTo(Rule::class);
+        return $this->belongsTo(Role::class);
     }
 
-    public function prfiles()
-    {
-        return $this->hasMany(Profile::class);
-    }
     public function posts()
     {
         return $this->hasMany(Post::class);
+    }
+
+    public function client()
+    {
+        return $this->hasOne(Client::class);
     }
 
     // Verificar si el usuario autenticado tiene acceso al panel
     // retorna verdadero o falso
     public function accessPanel()
     {
-        return $this->rule->section === 'panel';
+        return $this->role->section === 'panel';
     }
 }

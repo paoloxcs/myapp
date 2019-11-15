@@ -10,6 +10,13 @@ class Brand extends Model
     
     public $timestamps = false;
 
+    // Relacion catalogos 
+    public function catalogs()
+    {
+        return $this->hasMany(Catalog::class);
+    }
+
+    // Mutador para url_image
     public function getUrlImageAttribute($value)
     {
         return url('/').'/allimages/'.$value;

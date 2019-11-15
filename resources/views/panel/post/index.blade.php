@@ -28,6 +28,7 @@
 								<thead>
 									<th>Id</th>
 									<th>título</th>
+									<th>Tipo</th>
 									<th>Creado por</th>
 									<th>Acción</th>
 								</thead>
@@ -85,6 +86,7 @@
 							<tr class="${post.status == false ? 'table-warning': ''}">
 								<td>${post.id}</td>
 								<td>${post.title}</td>
+								<td>${post.post_type == 'N' ? 'Noticia' : 'Evento'}</td>
 								<td>${post.user.name}</td>
 								<td>
 									<button onclick="openModalPhotos(${post.id})" class="btn btn-link btn-sm"><i class="far fa-images"></i> Fotos</button>
@@ -150,6 +152,12 @@
 		form_edit.title.value = post.title;
 		CKEDITOR.instances[form_edit.bodyedit.name].setData(post.body);
 		form_edit.summary.value = post.summary;
+
+		$(form_edit.post_type).empty();
+		$(form_edit.post_type).append(`
+			<option ${post.post_type == 'N' ? 'selected' : ''} value="N">Moticia</option>
+			<option ${post.post_type == 'E' ? 'selected' : ''} value="E">Evento</option>
+		`);
 
 		$(form_edit.status).empty();
 		$(form_edit.status).append(`

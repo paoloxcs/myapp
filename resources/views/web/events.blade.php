@@ -54,7 +54,7 @@
 					props.eventList.append(`
 						<section class="col-xs-12 col-sm-4 col-md-4 mb-3">
 							<a class="new" href="/evento/${event.slug}">
-								<img src="/allimages/${getImageMain(event.images)}" alt="${event.title}">
+								<img src="${getImageMain(event.images)}" alt="${event.title}">
 								${event.title} <br><span>${dateFormat(event.created_at)}</span>
 							</a>
 						</section>

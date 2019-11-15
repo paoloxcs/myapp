@@ -21,6 +21,7 @@
     
     <link rel="stylesheet" href="{{asset('vendor/toastr/build/toastr.min.css')}}">
     <link rel="stylesheet" href="{{asset('css/modalimg.css')}}">
+    @yield('styles')
 </head>
 <body>
   <div class="main-container">
@@ -70,14 +71,18 @@
     <div class="app-content">
       <div class="left-nav">
           <ul class="main-menu">
-            <li><a href="{{url('/panel')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            {{-- <li><a href="{{url('/panel')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> --}}
             <li><a href="{{route('categories.index')}}"><i class="fas fa-sliders-h"></i> Categorías</a></li>
-            <li><a href="{{route('brands.index')}}"><i class="fas fa-sliders-h"></i> Marcas</a></li>
-            <li><a href="{{route('markets.index')}}"><i class="fas fa-sliders-h"></i> Mercados</a></li>
-            <li><a href="{{route('profiles.index')}}"><i class="fas fa-sliders-h"></i> Productos</a></li>
-            <li><a href="{{route('posts.index')}}"><i class="fas fa-sliders-h"></i> Posts</a></li>
+            <li><a href="{{route('brands.index')}}"><i class="fas fa-wallet"></i> Marcas</a></li>
+            <li><a href="{{route('markets.index')}}"><i class="fas fa-poll"></i> Mercados</a></li>
+            <li><a href="{{route('products.index')}}"><i class="fas fa-cubes"></i> Productos</a></li>
+            <li><a href="{{route('posts.index')}}"><i class="fas fa-newspaper"></i> Posts</a></li>
 
-            <li><a href="{{route('videos.index')}}"><i class="fas fa-sliders-h"></i> Videos</a></li>
+            <li><a href="{{route('videos.index')}}"><i class="fas fa-play-circle"></i> Videos</a></li>
+            <li><a href="{{route('catalog.index')}}"><i class="fas fa-book"></i> Catálogos</a></li>
+            <li><a href="{{route('slide.index')}}"><i class="fas fa-arrows-alt-h"></i> Slides</a></li>
+            <li><a href="{{route('iso.index')}}"><i class="fas fa-check-square"></i> Certificaciones</a></li>
+            <li><a href="{{route('sede.index')}}"><i class="fas fa-home"></i> Sedes</a></li>
           </ul>
         </div>
         

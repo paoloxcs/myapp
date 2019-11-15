@@ -2,14 +2,25 @@
 
 namespace App\Http\Controllers;
 
-use App\Category;
-use App\FluidGroup;
-use App\FluidKey;
 use App\Post;
+use App\Sede;
+use App\Slide;
+use App\Video;
+use App\Market;
+use App\Catalog;
+use App\Product;
 use App\Profile;
-use App\TypeApplication;
+use App\Category;
+use App\FluidKey;
 use Carbon\Carbon;
+use App\FluidGroup;
+use App\ProductPart;
+use App\Compatibility;
+
+use App\Mail\QuotePart;
+use App\TypeApplication;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 
 class FrontController extends Controller
@@ -18,15 +29,33 @@ class FrontController extends Controller
     {
         Carbon::setlocale('es');
     }
+
+    public function index()
+    {
+        $slides = Slide::where('status','1')->get();
+        $posts = Post::orderBy('created_at','DESC')->with('images')->limit(3)->get();
+        
+           
+        return view('web.index',compact('slides','posts'));
+    }
+
+
     public function getProducts()
     {
-        $categories = Category::with('profiles')->get();
+        $categories = Category::with(['products' => function($query){
+            $query->where('status', 1);
+        }])->get();
         // return response()->json($categories);
     	return view('web.products', compact('categories'));
     }
     public function getProductsOfCategory($categ_slug)
     {
-        $category = Category::where('slug',$categ_slug)->with('profiles')->first();
+        $category = Category::where('slug',$categ_slug)->with(['products' => function($query){
+            $query->where('status', 1)->with(['operating_conditions' => function($query){
+                $query->with('measurement');
+            }]);
+        }])->first();
+
         if($category){
             return view('web.category', compact('category'));
         }
@@ -34,39 +63,51 @@ class FrontController extends Controller
 
         // return response()->json($category);
     }
-    public function getProduct($categ_slug,$profile_slug)
+    public function getProduct($categ_slug,$product_slug)
     {
-        $category = Category::where('slug',$categ_slug)->with('profiles')->first();
+        $category = Category::where('slug',$categ_slug)
+        ->with(['products' => function($query){
+            $query->where('status', 1);
+        }])->first();
         
-        $profile = Profile::where('slug',$profile_slug)->with(['dimensions' => function($q){
-            $q->orderBy('id','ASC')->with('dimension');
-        }])->with('unit_measurements')->first();
+        $compatibilities = Compatibility::all();
+        $product = Product::where([
+                ['slug', $product_slug],
+                ['status', 1]
+            ])->with('dimensions','compatibilities','measurements','operating_conditions','docs', 'parts', 'materials')->first();
 
-        $type_applications = TypeApplication::orderBy('id','ASC')->get();
-        $fluid_keys = FluidKey::all();
-        $fluid_groups = FluidGroup::with(['items.profile_compatibilities' => function($q) use($profile){
-            $q->orderBy('type_application_id','ASC')->where('profile_id',$profile->id)->with('fluid_key');
-        }])->get();
-
-        // return response()->json($profile);
-        return view('web.product', compact('category','profile','type_applications','fluid_keys','fluid_groups'));
+        return view('web.product', compact('category','product','compatibilities'));
     }
     
-    public function getParts($profile_id)
+    public function getParts($product_id)
     {
-        $profile = Profile::where('id',$profile_id)->with(['parts'=> function($q){
-            $q->with(['dimensions_profile' => function($query){
-                $query->orderBy('id','ASC')->with('dimension');
-            }]);
-        }])->first();
+        
+        $product = Product::with(['parts' => function($query){
+            $query->orderBy('id','DESC');
+        }])->findOrFail($product_id);
 
-        return response()->json($profile->parts);
+        return response()->json($product->parts);
     }
-
-    public function getCatalogs()
+    //Catálogos
+    public function getCatalogsViews()
     {
     	return view('web.catalogs');
     }
+    public function getCatalogs(Request $request)
+    {
+        $catalogs = Catalog::with('brand')->orderBy('edicion','DESC')->paginate(9);
+        return response()->json($catalogs);
+    }
+    public function getAllEditions(Request $request)
+    {
+        // $editions=Catalog::groupBy('edicion')->orderBy('id', 'DESC')->get();
+
+        $editions = Catalog::distinct('edicion')->get()->pluck('edicion');
+        return response()->json(['editions' => $editions]);
+    }
+
+
+
     public function getNewsView(){
 
         return view('web.news');
@@ -86,19 +127,113 @@ class FrontController extends Controller
 
     public function getNew($slug){
         $post=Post::where('slug',$slug)->first();
-        $relations=Post::where('id','<>',$post->id)->orderBy('id','DESC')->limit(3)->get();
+        $relations=Post::where('id','<>',$post->id)->where('post_type', 'N')->orderBy('id','DESC')->limit(3)->get();
     	return view('web.new',compact('post','relations'));
     }
     public function getEventsView(){
         return view('web.events');
     }
-    public function getEvent(){
-        return view('web.event');
+    public function getEvent($slug){
+            $post=Post::where('slug',$slug)->first();
+            $relations=Post::where('id','<>',$post->id)->where('post_type', 'E')->orderBy('id','DESC')->limit(3)->get();
+            return view('web.event',compact('post','relations'));
     }
-    public function getVideos(){
+    public function getVideosView(){
         return view('web.videos');
     }
-    public function getContact(){
+    public function getVideos(Request $request)
+    {
+        $videos=Video::with('category')->orderBy('created_at','DESC')->paginate(9);
+        return response()->json($videos);
+    }
+    public function getContactView(){
         return view('web.contact');
+    }
+    public function getSedes(Request $request)
+    {
+        $sedes=Sede::orderBy('created_at', 'DESC')->paginate(9);
+        return response()->json($sedes);
+    }
+
+    //Funcionamiento de Mailers
+    //Enviando solicitud de info para una parte
+    public function sendQuotePart(Request $request)
+    {
+        // dd($request->all());
+        $this->validate($request,[
+            'name'=>'required|string|max:80',
+            'comment'=>'required|string',
+            'email'=>'required|email',
+            'mobile'=>'required|string|max:15',
+            'company'=>'required|string|max:80',
+        ],[
+            'name.required'=>'Este campo es requerido',
+            'mobile.required'=>'El teléfono es requerido',
+            'email.required'=>'El correo electrónico es requerido',
+            'comment.required'=>'Escriba aqui su consulta',
+            'company.required'=>'Este campo es requerido'
+        ]);
+
+        $data=[
+            'name'=>$request->name,
+            'mobile'=>$request->mobile,
+            'email'=>$request->email,
+            'comment'=>$request->comment,
+            'company'=>$request->company,
+            'part_nro'=>$request->part_nro
+        ];
+        Mail::to('paolo_xc@hotmail.com')->cc('postmaster2@constructivo.com')
+        ->send(new QuotePart($data));
+        // Session::flash('msg', 'Su información fue enviada con éxito.'); //para otra vista/ruta
+        return back()->with('msg', 'Su información fue enviada con éxito.');
+    }
+
+    /* Test de vista de búsqueda*/
+    public function getSearchResults(){
+        return view('web.productfinder');
+    }
+
+
+
+    /**
+     * Metodo para que devuelve resultados de busqueda
+     */
+    public function searchQuery(Request $request)
+    {
+        // Creacion de variables a partir de parametros
+        $prod_name = $request->has('prod_name') ? $request->prod_name : '';
+        $part_number = $request->has('part_number') ? $request->part_number : 0;
+        $max_pressure = $request->has('max_pressure') ? $request->max_pressure : 0;
+        $max_speed = $request->has('max_speed') ? $request->max_speed : 0;
+
+
+        //Busqueda de productos
+        $products = Product::where('name', 'like', $prod_name.'%')->get();
+
+        //Busqueda de partes
+        $part = ProductPart::where('part_nro', $part_number)->first();
+
+
+        return response()->json([
+            'products'   => $products,
+            'part'  => $part
+        ], 200);
+        
+
+
+    }
+
+    public function getMarkets()
+    {
+        $markets = Market::orderBy('id','desc')->get();
+
+        return view('web.markets', compact('markets'));
+    }
+
+    public function getMarket($slug)
+    {
+        $market = Market::where('slug', $slug)->with('products')->first();
+
+        return view('web.market', compact('market'));
     }
 }

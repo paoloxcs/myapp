@@ -6,11 +6,14 @@ use Illuminate\Database\Eloquent\Model;
 
 class Dimension extends Model
 {
-    protected $fillable = ['name','sigla'];
+    protected $fillable = ['name','sigla','slug'];
     public $timestamps = false;
 
-    public function profiles()
+
+    // Relacion con productos
+    public function products()
     {
-    	return $this->hasMany(DimensionProfile::class);
+        return $this->belongsToMany(Product::class, 'dimension_product');
     }
+
 }

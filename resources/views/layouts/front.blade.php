@@ -18,6 +18,8 @@
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
       <!-- Imagen - Favicon  -->
       <link rel="shortcut icon" type="image/x-icon" href="{{asset('images/logo.png')}}" />
+
+      @yield('styles')
     </head>
 
     <body>
@@ -69,6 +71,7 @@
                     <li><a href="{{route('events')}}">Eventos</a></li>
                     <li><a href="{{route('news')}}">Noticias</a></li>
                     <li><a href="{{route('videos')}}">Videos</a></li>
+                    <li><a href="{{route('markets')}}">Mercados</a></li>
                   </ul>
                   <div class="user-wrapper">
                     

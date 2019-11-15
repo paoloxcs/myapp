@@ -116,8 +116,9 @@ class CategoryController extends Controller
         $category = Category::find($id);
 
         if ($request->file('url_image')) {
-            if (file_exists(public_path().'/allimages/'.$category->url_image)) {
-                unlink(public_path().'/allimages/'.$category->url_image);
+            $path_img_original = $category->getOriginal('url_image');
+            if (file_exists(public_path().'/allimages/'.$path_img_original)) {
+                unlink(public_path().'/allimages/'.$path_img_original);
             }
             $url_image = uniqid().'.'.$request->file('url_image')->getClientOriginalExtension();
             $request->file('url_image')->move(public_path().'/allimages/',$url_image);
@@ -148,8 +149,9 @@ class CategoryController extends Controller
     public function destroy($id)
     {
         $category = Category::findOrfail($id);
-        if (file_exists(public_path().'/allimages/'.$category->url_image)) {
-            unlink(public_path().'/allimages/'.$category->url_image);
+        $path_img_original = $category->getOriginal('url_image');
+        if (file_exists(public_path().'/allimages/'.$path_img_original)) {
+            unlink(public_path().'/allimages/'.$path_img_original);
         }
 
         $category->delete();

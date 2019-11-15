@@ -2,42 +2,29 @@
 @section('title','Sellos Hidráulicos | Orings | Retenes Radiales | Sellos Neumáticos | Fajas de Transmisión | Retenes')
 @section('content')
 <div id="myCarousel" class="carousel slide" data-ride="carousel">
-	<ol class="carousel-indicators">
-	  <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-	  <li data-target="#myCarousel" data-slide-to="1"></li>
-	  <li data-target="#myCarousel" data-slide-to="2"></li>
-	</ol>
+
 	<div class="carousel-inner">
+	<!-- Programación de slides dinámicos -->
+	  @foreach($slides as $index => $slide)
+	  @if($index===0)
 	  <div class="carousel-item active">
-	    <img class="first-slide" src="{{asset('images/slide1.jpg')}}" alt="First slide">
+	  @else
+	  <div class="carousel-item ">
+	  @endif
+	    <img class="first-slide" src="{{asset('images/'.$slide->url_image)}}" alt="{{$slide->slidename}}">
 	    <div class="container">
 	      <div class="carousel-caption text-left">
-	        <h1 class="text-xlg">Example headline.</h1>
-	        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-	        <p><a class="btn btn-lg btn-orange" href="#" role="button">Sign up today</a></p>
+	        <h1 class="text-xlg bg-slide-title">{{$slide->headerline}}</h1>
+	        <p class="bg-slide-subtitle">{{$slide->slidetext}}</p>
+	        @if($slide->actionlink!='')
+	        <p>
+	        	<a class="btn btn-lg btn-orange" target="_blank" href="{{$slide->actionlink}}" role="button">{{$slide->textlink}}</a>
+	        </p>
+	        @endif
 	      </div>
 	    </div>
 	  </div>
-	  <div class="carousel-item">
-	    <img class="second-slide" src="{{asset('images/slide1.jpg')}}" alt="Second slide">
-	    <div class="container">
-	      <div class="carousel-caption">
-	        <h1 class="text-xlg">Another example headline.</h1>
-	        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-	        <p><a class="btn btn-lg btn-orange" href="#" role="button">Learn more</a></p>
-	      </div>
-	    </div>
-	  </div>
-	  <div class="carousel-item">
-	    <img class="third-slide" src="{{asset('images/slide1.jpg')}}" alt="Third slide">
-	    <div class="container">
-	      <div class="carousel-caption text-right">
-	        <h1 class="text-xlg">One more for good measure.</h1>
-	        <p>Cras justo odio, dapibus ac facilisis in, egestas eget quam. Donec id elit non mi porta gravida at eget metus. Nullam id dolor id nibh ultricies vehicula ut id elit.</p>
-	        <p><a class="btn btn-lg btn-orange" href="#" role="button">Browse gallery</a></p>
-	      </div>
-	    </div>
-	  </div>
+	  @endforeach
 	</div>
 	<a class="carousel-control-prev" href="#myCarousel" role="button" data-slide="prev">
 	  <span class="carousel-control-prev-icon" aria-hidden="true"></span>
@@ -53,23 +40,23 @@
 	<div class="mt-4 news-content">
 		<section class="news-item">
 			<img src="{{asset('images/seal1.jpg')}}" class="img-fluid" alt="">
-			<h5 class="mt-4"> Identificando el Sello Correcto</h5>
-			<p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ratione laborum nesciunt optio enim quasi consectetur dicta reiciendis sint, in commodi a.</p>
-			<a class="text-blue" href="#"> <i class="fas fa-arrow-circle-right"></i> Leer más</a>
+			<h5 class="mt-4"> Asesoría </h5>
+			<p class="mt-3">Ponemos a nuestros asesores comerciales a su servicio quienes darán soluciones técnicas a sus consultas. </p>
+			<!-- <a class="text-blue" href="#"> <i class="fas fa-arrow-circle-right"></i> Leer más</a> -->
 		</section>
 
 		<section class="justify-content-center news-item">
 			<img src="{{asset('images/seal2.jpg')}}" class="img-fluid" alt="">
-			<h5 class="mt-4"> Sellos personalizados </h5>
-			<p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ratione laborum nesciunt optio enim quasi consectetur dicta reiciendis sint, in commodi a.</p>
-			<a class="text-blue" href="#"> <i class="fas fa-arrow-circle-right"></i> Leer más</a>
+			<h5 class="mt-4"> Ventas </h5>
+			<p class="mt-3">Contamos con el mejor equipo de ventas para brindarle la más óptima solución a sus necesidades.</p>
+			
 		</section>
 
 		<section class="justify-content-center news-item">
 			<img src="{{asset('images/seal3.jpg')}}" class="img-fluid" alt="">
-			<h5 class="mt-4"> Catálogos Disponibles </h5>
-			<p class="mt-3">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Culpa ratione laborum nesciunt optio enim quasi consectetur dicta reiciendis sint, in commodi a.</p>
-			<a class="text-blue" href="#"> <i class="fas fa-arrow-circle-right"></i> Leer más</a>
+			<h5 class="mt-4"> Fabricación </h5>
+			<p class="mt-3">Diseñamos una gran variedad de sellos a medida de acuerdo a sus requerimientos.</p>
+			
 		</section>
 	</div>
 </div>
@@ -79,8 +66,8 @@
 	<div class="container mt-5">
 		<div class="row mt-5">
 			<section class="col-xs-12 col-sm-12 col-md-8 white">
-				<h4>Lorem ipsum dolor sit amet</h4>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eaque id consequuntur dolor eligendi fugiat facilis, asperiores quidem, perspiciatis blanditiis laudantium, eos, aut! Incidunt, beatae iusto error ab rem animi at!</p>
+				<!-- <h4>Lorem ipsum dolor sit amet</h4> -->
+				<p>Casdel Hnos S.A. es una empresa Peruana con 24 años en el mercado nacional, desde el 18 de Julio de 1991, ofreciendo a nuestros clientes calidad, garantía, confianza, mejores precios, stock amplio, atención rápida y soporte técnico en la distribución de elementos de estanqueidad como: orings, sellos hidráulicos, retenes radiales y fabricaciones de sellos especiales en nuestro torno CNC especial solo para sellos y de sobre medida según el requerimiento de nuestros clientes.</p>
 			</section>
 			<section class="col-xs-12 col-sm-12 col-md-4 col align-self-center">
 				<button type="button" class="btn btn-orange btn-lg col align-self-center">Alcance de Productos</button>
@@ -93,14 +80,17 @@
 	<div class="container mt-5">
 		<div class="row mt-5">
 			<section class="col-xs-12 col-sm-12 col-md-6">				
-				<p><strong>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla rerum ratione sapiente provident asperiores molestias, neque, error repellat deleniti amet itaque officia pariatur aliquid dolorem, aut quaerat sequi. Nam, repudiandae.</strong></p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nulla rerum ratione sapiente provident asperiores molestias, neque, error repellat deleniti amet itaque officia pariatur aliquid dolorem, aut quaerat sequi. Nam, repudiandae.</p>
+				<p>Brindamos soluciones confiables, rentables e inmediatas a nuestros clientes bajo la asesoría técnica de nuestro staff durante proceso de venta y también post venta asegurando el óptimo funcionamiento de nuestros productos.</p>
+				<p>Para el 2020 seremos reconocidos como una marca líder en distribución y fabricación de elementos de estanqueidad como: o´rings, sellos hidráulicos, retenes radiales y fabricaciones de sellos especiales en nuestro torno CNC y de sobre medida, comprometidos con la completa satisfacción de nuestros clientes.</p>
 			</section>
 			<section class="col-xs-12 col-sm-12 col-md-6">
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic rerum quasi provident quis voluptate ad ipsam labore 
-				alias quisquam dolorum suscipit, ducimus ratione harum nesciunt. Tenetur, illo doloribus qui quibusdam!</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic rerum quasi provident quis voluptate ad ipsam labore alias quisquam dolorum suscipit, ducimus ratione harum nesciunt. Tenetur, illo doloribus qui quibusdam!</p>
-				<p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Hic rerum quasi provident quis voluptate ad ipsam labore alias quisquam dolorum suscipit, ducimus ratione harum nesciunt. Tenetur, illo doloribus qui quibusdam!</p>
+				<ul>
+					<li>Mejorar continuamente nuestro desempeño y eficacia de nuestro sistema gestión de la calidad.</li>
+					<li>Brindar productos enfocados hacia el cliente, mejorando permanentemente nuestra tecnología para lograr su satisfacción.</li>
+					<li>Cumplir con sus requisitos y exigencias recibidas mediante una constante retroalimentación; evaluando y midiendo la calidad del producto en base a los indicadores de procesos implementados para la mejora continua de la calidad.</li>
+					<li>Definir metas y objetivos medibles, consistentes y dinámicos que permitan seguir y elevar nuestro desempeño empresarial.</li>
+					<li>A proteger la seguridad y salud integral de todos los miembros de la organización mediante la prevención de las lesiones, dolencias, enfermedades e incidentes relacionados con el trabajo.</li>
+				</ul>
 			</section>	
 		</div>
 	</div>
@@ -150,25 +140,19 @@
 	<div class="row">
 		<section class="col-xs-12 col-sm-12 col-md-10"><h4>Noticias y Eventos</h4></section>
 		<section class="col-xs-12 col-sm-12 col-md-2 text-right">
-			<a href="#" class="btn btn-secondary btn-sm">Más noticias</a>
+			<a href="/noticias" class="btn btn-secondary btn-sm">Más noticias</a>
 		</section>
 	</div>
 	<div class="row mt-5">
+		@foreach($posts as $index => $post)		
 		<section class="col-xs-12 col-sm-12 col-md-4 text-center">
-			<img src="{{asset('images/new1.jpg')}}" class="img-fluid" alt="">
-			<h5 class="text-blue">Lorem ipsum dolor sit amet, consectetur.</h3>
-			<small>17, Enero</small>
+			<a href="{{ $post->post_type == 'N' ? '/noticia/'.$post->slug : '/evento/'.$post->slug }}">
+				<img src="{{$post->getMainImage()->url_image}}" class="img-fluid" alt="{{$post->title}}">
+			</a>
+			<h5 class="text-blue">{{$post->title}}</h3>
+			<small>{{date('d/M/Y g:ia',strtotime($post->created_at))}}</small>
 		</section>
-		<section class="col-xs-12 col-sm-12 col-md-4 text-center">
-			<img src="{{asset('images/new2.jpg')}}" class="img-fluid" alt="">
-			<h5 class="text-blue">Lorem ipsum dolor sit amet, consectetur.</h3>
-			<small>17, Enero</small>
-		</section>
-		<section class="col-xs-12 col-sm-12 col-md-4 text-center">
-			<img src="{{asset('images/new3.jpg')}}" class="img-fluid" alt="">
-			<h5 class="text-blue">Lorem ipsum dolor sit amet, consectetur.</h3>
-			<small>17, Enero</small>
-		</section>
+		@endforeach
 	</div>
 </div>
 @endsection
