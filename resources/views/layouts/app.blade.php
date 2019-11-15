@@ -71,7 +71,7 @@
     <div class="app-content">
       <div class="left-nav">
           <ul class="main-menu">
-            <li><a href="{{url('/panel')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li>
+            {{-- <li><a href="{{url('/panel')}}"><i class="fas fa-tachometer-alt"></i> Dashboard</a></li> --}}
             <li><a href="{{route('categories.index')}}"><i class="fas fa-sliders-h"></i> Categorías</a></li>
             <li><a href="{{route('brands.index')}}"><i class="fas fa-wallet"></i> Marcas</a></li>
             <li><a href="{{route('markets.index')}}"><i class="fas fa-poll"></i> Mercados</a></li>

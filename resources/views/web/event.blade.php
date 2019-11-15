@@ -37,18 +37,18 @@
 			</div>
 
 
-			<p>Compartir este post:</p>
+			<p>Compartir este evento:</p>
 			<div class="mt-2 d-flex">			
-				<a class="social face" href="https://www.facebook.com/sharer.php?u={{url('noticia/'.$post->slug)}}">
+				<a class="social face" href="https://www.facebook.com/sharer.php?u={{url('evento/'.$post->slug)}}">
 					<i class="fab fa-facebook-f"></i>
 				</a>
-				<a class="social plus" href="https://plus.google.com/share?url={{url('noticia/'.$post->slug)}}">
+				<a class="social plus" href="https://plus.google.com/share?url={{url('evento/'.$post->slug)}}">
 					<i class="fab fa-google-plus-g"></i>
 				</a>
-				<a class="social tweet"href="https://twitter.com/intent/tweet?url={{url('noticia/'.$post->slug)}}&text={{$post->title}}">
+				<a class="social tweet"href="https://twitter.com/intent/tweet?url={{url('evento/'.$post->slug)}}&text={{$post->title}}">
 					<i class="fab fa-twitter"></i>
 				</a>
-				<a class="social linked" href="https://www.linkedin.com/shareArticle?mini=true&url={{url('noticia/'.$post->slug)}}">
+				<a class="social linked" href="https://www.linkedin.com/shareArticle?mini=true&url={{url('evento/'.$post->slug)}}">
 					<i class="fab fa-linkedin-in"></i>
 				</a>
 			</div>
@@ -69,7 +69,7 @@
 
 	<div class="row mt-5">
 		<section class="col-md-12">
-			<h3>Otros Eventos</h3>			
+			<h3>Otros eventos</h3>			
 		</section>
 	</div>
 
@@ -77,7 +77,7 @@
 		@foreach($relations as $relation)
 		<section class="col-xs-12 col sm-12 col-md-4">
 			<a class="new" href="{{route('new',$relation->slug)}}">
-				<img src="{{asset('allimages/'.$relation->getMainImage()->url_image)}}" alt="">
+				<img src="{{$relation->getMainImage()->url_image}}" alt="">
 				{{$relation->title}} <br>
 				<span>{{date('d/m/Y',strtotime($relation->created_at))}}</span>
 			</a>

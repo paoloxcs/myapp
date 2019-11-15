@@ -41,6 +41,9 @@ Route::get('nosotros', function () {
 // Ruta para busqueda de productos
 Route::get('search', 'FrontController@searchQuery');
 
+Route::get('mercados', 'FrontController@getMarkets')->name('markets');
+Route::get('mercado/{slug}', 'FrontController@getMarket');
+
 //Solicitar Info de Part
 Route::post('sendquotepart', 'FrontController@sendQuotePart')->name('sendquotepart');
 
@@ -57,7 +60,11 @@ Route::group(['middleware'=>'auth'],function(){
 	// Grupo de rutas PANEL DE ADMINISTRACION
 	Route::group(['prefix'=>'/panel'],function(){
 
-		Route::get('/', 'HomeController@index')->name('dashboard');
+		// Route::get('/', 'HomeController@index')->name('dashboard');
+		Route::get('/', function(){
+			return redirect('/panel/categories');
+		});
+
 
 		// Ruta para CRUD de Categorias y subcategorias
 		Route::group(['middleware'=>'permision:manage_categories'],function(){

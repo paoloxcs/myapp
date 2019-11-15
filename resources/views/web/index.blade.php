@@ -140,17 +140,17 @@
 	<div class="row">
 		<section class="col-xs-12 col-sm-12 col-md-10"><h4>Noticias y Eventos</h4></section>
 		<section class="col-xs-12 col-sm-12 col-md-2 text-right">
-			<a href="#" class="btn btn-secondary btn-sm">Más noticias</a>
+			<a href="/noticias" class="btn btn-secondary btn-sm">Más noticias</a>
 		</section>
 	</div>
 	<div class="row mt-5">
-		@foreach($news as $index => $new)		
+		@foreach($posts as $index => $post)		
 		<section class="col-xs-12 col-sm-12 col-md-4 text-center">
-			<a href="{{url('noticia/'.$new->slug)}}">
-				<img src="{{$new->getMainImage()->url_image}}" class="img-fluid" alt="{{$new->title}}">
+			<a href="{{ $post->post_type == 'N' ? '/noticia/'.$post->slug : '/evento/'.$post->slug }}">
+				<img src="{{$post->getMainImage()->url_image}}" class="img-fluid" alt="{{$post->title}}">
 			</a>
-			<h5 class="text-blue">{{$new->title}}</h3>
-			<small>{{date('d/M/Y g:ia',strtotime($new->created_at))}}</small>
+			<h5 class="text-blue">{{$post->title}}</h3>
+			<small>{{date('d/M/Y g:ia',strtotime($post->created_at))}}</small>
 		</section>
 		@endforeach
 	</div>

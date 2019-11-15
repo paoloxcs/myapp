@@ -79,7 +79,7 @@
 		@foreach($relations as $relation)
 		<section class="col-xs-12 col sm-12 col-md-4">
 			<a class="new" href="{{route('new',$relation->slug)}}">
-				<img src="{{asset('allimages/'.$relation->getMainImage()->url_image)}}" alt="">
+				<img src="{{$relation->getMainImage()->url_image}}" alt="">
 				{{$relation->title}} <br>
 				<span>{{date('d/m/Y',strtotime($relation->created_at))}}</span>
 			</a>

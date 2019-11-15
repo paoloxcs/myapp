@@ -6,6 +6,7 @@ use App\Post;
 use App\Sede;
 use App\Slide;
 use App\Video;
+use App\Market;
 use App\Catalog;
 use App\Product;
 use App\Profile;
@@ -15,8 +16,8 @@ use Carbon\Carbon;
 use App\FluidGroup;
 use App\ProductPart;
 use App\Compatibility;
-use App\Mail\QuotePart;
 
+use App\Mail\QuotePart;
 use App\TypeApplication;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
@@ -32,10 +33,10 @@ class FrontController extends Controller
     public function index()
     {
         $slides = Slide::where('status','1')->get();
-        $news=Post::where('post_type','=','N')->orderBy('created_at','DESC')->with('images')->limit(3)->get();
-        // $news=Post::where('post_type','=','N')->orderBy('created_at','DESC')->with(['images' => function($query){$query->where('is_main',1);}])->limit(3)->get();
+        $posts = Post::orderBy('created_at','DESC')->with('images')->limit(3)->get();
+        
            
-        return view('web.index',compact('slides','news'));
+        return view('web.index',compact('slides','posts'));
     }
 
 
@@ -126,7 +127,7 @@ class FrontController extends Controller
 
     public function getNew($slug){
         $post=Post::where('slug',$slug)->first();
-        $relations=Post::where('id','<>',$post->id)->orderBy('id','DESC')->limit(3)->get();
+        $relations=Post::where('id','<>',$post->id)->where('post_type', 'N')->orderBy('id','DESC')->limit(3)->get();
     	return view('web.new',compact('post','relations'));
     }
     public function getEventsView(){
@@ -134,7 +135,7 @@ class FrontController extends Controller
     }
     public function getEvent($slug){
             $post=Post::where('slug',$slug)->first();
-            $relations=Post::where('id','<>',$post->id)->orderBy('id','DESC')->limit(3)->get();
+            $relations=Post::where('id','<>',$post->id)->where('post_type', 'E')->orderBy('id','DESC')->limit(3)->get();
             return view('web.event',compact('post','relations'));
     }
     public function getVideosView(){
@@ -220,5 +221,19 @@ class FrontController extends Controller
         
 
 
+    }
+
+    public function getMarkets()
+    {
+        $markets = Market::orderBy('id','desc')->get();
+
+        return view('web.markets', compact('markets'));
+    }
+
+    public function getMarket($slug)
+    {
+        $market = Market::where('slug', $slug)->with('products')->first();
+
+        return view('web.market', compact('market'));
     }
 }

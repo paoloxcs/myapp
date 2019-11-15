@@ -71,6 +71,7 @@
                     <li><a href="{{route('events')}}">Eventos</a></li>
                     <li><a href="{{route('news')}}">Noticias</a></li>
                     <li><a href="{{route('videos')}}">Videos</a></li>
+                    <li><a href="{{route('markets')}}">Mercados</a></li>
                   </ul>
                   <div class="user-wrapper">
                     
