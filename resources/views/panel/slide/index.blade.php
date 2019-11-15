@@ -144,6 +144,12 @@
 		console.log(slide);		
 		let form_edit = $('#form_edit')[0];
 		form_edit.slide_id.value = slide.id;
+		form_edit.slidename.value = slide.slidename;
+		form_edit.headerline.value = slide.headerline;
+		form_edit.slidetext.value = slide.slidetext;
+		form_edit.status.value = slide.status;
+		form_edit.textlink.value = slide.textlink;
+		form_edit.actionlink.value = slide.actionlink;
 		props.modal_edit.modal();
 	}
 
