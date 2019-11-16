@@ -29,6 +29,8 @@
 									<th>Nombre</th>
 									<th>Dirección</th>
 									<th>Distrito</th>
+									<th>Teléfono</th>
+									<th>Anexo</th>
 									<th>Ciudad</th>									
 									<th>Acción</th>
 								</thead>
@@ -88,6 +90,8 @@
 							<td> ${sede.name}</td>
 							<td> ${sede.address}</td>
 							<td> ${sede.district}</td>
+							<td> ${sede.telf}</td>
+							<td> ${sede.anexo}</td>
 							<td> ${sede.city}</td>							
 							<td>
 								<button class="btn btn-orange btn-sm" onclick='editSede(${JSON.stringify(sede)})'> Editar </button>
@@ -150,6 +154,8 @@
 		form_edit.name.value = sede.name;
 		form_edit.address.value = sede.address;
 		form_edit.district.value = sede.district;
+		form_edit.telf.value = sede.telf;
+		form_edit.anexo.value = sede.anexo;
 		form_edit.city.value = sede.city;
 		form_edit.maps_code.value = sede.maps_code;
 		props.modal_edit.modal();
