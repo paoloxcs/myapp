@@ -83,6 +83,7 @@
             <li><a href="{{route('slide.index')}}"><i class="fas fa-arrows-alt-h"></i> Slides</a></li>
             <li><a href="{{route('iso.index')}}"><i class="fas fa-check-square"></i> Certificaciones</a></li>
             <li><a href="{{route('sede.index')}}"><i class="fas fa-home"></i> Sedes</a></li>
+            <li><a href="{{route('users.index')}}"><i class="fas fa-users"></i> Usuarios</a></li>
           </ul>
         </div>
         
