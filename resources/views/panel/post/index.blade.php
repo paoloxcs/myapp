@@ -155,7 +155,7 @@
 
 		$(form_edit.post_type).empty();
 		$(form_edit.post_type).append(`
-			<option ${post.post_type == 'N' ? 'selected' : ''} value="N">Moticia</option>
+			<option ${post.post_type == 'N' ? 'selected' : ''} value="N">Noticia</option>
 			<option ${post.post_type == 'E' ? 'selected' : ''} value="E">Evento</option>
 		`);
 
