@@ -16,7 +16,7 @@ use Carbon\Carbon;
 use App\FluidGroup;
 use App\ProductPart;
 use App\Compatibility;
-
+use App\Dimension;
 use App\Mail\QuotePart;
 use App\TypeApplication;
 use Illuminate\Http\Request;
@@ -190,7 +190,9 @@ class FrontController extends Controller
 
     /* Test de vista de búsqueda*/
     public function getSearchResults(){
-        return view('web.productfinder');
+        $dimensions=Dimension::all();
+        $categories = Category::where('status',1)->get();
+        return view('web.productfinder', compact('dimensions', 'categories'));
     }
 
 
@@ -200,25 +202,62 @@ class FrontController extends Controller
      */
     public function searchQuery(Request $request)
     {
-        // Creacion de variables a partir de parametros
-        $prod_name = $request->has('prod_name') ? $request->prod_name : '';
-        $part_number = $request->has('part_number') ? $request->part_number : 0;
-        $max_pressure = $request->has('max_pressure') ? $request->max_pressure : 0;
-        $max_speed = $request->has('max_speed') ? $request->max_speed : 0;
+        $dimensions = Dimension::all();
+        $categories = Category::where('status',1)->get();
 
+        if($request->has('part_number')){
 
-        //Busqueda de productos
-        $products = Product::where('name', 'like', $prod_name.'%')->get();
-
-        //Busqueda de partes
-        $part = ProductPart::where('part_nro', $part_number)->first();
-
-
-        return response()->json([
-            'products'   => $products,
-            'part'  => $part
-        ], 200);
+            $part = ProductPart::where('part_nro',$request->part_number)->first();
+            return view('web.productfinder', compact('dimensions', 'categories', 'part'));
+        }
         
+        // Creacion de variables a partir de parametros
+        $category_id = $request->category;
+        $max_pressure = $request->max_pressure;
+        $max_speed = $request->max_speed;
+        $min_temp = $request->min_temp;
+        $max_temp = $request->max_temp;
+
+        $category = Category::with(['products.operating_conditions' => function($query) use(
+            $max_pressure,
+            $max_speed,
+            $max_temp,
+            $min_temp
+        ){
+            $query->where([
+                ['max_pressure','like',$max_pressure.'%'],
+                ['max_speed','like',$max_speed.'%'],
+                ['min_temp','like',$min_temp.'%'],
+                ['max_temp','like',$max_temp.'%'],
+            ]);
+
+        }])->findOrFail($category_id);
+
+
+        
+        $parts = [];
+        foreach ($dimensions as $index => $dimension) {
+
+            $input_value = $request['dimension'.$index];
+
+
+            if($input_value != null){
+                $part_found = ProductPart::where('dimensions', 'like', '%"dimension_'.$index.'":"'.$input_value.'"%')->first();
+
+                if($part_found){
+
+                    if(!in_array($part_found, $parts)){
+                        array_push($parts, $part_found);
+                    }
+                }
+
+            }
+
+        }
+
+
+
+        return view('web.productfinder', compact('dimensions', 'categories', 'category', 'parts'));
 
 
     }

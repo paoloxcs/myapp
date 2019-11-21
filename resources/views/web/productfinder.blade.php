@@ -25,39 +25,29 @@
 			    	<div class="tab-content" id="myTabContent">
 			    	  <div class="tab-pane fade show active" id="seal" role="tabpanel" aria-labelledby="home-tab">
 
-			    	  	<form action="">
+			    	  	<form action="{{route('products.search')}}" method="GET">
 			    	  		<div class="row mt-1">
 			    	  			<section class="col-12">
 				    	  			<label for="category"><small>Categoría</small></label>
 				    	  			<select name="category" class="form-control form-control-sm" id="">
-				    	  				<option value="1">Rod Seals</option>
-				    	  				<option value="2">Single Action Piston</option>
+				    	  				@foreach($categories as $categ)
+				    	  					<option value="{{$categ->id}}">{{$categ->name}}</option>
+				    	  				@endforeach
 				    	  			</select>
 			    	  			</section>
 			    	  		</div>
 
 			    	  		<div class="row mt-1">
 			    	  			<section class="col-12">
-			    	  				<small>Diámetros</small>
+			    	  				<small>Diámetros y Longitud</small>
 			    	  			</section>
-			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control form-control-sm" placeholder="0d1">
+			    	  			@foreach ($dimensions as $index => $dimension)
+			    	  			<section class="col-4">
+			    	  				<div class="form-group">
+			    	  					<input type="text" class="form-control form-control-sm" title="{{$dimension->name}}" name="dimension{{$index}}" placeholder="{{$dimension->sigla}}">
+			    	  				</div>
 			    	  			</section>
-			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control form-control-sm" placeholder="0D1">
-			    	  			</section>
-			    	  		</div>
-
-			    	  		<div class="row mt-1">
-			    	  			<section class="col-12">
-			    	  				<small>Longitud y Largo</small>
-			    	  			</section>
-			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control form-control-sm" placeholder="L1">
-			    	  			</section>
-			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control form-control-sm" placeholder="SL">
-			    	  			</section>
+			    	  			@endforeach
 			    	  		</div>
 
 			    	  		<div class="row mt-2">
@@ -65,46 +55,22 @@
 			    	  				<small>Presión de Operación</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control form-control-sm" placeholder="Max">
+			    	  				<input type="text" name="max_pressure" class="form-control form-control-sm" placeholder="Max">
 			    	  			</section>
 			    	  			<section class="col-12">
 			    	  				<small>Temperaturas de Operatividad</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control form-control-sm" placeholder="Max">
+			    	  				<input type="text" name="max_temp" class="form-control form-control-sm" placeholder="Max">
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control form-control-sm" placeholder="Min">
+			    	  				<input type="text" name="min_temp" class="form-control form-control-sm" placeholder="Min">
 			    	  			</section>
 			    	  			<section class="col-12">
 			    	  				<small>Velocidad de Operación</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" class="form-control form-control-sm" placeholder="Max">
-			    	  			</section>
-			    	  		</div>
-
-			    	  		<div class="row mt-2">
-			    	  			<section class="col-12">
-			    	  				<h6>Fluido de Operatividad</h6>
-			    	  			</section>
-			    	  			<section class="col-12">
-			    	  				<label for="application">
-			    	  					<small>Aplicación</small>
-			    	  				</label>
-			    	  				<select name="application" class="form-control form-control-sm" id="">
-			    	  					<option value="1">Estática</option>
-			    	  					<option value="1">Dinámica</option>
-			    	  				</select>
-			    	  			</section>
-			    	  			<section class="col-12">
-			    	  				<label for="fluid">
-			    	  					<small>Tipo de Fluido</small>
-			    	  				</label>
-			    	  				<select name="fluid" class="form-control form-control-sm" id="">
-			    	  					<option value="1">basados en aceite mineral</option>
-			    	  					<option value="2">basados en agua</option>
-			    	  				</select>
+			    	  				<input type="text" name="max_speed" class="form-control form-control-sm" placeholder="Max">
 			    	  			</section>
 			    	  		</div>
 
@@ -120,10 +86,10 @@
 
 			    	  </div>
 			    	  <div class="tab-pane fade" id="part" role="tabpanel" aria-labelledby="profile-tab">
-			    	  	<form action="">
+			    	  	<form action="{{route('products.search')}}" method="GET">
 			    	  		<div class="row mt-1">
 				    	  		<section class="col-12">
-				    	  			<input type="text" class="form-control form-control-sm" placeholder="Nro de Parte">
+				    	  			<input type="text" name="part_number" class="form-control form-control-sm" placeholder="Nro de Parte">
 				    	  		</section>
 			    	  		</div>
 
@@ -135,7 +101,6 @@
 			    	  	</form>
 			    	  </div>
 			    	</div>
-			    	
 
 			    </div>
 			  </div>
@@ -154,7 +119,35 @@
 			</div>
 
 			<div class="row mt-3">
-				
+				    	@if(isset($parts))
+
+				    	@foreach($parts as $part)
+				    		<pre>
+				    			{{$part}}
+				    		</pre>
+				    	@endforeach
+
+				    	@endif
+
+				    	@if(isset($part))
+
+
+				    		<pre>
+				    			{{$part}}
+				    		</pre>
+
+
+				    	@endif				    	
+
+				    	@if(isset($category))
+
+				    	<pre>
+				    		{{$category}}
+				    	</pre>
+
+
+				    	@endif
+
 			</div>
 		</section>
 			
