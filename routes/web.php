@@ -147,7 +147,7 @@ Route::group(['middleware'=>'auth'],function(){
 		});
 		
 		// Ruta para posts
-		Route::group(['middleware'=>'permision:manage_posts'],function(){
+		Route::group(['middleware'=>'permision:manage_general'],function(){
 			//Route::resource('posts','PostController');
 			Route::get('posts','PostController@index')->name('posts.index');
 			Route::get('posts-data','PostController@getPosts');
@@ -200,6 +200,11 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::group(['middleware'=>'permision:manage_admin'],function(){
 			Route::resource('users','UserController');
 			Route::get('users/{id}/destroy','UserController@destroy')->name('users.destroy');
+
+			// Ruta para roles
+			Route::resource('roles','RoleController');
+			Route::get('roles/{id}/destroy', 'RoleController@destroy')->name('roles.destroy');
+			
 		});
 		
 	});

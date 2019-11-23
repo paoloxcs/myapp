@@ -17,7 +17,7 @@ class PermissionsTableSeeder extends Seeder
             ['name' => 'Modulo mercados', 'slug' => 'manage_markets'],
             ['name' => 'Modulo marcas', 'slug' => 'manage_brands'],
             ['name' => 'Modulo productos', 'slug' => 'manage_products'],
-            ['name' => 'Modulo posts', 'slug' => 'manage_posts'],
+            ['name' => 'Modulo general', 'slug' => 'manage_general'],
             ['name' => 'Modulo administrador', 'slug' => 'manage_admin'],
         ]);
 

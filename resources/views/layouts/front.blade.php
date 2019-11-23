@@ -86,8 +86,8 @@
                             {{Auth()->user()->name}}
                           </a>
                           <div class="dropdown-menu" id="user-dropdown" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Perfil</a>
-                            <a class="dropdown-item" href="#">Settings</a>
+                            {{-- <a class="dropdown-item" href="#">Perfil</a>
+                            <a class="dropdown-item" href="#">Settings</a> --}}
                             @if(Auth()->user()->accessPanel())
                               <a class="dropdown-item" href="{{url('panel')}}">Ver panel</a>
                             @endif
