@@ -144,7 +144,7 @@
         </section>
         <section class="col-xs-12 col-sm-12 col-md-3 redes">          
             <ul class="menufooter d-flex justify-content-end">
-              <li><a class="social face" href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a target="_blank" class="social face" href="https://web.facebook.com/CASDELSA"><i class="fab fa-facebook-f"></i></a></li>
               <li><a class="social youtube" href="#"><i class="fab fa-youtube"></i></a></li>
               <li><a class="social linked" href="#"><i class="fab fa-linkedin-in"></i></a></li>
             </ul>          

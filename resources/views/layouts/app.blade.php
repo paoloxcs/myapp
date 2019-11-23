@@ -49,7 +49,7 @@
                 </div>
               </div>
                 <ul class="menu">
-                  <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
+                  {{-- <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li> --}}
                   <li><a href="{{url('/')}}"><i class="fab fa-chrome"></i> Regresar a casdel</a></li>
                   <li>
                     <a href="{{ route('logout') }}"
