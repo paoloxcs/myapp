@@ -1,14 +1,14 @@
 @extends('layouts.app')
 @section('title', 'Certificaciones')
 @section('content')
-<div class="container">
+<div class="container" id="iso">
 	<div class="row">
 		<div class="col-md-12">
 			<div class="card">
 				<div class="card-header">
 					<nav aria-label="breadcrumb">
 					  <ol class="breadcrumb">
-					    <li class="breadcrumb-item active" aria-current="page"><i class="fas fa-table"></i>Certificaciones ISOS</li>
+					    <li class="breadcrumb-item active" aria-current="page"><span class="badge badge-secondary" id="counter"></span> <i class="fas fa-table"></i>Certificaciones ISOS</li>
 					  </ol>
 					</nav>					
 				</div>
@@ -18,7 +18,7 @@
 							<!-- Buscador -->
 						</div>
 						<div class="col-12 col-md-4">
-							<button onclick="createIso()" class="btn btn-orange"><i class="fa fa-plus"></i> Nuevo registro</button>
+							<button data-toggle="modal" data-target="#modal_create" class="btn btn-orange"><i class="fa fa-plus"></i> Nuevo registro</button>
 						</div>
 					</div>
 					<div class="row mt-2">
@@ -55,24 +55,28 @@
 	$(document).ready(function(){
 		getIsos();
 	});
-	let props={
-		tbIsos : $('#isos'),
-		modal_create: $('#modal_create'),
-		modal_edit: $('#modal_edit')
-	}
 
-	function getIsos(page=1) {
+	const modal_create = $("#modal_create");
+	const modal_edit = $("#modal_edit");
+	let counter = $("#counter");
+
+	function getIsos(page=0) {
+
+		let tbisos = $("#isos"),
+			ruta = '/panel/isos-data'; // Declaracion de variables
+		if(page != 0) ruta = `/panel/isos-data/?page=${page}`;
+
 		spinner.show();
+		
 
-		$.ajax({
-			url:`/panel/isos-data?page=${page}`,
-			type:'GET',
-			dataType:'JSON',
+		$.ajax({url: ruta,type: 'GET',dataType: 'JSON',
 			success:res=>{
+				tbisos.empty();
 				spinner.hide();
-				props.tbIsos.empty();
+				counter.text(res.total);				
 				res.data.forEach(iso=>{
-					props.tbIsos.append(`
+
+					tbisos.append(`
 						<tr>
 							<td> ${iso.id} </td>
 							<td title="${iso.description}"> ${iso.name} </td>							
@@ -81,98 +85,99 @@
 							<button class="btn btn-danger btn-sm" onclick="destroyIso(${iso.id})"> Eliminar </button>
 
 							</td>
-						`)
-				})
-			}
-
-		});
-	}
-
-	function createIso() {
-		props.modal_create.modal();
-	}
-
-	function saveIso(form) {
-		event.preventDefault();
-		let ruta = '/panel/isos',
-			data = new FormData($(form)[0]);
-
-		spinner.show();
-		$.ajax({
-			url:ruta,
-			type:'POST',
-			headers: {'X-CSRF-TOKEN': form._token.value},
-			data: data,
-			contentType: false,
-			cache: false,
-			processData: false,
-			success: res=>{
-				spinner.hide();
-				props.modal_create.modal('hide');
-				getIsos();
-				toastr.success(res.message);
-				$(form).trigger('reset');
-			},
-			error:error=>{
-				if (error.status == 422){
-					spinner.hide();
-					let errors = Object.values(error.responseJSON.errors);
-					for (var error in errors){
-					    toastr.error(errors[error][0],'Advertencia');
-					}
-
-				}else{
-					console.log(error);
-				}
-			}
-		});
-	}
-
-	function editIso(iso) {
-		console.log(iso);		
-		let form_edit = $('#form_edit')[0];
-		form_edit.iso_id.value = iso.id;
-		form_edit.name.value = iso.name;
-		form_edit.description.value = iso.description;
-		props.modal_edit.modal();
-	}
-	function updateIso(form) {
-		event.preventDefault();
-		let ruta = `/panel/isos/${form.iso_id.value}`,
-			data = new FormData($(form)[0]);
-
-		spinner.show();
-		$.ajax({
-			url: ruta,
-			type: 'POST',
-			headers:{'X-CSRF-TOKEN': form._token.value},
-			data: data,
-			contentType: false,
-			processData: false,
-			cache: false,
-			success:res=>{
-				spinner.hide();
-				props.modal_edit.modal('hide');
-				getIsos();
-				toastr.success(res.message);
+						`);
+				});
+				renderPagination(res, 'getIsos');
 			},
 			error: error =>{
-				if (error.status == 422){
-					spinner.hide();
-					let errors = Object.values(error.responseJSON.errors);
-					for (var error in errors){
-					    toastr.error(errors[error][0],'Advertencia');
-					}
-
-				}else{
-					console.log(error);
-				}
+				console.log(error);
 			}
 		});
 	}
 
-	function destroyIso(isoId) { // send postId on server for deleting register
-		if(confirm('¿Seguro de eliminar la certificación?')){
+
+	function saveIso(form) { // Save category method
+		event.preventDefault();
+		if(validateForm(form)){
+			let ruta = '/panel/isos',
+				data = new FormData($(form)[0]);
+			spinner.show();
+			$.ajax({url: ruta, type: 'POST',data: data,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: res =>{
+					spinner.hide();
+					// if(res.status == 200){
+						modal_create.modal('hide');
+						getIsos();
+						toastr.success(res.message,'Éxito');
+						$(form).trigger('reset');
+					// }
+
+					if (res.status == 422){
+						for (var error in res.errors){
+						    toastr.error(res.errors[error][0],'Advertencia');
+						}
+					}
+					console.log(res);
+				},
+				error: err =>{
+					if(err.status === 422){
+						console.log(err.data);
+					}
+				}
+			});
+		}	
+	}
+	
+	function editIso(iso) {
+		let formedit = $("#form_edit")[0];
+		modal_edit.modal();
+		formedit.iso_id.value = iso.id;
+		formedit.name.value = iso.name;
+		formedit.description.value = iso.description;
+		$(formedit.status).empty();
+	}
+
+	function updateIso(form) {
+		event.preventDefault();
+		if(validateForm(form)){
+			let ruta = `/panel/isos/${form.iso_id.value}`,
+				data = new FormData($(form)[0]);
+			spinner.show();
+			$.ajax({
+				url: ruta,
+				type:'POST',
+				data: data,
+				cache: false,
+				contentType: false,
+				processData: false,
+				success: res =>{
+					spinner.hide();
+					// if(res.status == 200){
+						modal_edit.modal('hide');
+						getIsos();
+						toastr.success(res.message,'Éxito');
+					// }
+
+					if (res.status == 422){
+						for (var error in res.errors){
+						    toastr.error(res.errors[error][0],'Advertencia');
+						}
+					}
+					console.log(res);
+				},
+				error: error =>{
+					console.log(error);
+				}
+			});
+		}
+		
+	}
+
+	function destroyIso(isoId) {
+		if(confirm('¿Seguro de eliminar el registro?')){
 			let ruta = `/panel/isos/${isoId}/destroy`;
 			spinner.show();
 			$.ajax({
@@ -181,14 +186,15 @@
 				dataType: 'JSON',
 				success: res =>{
 					spinner.hide();
+					toastr.success(res.message,'Éxito');
 					getIsos();
-					toastr.success(res.message);
 				},
 				error: error =>{
 					console.log(error);
 				}
 			});
 		}
+		
 	}
 </script>
 @endsection

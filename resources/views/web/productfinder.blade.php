@@ -119,34 +119,96 @@
 			</div>
 
 			<div class="row mt-3">
-				    	@if(isset($parts))
+				@if(isset($category))
+				<h5 class="orange-text">Resultados x Categoría</h5>
 
-				    	@foreach($parts as $part)
-				    		<pre>
-				    			{{$part}}
-				    		</pre>
-				    	@endforeach
+				<table class="table table-striped table-bordered table-sm">
+					<tbody>
+						<tr>
+							<td width="8%"><img src="{{$category->url_image}}" alt="{{$category->name}}"></td>
+							<td>{{$category->id}}</td>
+							<td>{{$category->name}}</td>
+							<td><a href="productos/{{$category->slug}}" class="btn btn-orange btn-sm">Visitar</a></td>
+						</tr>
+					</tbody>
+				</table>
 
-				    	@endif
+				<!-- <pre>
+					{{$category}}
+				</pre -->
+				@endif
 
-				    	@if(isset($part))
+		    	@if(isset($parts))
+		    	<h5 class="orange-text">Partes Encontradas</h5>
+		    	<table class="table table-striped table-bordered table-sm">
+		    	<thead>
+		    		<th scope="col">Código</th>
+		    		<th scope="col">Perfil</th>
+		    		<th scope="col">Nro de Parte</th>
+		    		@foreach($parts as $p)
+		    			
+		    				@foreach($p->product->dimensions as $dim)
+		    					<th scope="col">{{$dim->sigla}}</th>
+		    				@endforeach
+		    			
+		    		@endforeach
+		    		<th scope="col">Medida</th>
+		    		<th scope="col">Documento</th>	
 
+		    	</thead>
+		    	<tbody>
+		    		@foreach($parts as $part)
+		    		<tr>
+		    			<td>{{$part->id}}</td>
+		    			<td>{{$part->product->name}}</td>
+		    			<td>{{$part->part_nro}}</td>
+		    			@foreach(json_decode($part->dimensions) as $index => $part_dimen)
+		    				<td>{{$part_dimen}}</td>
+		    			@endforeach
+		    			<td>{{$part->measurement->sigla}}</td>
+		    			<td><a href="/docs/{{$part->ruta}}" target="_blank" class="orange-text"><i class="far fa-file-pdf"></i> Descargar </a></td>
+		    			<!-- {{$part}} -->
+		    		</tr>
+		    		@endforeach
+		    	</tbody>
+		    	</table>
 
-				    		<pre>
-				    			{{$part}}
-				    		</pre>
+		    	
 
+		    	@endif
 
-				    	@endif				    	
+		    	@if(isset($part))
+		    	<h5 class="orange-text">Resultados para Partes</h5>
 
-				    	@if(isset($category))
+		    	<table class="table table-striped table-bordered table-sm">
+		    	<thead>
+		    		<th scope="col">Código</th>
+		    		<th scope="col">Perfil</th>
+		    		<th scope="col">Nro de Parte</th>
+		    		@foreach($part->product->dimensions as $dim)
+		    			<th scope="col">{{$dim->sigla}}</th>
+		    		@endforeach
+		    		<th scope="col">Medida</th>
+		    		<th scope="col">Documento</th>				    		
+		    	</thead>
+		    	<tbody>
 
-				    	<pre>
-				    		{{$category}}
-				    	</pre>
+		    		<tr>
+		    			<td>{{$part->id}}</td>
+		    			<td>{{$part->product->name}}</td>
+		    			<td>{{$part->part_nro}}</td>				    			
+		    			@foreach(json_decode($part->dimensions) as $index => $part_dimen)
+		    				<td>{{$part_dimen}}</td>
+		    			@endforeach
+		    			<td>{{$part->measurement->sigla}}</td>
+		    			<td><a href="/docs/{{$part->ruta}}" target="_blank" class="orange-text"><i class="far fa-file-pdf"></i> Descargar </a></td>
+		    		</tr>
+		    		
+		    	</tbody>
+		    	</table>
+		    	@endif				    	
 
-
-				    	@endif
+				    	
 
 			</div>
 		</section>

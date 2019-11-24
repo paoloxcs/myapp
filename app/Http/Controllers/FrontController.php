@@ -202,12 +202,15 @@ class FrontController extends Controller
      */
     public function searchQuery(Request $request)
     {
+
         $dimensions = Dimension::all();
         $categories = Category::where('status',1)->get();
 
         if($request->has('part_number')){
 
-            $part = ProductPart::where('part_nro',$request->part_number)->first();
+        $part = ProductPart::with('measurement')->with(['product' => function($query){$query->with('dimensions');
+        }])->where('part_nro',$request->part_number)->first();
+
             return view('web.productfinder', compact('dimensions', 'categories', 'part'));
         }
         
@@ -242,7 +245,8 @@ class FrontController extends Controller
 
 
             if($input_value != null){
-                $part_found = ProductPart::where('dimensions', 'like', '%"dimension_'.$index.'":"'.$input_value.'"%')->first();
+                $part_found = ProductPart::with('measurement')->with(['product' => function($query){$query->with('dimensions');
+        }])->where('dimensions', 'like', '%"dimension_'.$index.'":"'.$input_value.'"%')->first();
 
                 if($part_found){
 
