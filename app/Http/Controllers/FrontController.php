@@ -206,13 +206,6 @@ class FrontController extends Controller
         $dimensions = Dimension::all();
         $categories = Category::where('status',1)->get();
 
-        if($request->has('part_number')){
-
-        $part = ProductPart::with('measurement')->with(['product' => function($query){$query->with('dimensions');
-        }])->where('part_nro',$request->part_number)->first();
-
-            return view('web.productfinder', compact('dimensions', 'categories', 'part'));
-        }
         
         // Creacion de variables a partir de parametros
         $category_id = $request->category;
@@ -264,6 +257,18 @@ class FrontController extends Controller
         return view('web.productfinder', compact('dimensions', 'categories', 'category', 'parts'));
 
 
+    }
+
+    public function searchByPart(Request $request)
+    {
+
+        $dimensions = Dimension::all();
+        $categories = Category::where('status',1)->get();
+
+        $part = ProductPart::with('measurement')->with(['product' => function($query){$query->with('dimensions');
+        }])->where('part_nro',$request->part_number)->first();
+
+        return view('web.productfinder', compact('dimensions', 'categories', 'part'));
     }
 
     public function getMarkets()

@@ -41,6 +41,9 @@ Route::get('nosotros', function () {
 // Ruta para busqueda de productos
 Route::get('search', 'FrontController@searchQuery')->name('products.search');
 
+// Ruta para busqueda por numero de parte
+Route::get('search-by', 'FrontController@searchByPart')->name('products.search.part');
+
 Route::get('mercados', 'FrontController@getMarkets')->name('markets');
 Route::get('mercado/{slug}', 'FrontController@getMarket');
 

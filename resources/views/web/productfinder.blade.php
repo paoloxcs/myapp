@@ -31,7 +31,7 @@
 				    	  			<label for="category"><small>Categoría</small></label>
 				    	  			<select name="category" class="form-control form-control-sm" id="">
 				    	  				@foreach($categories as $categ)
-				    	  					<option value="{{$categ->id}}">{{$categ->name}}</option>
+				    	  					<option {{Request::get('category') == $categ->id ? 'selected' : ''}} value="{{$categ->id}}">{{$categ->name}}</option>
 				    	  				@endforeach
 				    	  			</select>
 			    	  			</section>
@@ -44,7 +44,7 @@
 			    	  			@foreach ($dimensions as $index => $dimension)
 			    	  			<section class="col-4">
 			    	  				<div class="form-group">
-			    	  					<input type="text" class="form-control form-control-sm" title="{{$dimension->name}}" name="dimension{{$index}}" placeholder="{{$dimension->sigla}}">
+			    	  					<input type="text" class="form-control form-control-sm" title="{{$dimension->name}}" name="dimension{{$index}}" placeholder="{{$dimension->sigla}}" value="{{Request::get('dimension'.$index)}}">
 			    	  				</div>
 			    	  			</section>
 			    	  			@endforeach
@@ -55,22 +55,22 @@
 			    	  				<small>Presión de Operación</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" name="max_pressure" class="form-control form-control-sm" placeholder="Max">
+			    	  				<input type="text" name="max_pressure" value="{{Request::get('max_pressure')}}" class="form-control form-control-sm" placeholder="Max">
 			    	  			</section>
 			    	  			<section class="col-12">
 			    	  				<small>Temperaturas de Operatividad</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" name="max_temp" class="form-control form-control-sm" placeholder="Max">
+			    	  				<input type="text" name="max_temp" value="{{Request::get('max_temp')}}" class="form-control form-control-sm" placeholder="Max">
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" name="min_temp" class="form-control form-control-sm" placeholder="Min">
+			    	  				<input type="text" name="min_temp" value="{{Request::get('min_temp')}}" class="form-control form-control-sm" placeholder="Min">
 			    	  			</section>
 			    	  			<section class="col-12">
 			    	  				<small>Velocidad de Operación</small>
 			    	  			</section>
 			    	  			<section class="col-6">
-			    	  				<input type="text" name="max_speed" class="form-control form-control-sm" placeholder="Max">
+			    	  				<input type="text" name="max_speed" value="{{Request::get('max_speed')}}" class="form-control form-control-sm" placeholder="Max">
 			    	  			</section>
 			    	  		</div>
 
@@ -86,10 +86,10 @@
 
 			    	  </div>
 			    	  <div class="tab-pane fade" id="part" role="tabpanel" aria-labelledby="profile-tab">
-			    	  	<form action="{{route('products.search')}}" method="GET">
+			    	  	<form action="{{route('products.search.part')}}" method="GET">
 			    	  		<div class="row mt-1">
 				    	  		<section class="col-12">
-				    	  			<input type="text" name="part_number" class="form-control form-control-sm" placeholder="Nro de Parte">
+				    	  			<input type="text" name="part_number" value="{{Request::get('part_number')}}" class="form-control form-control-sm" placeholder="Nro de Parte">
 				    	  		</section>
 			    	  		</div>
 
@@ -128,7 +128,7 @@
 							<td width="8%"><img src="{{$category->url_image}}" alt="{{$category->name}}"></td>
 							<td>{{$category->id}}</td>
 							<td>{{$category->name}}</td>
-							<td><a href="productos/{{$category->slug}}" class="btn btn-orange btn-sm">Visitar</a></td>
+							<td><a href="productos/{{$category->slug}}" class="btn btn-orange btn-sm">Ver productos</a></td>
 						</tr>
 					</tbody>
 				</table>
@@ -142,7 +142,6 @@
 		    	<h5 class="orange-text">Partes Encontradas</h5>
 		    	<table class="table table-striped table-bordered table-sm">
 		    	<thead>
-		    		<th scope="col">Código</th>
 		    		<th scope="col">Perfil</th>
 		    		<th scope="col">Nro de Parte</th>
 		    		@foreach($parts as $p)
@@ -157,17 +156,16 @@
 
 		    	</thead>
 		    	<tbody>
-		    		@foreach($parts as $part)
+		    		@foreach($parts as $part_item)
 		    		<tr>
-		    			<td>{{$part->id}}</td>
-		    			<td>{{$part->product->name}}</td>
-		    			<td>{{$part->part_nro}}</td>
-		    			@foreach(json_decode($part->dimensions) as $index => $part_dimen)
+		    			<td>{{$part_item->product->name}}</td>
+		    			<td>{{$part_item->part_nro}}</td>
+		    			@foreach(json_decode($part_item->dimensions) as $index => $part_dimen)
 		    				<td>{{$part_dimen}}</td>
 		    			@endforeach
-		    			<td>{{$part->measurement->sigla}}</td>
-		    			<td><a href="/docs/{{$part->ruta}}" target="_blank" class="orange-text"><i class="far fa-file-pdf"></i> Descargar </a></td>
-		    			<!-- {{$part}} -->
+		    			<td>{{$part_item->measurement->sigla}}</td>
+		    			<td><a href="/docs/{{$part_item->ruta}}" target="_blank" class="orange-text"><i class="far fa-file-pdf"></i> Descargar </a></td>
+		    			<!-- {{$part_item}} -->
 		    		</tr>
 		    		@endforeach
 		    	</tbody>
@@ -178,11 +176,10 @@
 		    	@endif
 
 		    	@if(isset($part))
-		    	<h5 class="orange-text">Resultados para Partes</h5>
+		    	<h5 class="orange-text">Resultado de búsqueda por numero de parte</h5>
 
 		    	<table class="table table-striped table-bordered table-sm">
 		    	<thead>
-		    		<th scope="col">Código</th>
 		    		<th scope="col">Perfil</th>
 		    		<th scope="col">Nro de Parte</th>
 		    		@foreach($part->product->dimensions as $dim)
@@ -194,7 +191,6 @@
 		    	<tbody>
 
 		    		<tr>
-		    			<td>{{$part->id}}</td>
 		    			<td>{{$part->product->name}}</td>
 		    			<td>{{$part->part_nro}}</td>				    			
 		    			@foreach(json_decode($part->dimensions) as $index => $part_dimen)
