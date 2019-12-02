@@ -62,7 +62,7 @@
 			</div>	 
 			  <div class="card-body gray">			    
 			    <p class="card-text">Tenemos disponibles una alta gama de sellos para todo tipo de uso desde minería hasta la agricultura. Diseñados para trabajar ante las condiciones más extremas. Encuéntrelo aquí</p>
-			    <a href="#" class="btn btn-orange">Buscador de Productos</a>
+			    <a href="{{route('productfinder')}}" class="btn btn-orange">Buscador de Productos</a>
 			  </div>
 			</div>
 		</section>

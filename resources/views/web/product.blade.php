@@ -39,12 +39,90 @@
 		<div class="row mt-5 mx-auto">
 			<h5>Sellos a Medida</h5>
 			<p>Además de nuestra amplia gama de productos almacenados, ofrecemos soluciones de sellado diseñadas a medida y sellos maquinados.</p>
-			<button type="button" class="btn btn-outline-primary btn-lg btn-block">Arme su Sello</button>
+			<a href="{{route('contact')}}" class="btn btn-outline-primary btn-lg btn-block">Arme su Sello</a>
 		</div>
 
-
-
 		</section>
+
+		{{-- Modal Question Form --}}
+		<div class="modal fade" id="questionForm{{$product->id}}" tabindex="-1" role="dialog" aria-labelledby="questionForm{{$product->id}}" aria-hidden="true">
+		  <div class="modal-dialog modal-lg" role="document">
+		    <div class="modal-content">
+		      <div class="modal-header">
+		        <h5 class="modal-title" id="exampleModalLabel">Consultar sobre el perfil {{$product->name}}</h5>
+		        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+		          <span aria-hidden="true">&times;</span>
+		        </button>
+		      </div>
+		      <form action="{{route('askprofile')}}" method="POST">
+		      {{csrf_field()}}
+		      <div class="modal-body">
+		      <input type="hidden" name="profile_name" value="{{$product->name}}">
+		      <div class="row">
+		      	<div class="col-12 col-md-6">
+		      		<div class="form-group">
+		      			<label for="name"><small>Nombres y Apellidos</small></label>
+		      			<input type="name" name="name" class="form-control form-control-sm" placeholder="Ingrese sus nombres completos">
+		      		</div>
+		      	</div>
+		      	<div class="col-12 col-md-6">
+		      		<div class="form-group">
+		      			<label for="email"><small>Correo electrónico</small></label>
+		      			<input type="email" name="email" class="form-control form-control-sm" placeholder="Ingreso un correo electrónico">
+		      		</div>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="col-12 col-md-4">
+		      		<div class="form-group">
+		      			<label for="mobile"><small>Teléfono</small></label>
+		      			<input type="text" name="mobile" class="form-control form-control-sm" placeholder="Ingreso un nro de teléfono/móvil">
+		      		</div>
+		      	</div>
+		      	<div class="col-12 col-md-4">
+		      		<div class="form-group">
+		      			<label for="company"><small>Empresa</small></label>
+		      			<input type="text" name="company" class="form-control form-control-sm" placeholder="Ingreso el nombre de la empresa en la que trabaja">
+		      		</div>
+		      	</div>
+		      	<div class="col-12 col-md-4">
+		      		<div class="form-group">
+		      			<label for="jobtitle"><small>Cargo</small></label>
+		      			<input type="text" name="jobtitle" class="form-control form-control-sm" placeholder="Ingreso su cargo">
+		      		</div>
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="col-12">
+		      		<div class="form-group">
+		      		  <label for="comment"><small>Comentario</small></label>
+		      		  <textarea name="comment" id="comment" class="form-control form-control-sm" rows="3">Desearía conocer más sobre el perfil {{$product->name}}</textarea>
+		      		</div>					  		  				       			
+		      	</div>
+		      </div>
+		      <div class="row">
+		      	<div class="col-12">
+		      		<div class="form-group form-check">
+		      		  <input type="checkbox" class="form-check-input" id="exampleCheck1">
+		      		  <label class="form-check-label" for="exampleCheck1"><small>Doy mi consentimiento para recibir comunicaciones sobre productos, servicios y eventos por de parte de CASDEL.</small></label>
+		      		</div>
+		      		
+		      	</div>
+		      </div>
+		      </div>
+		      <div class="modal-footer">
+		      	<div class="row">
+		      		<div class="col-12">
+		      			<button type="submit" class="btn btn-orange btn-sm">Enviar</button>
+		      			<button type="button" class="btn btn-secondary btn-sm" data-dismiss="modal">Cerrar</button>
+		      		</div>
+		      	</div>				  		  				        
+		      </div>
+		      </form>
+		    </div>
+		  </div>
+		</div>
+		{{-- Modal Question Form --}}
 
 		<section class="col-xs-12 col-sm-12 col-md-9">
 			<div class="row">
@@ -59,7 +137,21 @@
 						</a>
 					</section>
 				@endforeach
-				<section class="col-3"><a href="#" class="orange-link"><i class="far fa-question-circle"></i> Hacer una pregunta</a></section>
+
+				
+				<section class="col-3">
+					
+					<a href="#" class="orange-link" tabindex="-1" role="dialog" data-toggle="modal" data-target="#questionForm{{$product->id}}">
+						<i class="far fa-question-circle"></i> Hacer una pregunta
+					</a>					
+				</section>
+				<section class="col-12">
+					@if(session('msg2'))
+					<div class="alert alert-success">
+						{{session('msg2')}}
+					</div>									
+					@endif
+				</section>
 			</div>
 
 			<div class="row mt-4">

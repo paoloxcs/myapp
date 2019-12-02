@@ -36,7 +36,7 @@
 		<div class="row mt-5 mx-auto">
 			<h5>Sellos a Medida</h5>
 			<p>Además de nuestra amplia gama de productos almacenados, ofrecemos soluciones de sellado diseñadas a medida y sellos maquinados.</p>
-			<button type="button" class="btn btn-outline-primary btn-lg btn-block">Arme su Sello</button>
+			<a href="{{route('contact')}}" class="btn btn-outline-primary btn-lg btn-block">Arme su Sello</a>
 		</div>
 
 

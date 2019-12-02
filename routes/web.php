@@ -31,7 +31,7 @@ Route::get('videos-data', 'FrontController@getVideos');
 
 Route::get('product-finder','FrontController@getSearchResults')->name('productfinder');
 
-Route::get('contacto','FrontController@getContactView')->name('contact');
+Route::get('contacto','FrontController@getContactView')->name('contacto');
 Route::get('sedes-data','FrontController@getSedes');
 
 Route::get('nosotros', function () {
@@ -49,6 +49,8 @@ Route::get('mercado/{slug}', 'FrontController@getMarket');
 
 //Solicitar Info de Part
 Route::post('sendquotepart', 'FrontController@sendQuotePart')->name('sendquotepart');
+Route::post('askprofile', 'FrontController@askQuestion')->name('askprofile');
+Route::post('contact', 'FrontController@contact')->name('contact');
 
 // Peticion asyncrona
 Route::get('products/{id}/parts','FrontController@getParts');

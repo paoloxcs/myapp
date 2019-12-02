@@ -70,7 +70,7 @@
 				<p>Casdel Hnos S.A. es una empresa Peruana con 24 años en el mercado nacional, desde el 18 de Julio de 1991, ofreciendo a nuestros clientes calidad, garantía, confianza, mejores precios, stock amplio, atención rápida y soporte técnico en la distribución de elementos de estanqueidad como: orings, sellos hidráulicos, retenes radiales y fabricaciones de sellos especiales en nuestro torno CNC especial solo para sellos y de sobre medida según el requerimiento de nuestros clientes.</p>
 			</section>
 			<section class="col-xs-12 col-sm-12 col-md-4 col align-self-center">
-				<button type="button" class="btn btn-orange btn-lg col align-self-center">Alcance de Productos</button>
+				<a href="{{route('markets')}}" class="btn btn-orange btn-lg col align-self-center">Alcance de Productos</a>
 			</section>	
 		</div>
 	</div>
@@ -107,7 +107,7 @@
 			  <div class="card-body">
 			  	<div class="mt-2 mb-2"> <i class="fas fa-comments fa-7x" style="color: #1D509E;"></i> </div>
 			    <h5 class="card-title mt-3">Chatea con nuestros Expertos</h5>
-			    <h6 class="card-subtitle mb-2 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h6>
+			    <!-- <h6 class="card-subtitle mb-2 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h6> -->
 			  </div>
 			</div>
 		</section>
@@ -118,7 +118,7 @@
 			  <div class="card-body">
 			  	<div class="mt-2 mb-2"> <i class="fas fa-envelope-open fa-7x" style="color: #EF6A0B;"></i> </div>			  	
 			    <h5 class="card-title mt-3">Suscríbete para novedades</h5>
-			    <h6 class="card-subtitle mb-2 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h6>
+			    <!-- <h6 class="card-subtitle mb-2 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h6> -->
 			  </div>
 			</div>
 		</section>
@@ -129,7 +129,7 @@
 			  <div class="card-body">
 			  	<div class="mt-2 mb-2"> <i class="fas fa-phone fa-7x" style="color: #797979;"></i> </div>			  	
 			    <h5 class="card-title mt-3">Llámanos si tienes dudas</h5>
-			    <h6 class="card-subtitle mb-2 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h6>
+			    <!-- <h6 class="card-subtitle mb-2 text-muted">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</h6> -->
 			  </div>
 			</div>
 		</section>
