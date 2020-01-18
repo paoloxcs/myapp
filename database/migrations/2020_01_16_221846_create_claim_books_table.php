@@ -18,6 +18,7 @@ class CreateClaimBooksTable extends Migration
             $table->string('book_number', 20)->nullable(); // Codigo de libro de reclamaciones
             $table->string('name', 100); // Nombre del cliente
             $table->string('last_name', 100); // Apellidos del cliente
+            $table->string('nrs', 100)->nullable(); // Razón Social
             $table->string('phone_number'); // Numero telefònico del cliente
             $table->string('doc_number', 11); // Numero de documento del cliente
             $table->string('email', 70); // Correo del cliente

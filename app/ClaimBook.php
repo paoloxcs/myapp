@@ -10,6 +10,7 @@ class ClaimBook extends Model
         'book_number',
         'name',
         'last_name',
+        'nrs',
         'phone_number',
         'doc_number',
         'email',

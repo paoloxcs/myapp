@@ -38,6 +38,11 @@ Route::get('nosotros', function () {
     return view('web.about');
 });
 
+
+Route::get('libroreclamaciones','FrontController@showClaimBookForm')->name('libroreclamaciones');
+
+
+
 // Ruta para busqueda de productos
 Route::get('search', 'FrontController@searchQuery')->name('products.search');
 
