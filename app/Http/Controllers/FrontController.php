@@ -12,15 +12,17 @@ use App\Product;
 use App\Profile;
 use App\Category;
 use App\FluidKey;
+use App\ClaimBook;
+use App\Dimension;
 use Carbon\Carbon;
 use App\FluidGroup;
 use App\ProductPart;
-use App\Compatibility;
-use App\Dimension;
-use App\Mail\QuotePart;
-use App\Mail\AskQuestion;
 use App\Mail\Contact;
+use App\Compatibility;
+use App\Mail\QuotePart;
 use App\TypeApplication;
+use App\Mail\AskQuestion;
+use App\Mail\SendClaimBook;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -347,5 +349,54 @@ class FrontController extends Controller
         $market = Market::where('slug', $slug)->with('products')->first();
 
         return view('web.market', compact('market'));
+    }
+
+
+    public function showClaimBookForm()
+    {
+        return view('web.claimbook');
+    }
+
+    /**
+     * Metodo encargado de de almacenar el libro de reclamaciones y enviar correo.
+     */
+    public function storeClaimBook(Request $request)
+    {
+        // Validacion de informacion 
+        $this->validate($request, [
+            'name' => 'required|string',
+            'last_name' => 'required|string',
+            'phone_number' => 'required',
+            'doc_number' => 'required',
+            'email' => 'required',
+            'reason' => 'required'
+        ]);
+
+        // Almaca la informacion en base de datos
+        $claimBook = ClaimBook::create([
+            'name' => $request->name,
+            'last_name' => $request->last_name,
+            'phone_number' => $request->phone_number,
+            'doc_number' => $request->doc_number,
+            'email' => $request->email,
+            'address' => $request->address,
+            'reason' => $request->reason,
+            'detail' => $request->detail,
+            'request_client' => $request->request_client
+        ]);
+
+        // Generar codigo para el libro, concatenando con el año actual
+        $bookNumber = str_repeat('0',(10 - strlen( $claimBook->id))).''.$claimBook->id.'-'.date('Y');
+        // Guardando el codigo generando
+        $claimBook->book_number = $bookNumber;
+        $claimBook->save();
+
+        //ventas@casdel.com.pe
+        Mail::to('postmaster2@constructivo.com')
+        ->send(new SendClaimBook($claimBook));
+
+
+        return back()->with(['msg' => 'Su solicitud se enviío con extito']);
+
     }
 }

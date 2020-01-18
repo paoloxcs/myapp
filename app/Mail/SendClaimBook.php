@@ -2,7 +2,7 @@
 
 namespace App\Mail;
 
-use App\Mail\SendClaimBook;
+use App\ClaimBook;
 use Illuminate\Bus\Queueable;
 use Illuminate\Mail\Mailable;
 use Illuminate\Queue\SerializesModels;
@@ -18,7 +18,7 @@ class SendClaimBook extends Mailable
      *
      * @return void
      */
-    public function __construct(SendClaimBook $claimBook)
+    public function __construct(ClaimBook $claimBook)
     {
         $this->claimBook = $claimBook;
     }

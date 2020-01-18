@@ -55,6 +55,10 @@ Route::post('contact', 'FrontController@contact')->name('contact');
 // Peticion asyncrona
 Route::get('products/{id}/parts','FrontController@getParts');
 
+// Rutas para libro de reclamaciones
+Route::get('claim-book', 'FrontController@showClaimBookForm')->name('claim.book.form');
+Route::post('claim-book', 'FrontController@storeClaimBook')->name('claim.book.store');
+
 // Rutas de autenticación
 Auth::routes();
 // Grupo de rutas Usuarios autenticados

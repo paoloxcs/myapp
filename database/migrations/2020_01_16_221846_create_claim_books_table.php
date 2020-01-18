@@ -15,7 +15,7 @@ class CreateClaimBooksTable extends Migration
     {
         Schema::create('claim_books', function (Blueprint $table) {
             $table->increments('id');
-            $table->string('book_number', 20); // Codigo de libro de reclamaciones
+            $table->string('book_number', 20)->nullable(); // Codigo de libro de reclamaciones
             $table->string('name', 100); // Nombre del cliente
             $table->string('last_name', 100); // Apellidos del cliente
             $table->string('phone_number'); // Numero telefònico del cliente
