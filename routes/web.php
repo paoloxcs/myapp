@@ -39,10 +39,6 @@ Route::get('nosotros', function () {
 });
 
 
-Route::get('libroreclamaciones','FrontController@showClaimBookForm')->name('libroreclamaciones');
-
-
-
 // Ruta para busqueda de productos
 Route::get('search', 'FrontController@searchQuery')->name('products.search');
 
@@ -61,8 +57,10 @@ Route::post('contact', 'FrontController@contact')->name('contact');
 Route::get('products/{id}/parts','FrontController@getParts');
 
 // Rutas para libro de reclamaciones
-Route::get('claim-book', 'FrontController@showClaimBookForm')->name('claim.book.form');
-Route::post('claim-book', 'FrontController@storeClaimBook')->name('claim.book.store');
+// Route::get('claim-book', 'FrontController@showClaimBookForm')->name('claim.book.form');
+
+Route::get('claim-book', 'FrontController@showClaimBookForm')->name('web.claimbook');
+Route::post('storeclaimbook', 'FrontController@storeClaimBook')->name('storeclaimbook');
 
 // Rutas de autenticación
 Auth::routes();
@@ -207,6 +205,11 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::post('sedes','SedeController@store');
 			Route::put('sedes/{id}','SedeController@update');
 			Route::get('sedes/{id}/destroy','SedeController@destroy');
+
+			//Ruta para reclamos registrados
+			Route::get('claimbook','ClaimbookController@index')->name('claimbook.index');
+			Route::get('claims-data','ClaimbookController@getClaims');
+			Route::put('claims/{id}','ClaimbookController@update');
 		});
 
 		
@@ -218,6 +221,7 @@ Route::group(['middleware'=>'auth'],function(){
 			// Ruta para roles
 			Route::resource('roles','RoleController');
 			Route::get('roles/{id}/destroy', 'RoleController@destroy')->name('roles.destroy');
+
 			
 		});
 		

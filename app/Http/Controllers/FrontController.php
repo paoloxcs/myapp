@@ -366,6 +366,8 @@ class FrontController extends Controller
         $this->validate($request, [
             'name' => 'required|string',
             'last_name' => 'required|string',
+            'nrs' => 'string',
+            'address' => 'required|string',
             'phone_number' => 'required',
             'doc_number' => 'required',
             'email' => 'required',
@@ -376,6 +378,7 @@ class FrontController extends Controller
         $claimBook = ClaimBook::create([
             'name' => $request->name,
             'last_name' => $request->last_name,
+            'nrs' => $request->nrs,
             'phone_number' => $request->phone_number,
             'doc_number' => $request->doc_number,
             'email' => $request->email,

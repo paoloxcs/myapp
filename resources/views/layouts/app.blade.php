@@ -85,6 +85,7 @@
             <li><a href="{{route('sede.index')}}"><i class="fas fa-home"></i> Sedes</a></li>
             <li><a href="{{route('users.index')}}"><i class="fas fa-users"></i> Usuarios</a></li>
             <li><a href="{{route('roles.index')}}"><i class="fas fa-cog"></i> Roles</a></li>
+            <li><a href="{{route('claimbook.index')}}"><i class="fas fa-book-reader"></i> Libro de Reclamaciones</a></li>
           </ul>
         </div>
         

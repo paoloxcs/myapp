@@ -12,7 +12,7 @@
    			</div>									
    			@endif
 
-   			<form action="{{route('contact')}}" method="POST">
+   			<form action="{{route('storeclaimbook')}}" method="POST">
    			{{csrf_field()}}
 
    			<div class="row">
@@ -36,7 +36,7 @@
    			<div class="row">
    				<section class="col-12 col-md-4">
    					<div class="form-group">			    
-   						<input type="text" class="form-control" id="phone" name="phone" placeholder="Teléfono/Móvil" required>
+   						<input type="text" class="form-control" id="phone_number" name="phone_number" placeholder="Teléfono/Móvil" required>
    					</div>
    				</section>
    				<section class="col-12 col-md-8">
@@ -49,7 +49,7 @@
    			<div class="row">
    				<section class="col-12 col-md-4">
    					<div class="form-group">			    
-   						<input type="text" class="form-control" id="doc" name="doc" placeholder="Doc. Identidad" required>
+   						<input type="text" class="form-control" id="doc_number" name="doc_number" placeholder="Doc. Identidad" required>
    					</div>
    				</section>
    				<section class="col-12 col-md-8">
