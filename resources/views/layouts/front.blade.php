@@ -48,7 +48,7 @@
                 <li><a href="{{route('contact')}}">Contacto</a></li>
                 <li><a class="whatsapp-color" href="#"><i class="fab fa-whatsapp"></i> Whatsapp</a></li>
                 <li><a class="active" href="mailto:ventas@casdel.com.pe"><i class="fas fa-envelope"></i> ventas@casdel.com.pe</a></li>
-                <li><a href="{{url('libroreclamaciones')}}">Libro de Reclamaciones</a></li>
+                <li><a href="{{url('claim-book')}}">Libro de Reclamaciones</a></li>
                 <li><a href="#"><i class="fas fa-phone"></i> (+511) 202 0777</a></li>
                 
               </ul>

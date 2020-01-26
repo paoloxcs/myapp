@@ -23,7 +23,7 @@
    				</section>
    				<section class="col-12 col-md-4">
    					<div class="form-group">			    
-   						<input type="text" class="form-control" id="lastname" name="lastname" placeholder="Apellidos" required>
+   						<input type="text" class="form-control" id="last_name" name="last_name" placeholder="Apellidos" required>
    					</div>
    				</section>
                <section class="col-12 col-md-4">

@@ -362,6 +362,7 @@ class FrontController extends Controller
      */
     public function storeClaimBook(Request $request)
     {
+        //dd($request->all());
         // Validacion de informacion 
         $this->validate($request, [
             'name' => 'required|string',

@@ -26,6 +26,8 @@ class CreateClaimBooksTable extends Migration
             $table->string('reason', 255); // Razon del reclamo
             $table->longText('detail')->nullable();  // Dettale de reclamo
             $table->longText('request_client')->nullable(); // Solicitud o pedido del cliente.
+            $table->longText('owner_response')->nullable(); // Respuesta que la empresa debe dar.
+            $table->boolean('status')->default('1'); // Estado de la respuesta
             $table->timestamps(); // Fecha de creacion
 
         });
