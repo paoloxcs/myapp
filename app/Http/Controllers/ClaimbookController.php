@@ -33,7 +33,8 @@ class ClaimbookController extends Controller
         $claim = Claimbook::find($id);
 
         //Asignando valores para actualizar
-        $claim->request_client = $request->response;
+        $claim->owner_response = $request->response;
+        $claim->status = 1;
         $claim->save();
 
         //Retornando la respuesta

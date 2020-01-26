@@ -75,6 +75,14 @@
    				</section>
    			</div>
 
+            <div class="row">
+               <section class="col-12">
+                  <div class="form-group">            
+                     <textarea name="request_client" class="form-control" id="request_client" rows="5" placeholder="Ingrese aqui su solicitud"></textarea>
+                  </div>                  
+               </section>
+            </div>
+
    			<div class="row">
    				<div class="col-12">
    					<div class="form-group form-check">

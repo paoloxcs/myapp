@@ -29,6 +29,7 @@
 									<th>Razón Social</th>
 									<th>Nro Documento</th>
 									<th>Correo</th>
+									<th>Estado</th>
 									<th>Acción</th>
 								</thead>
 								<tbody id="claims">
@@ -85,9 +86,10 @@
 							<td> ${queja.last_name}</td>
 							<td> ${queja.nrs}</td>
 							<td> ${queja.doc_number}</td>
-							<td> ${queja.email}</td>						
+							<td> ${queja.email}</td>
+							<td> ${queja.status == '0' ? 'Pendiente' : 'Respondida'}</td>
 							<td>
-								<button class="btn btn-orange btn-sm" onclick='responseClaim(${JSON.stringify(queja)})'> Responder </button>
+								<button class="btn btn-orange btn-sm" onclick='responseClaim(${JSON.stringify(queja)})' ${queja.status=='1' ? 'disabled' : 'enabled'}> Responder </button>
 							</td>
 						</tr>
 						`)
@@ -107,7 +109,8 @@
 		form_edit.nrs.value = queja.nrs;
 		form_edit.reason.value = queja.reason;
 		form_edit.detail.value = queja.detail;
-		form_edit.response.value = queja.request_client;
+		form_edit.request_client.value = queja.request_client;
+		form_edit.response.value = queja.owner_response;
 		form_edit.fecharegistro.value = queja.created_at;
 		props.modal_edit.modal();
 	}

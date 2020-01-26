@@ -17,7 +17,9 @@ class ClaimBook extends Model
         'address',
         'reason',
         'detail',
-        'request_client'
+        'request_client',
+        'owner_response',
+        'status'
     ];
 
     

@@ -69,8 +69,15 @@
 
 					<div class="row">
 						<section class="col-12">
-							<label for="response">Ingresar respuesta</label>
-							<textarea name="response" id="response" class="form-control" rows="4" placeholder="Ingrese Respuesta"></textarea>
+							<label for="request_client">Solicitud del Cliente</label>
+							<textarea name="request_client" id="request_client" class="form-control" rows="4" placeholder="Solicitud del Cliente" readonly></textarea>
+						</section>
+					</div>
+
+					<div class="row">
+						<section class="col-12">
+							<label for="response">Responder Reclamo de Cliente</label>
+							<textarea name="response" id="response" class="form-control" rows="4" placeholder="Ingrese la respuesta"></textarea>
 						</section>
 					</div>
 				</div>
