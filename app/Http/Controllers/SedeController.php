@@ -27,6 +27,8 @@ class SedeController extends Controller
             'address' => 'required|string',
             'district' =>  'required|string',
             'city' => 'required|string',
+            'telf' => 'required|string',
+            'anexo' => 'required|string',
             'maps_code' => 'required|string'
         ]);
         //condicionando validación
@@ -39,6 +41,8 @@ class SedeController extends Controller
             'name' => $request->name,
             'address' => $request->address,
             'district' => $request->district,
+            'telf' => $request->telf,
+            'anexo' => $request->anexo,
             'city' => $request->city,
             'maps_code'=> $request->maps_code
         ]);
@@ -52,6 +56,8 @@ class SedeController extends Controller
             'name' => 'required|string',
             'address' => 'required|string',
             'district' =>  'required|string',
+            'telf' =>  'required|string',
+            'anexo' =>  'required|string',
             'city' => 'required|string',
             'maps_code' => 'required|string'
         ]);
@@ -67,6 +73,8 @@ class SedeController extends Controller
         $sede->address= $request->address;
         $sede->district = $request->district;
         $sede->city = $request->city;
+        $sede->telf = $request->telf;
+        $sede->anexo = $request->anexo;
         $sede->maps_code = $request->maps_code;
         $sede->save();
 

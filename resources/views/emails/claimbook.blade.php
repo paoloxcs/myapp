@@ -1,0 +1,1 @@
+<p>This is email template for claim book. {{$claimBook->book_number}}</p>

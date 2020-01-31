@@ -37,6 +37,18 @@
 							   <input type="text" name="city" class="form-control" placeholder="Ciudad">
 							</div>
 						</section>
+
+						<section class="col-12 col-md-3">
+							<div class="form-group">
+							   <input type="text" name="telf" class="form-control" placeholder="Teléfono de la Sede">
+							</div>
+						</section>
+
+						<section class="col-12 col-md-3">
+							<div class="form-group">
+							   <input type="text" name="anexo" class="form-control" placeholder="Anexo">
+							</div>
+						</section>
 					</div>
 
 					<div class="row">

@@ -16,7 +16,7 @@
    			  	<div class="col-xs-12 col-md-4">
    			  		<div class="form-group">
    			  			<select name="post_type" class="form-control">
-							<option value="N">Moticia</option>
+							<option value="N">Noticia</option>
 							<option value="E">Evento</option>
 						</select>
    			  		</div>

@@ -31,24 +31,36 @@ Route::get('videos-data', 'FrontController@getVideos');
 
 Route::get('product-finder','FrontController@getSearchResults')->name('productfinder');
 
-Route::get('contacto','FrontController@getContactView')->name('contact');
+Route::get('contacto','FrontController@getContactView')->name('contacto');
 Route::get('sedes-data','FrontController@getSedes');
 
 Route::get('nosotros', function () {
     return view('web.about');
 });
 
+
 // Ruta para busqueda de productos
-Route::get('search', 'FrontController@searchQuery');
+Route::get('search', 'FrontController@searchQuery')->name('products.search');
+
+// Ruta para busqueda por numero de parte
+Route::get('search-by', 'FrontController@searchByPart')->name('products.search.part');
 
 Route::get('mercados', 'FrontController@getMarkets')->name('markets');
 Route::get('mercado/{slug}', 'FrontController@getMarket');
 
 //Solicitar Info de Part
 Route::post('sendquotepart', 'FrontController@sendQuotePart')->name('sendquotepart');
+Route::post('askprofile', 'FrontController@askQuestion')->name('askprofile');
+Route::post('contact', 'FrontController@contact')->name('contact');
 
 // Peticion asyncrona
 Route::get('products/{id}/parts','FrontController@getParts');
+
+// Rutas para libro de reclamaciones
+// Route::get('claim-book', 'FrontController@showClaimBookForm')->name('claim.book.form');
+
+Route::get('claim-book', 'FrontController@showClaimBookForm')->name('web.claimbook');
+Route::post('storeclaimbook', 'FrontController@storeClaimBook')->name('storeclaimbook');
 
 // Rutas de autenticación
 Auth::routes();
@@ -131,7 +143,7 @@ Route::group(['middleware'=>'auth'],function(){
 			//Administración de Certificados por Perfil
 			Route::get('products/{id}/isos', 'ProductController@getIsos');
 			Route::put('products/isos/{id}','ProductController@storeProductIso')->name('products.isos.store');
-			Route::get('isos/{iso_id}/destroy','ProductController@destroyProductIso')->name('isos.destroy');
+			Route::get('productos.isos/{iso_id}/destroy','ProductController@destroyProductIso')->name('isos.destroy');
 
 			
 
@@ -147,7 +159,7 @@ Route::group(['middleware'=>'auth'],function(){
 		});
 		
 		// Ruta para posts
-		Route::group(['middleware'=>'permision:manage_posts'],function(){
+		Route::group(['middleware'=>'permision:manage_general'],function(){
 			//Route::resource('posts','PostController');
 			Route::get('posts','PostController@index')->name('posts.index');
 			Route::get('posts-data','PostController@getPosts');
@@ -193,6 +205,11 @@ Route::group(['middleware'=>'auth'],function(){
 			Route::post('sedes','SedeController@store');
 			Route::put('sedes/{id}','SedeController@update');
 			Route::get('sedes/{id}/destroy','SedeController@destroy');
+
+			//Ruta para reclamos registrados
+			Route::get('claimbook','ClaimbookController@index')->name('claimbook.index');
+			Route::get('claims-data','ClaimbookController@getClaims');
+			Route::put('claims/{id}','ClaimbookController@update');
 		});
 
 		
@@ -200,6 +217,12 @@ Route::group(['middleware'=>'auth'],function(){
 		Route::group(['middleware'=>'permision:manage_admin'],function(){
 			Route::resource('users','UserController');
 			Route::get('users/{id}/destroy','UserController@destroy')->name('users.destroy');
+
+			// Ruta para roles
+			Route::resource('roles','RoleController');
+			Route::get('roles/{id}/destroy', 'RoleController@destroy')->name('roles.destroy');
+
+			
 		});
 		
 	});

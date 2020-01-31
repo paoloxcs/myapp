@@ -6,6 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Sede extends Model
 {
-    protected $fillable = ['name','address','district','city','maps_code',''];
+    protected $fillable = ['name','address','district','telf','anexo','city','maps_code',''];
     
 }

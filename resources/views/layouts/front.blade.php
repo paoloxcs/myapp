@@ -48,6 +48,7 @@
                 <li><a href="{{route('contact')}}">Contacto</a></li>
                 <li><a class="whatsapp-color" href="#"><i class="fab fa-whatsapp"></i> Whatsapp</a></li>
                 <li><a class="active" href="mailto:ventas@casdel.com.pe"><i class="fas fa-envelope"></i> ventas@casdel.com.pe</a></li>
+                <li><a href="{{url('claim-book')}}">Libro de Reclamaciones</a></li>
                 <li><a href="#"><i class="fas fa-phone"></i> (+511) 202 0777</a></li>
                 
               </ul>
@@ -86,8 +87,8 @@
                             {{Auth()->user()->name}}
                           </a>
                           <div class="dropdown-menu" id="user-dropdown" aria-labelledby="navbarDropdownMenuLink">
-                            <a class="dropdown-item" href="#">Perfil</a>
-                            <a class="dropdown-item" href="#">Settings</a>
+                            {{-- <a class="dropdown-item" href="#">Perfil</a>
+                            <a class="dropdown-item" href="#">Settings</a> --}}
                             @if(Auth()->user()->accessPanel())
                               <a class="dropdown-item" href="{{url('panel')}}">Ver panel</a>
                             @endif
@@ -144,7 +145,7 @@
         </section>
         <section class="col-xs-12 col-sm-12 col-md-3 redes">          
             <ul class="menufooter d-flex justify-content-end">
-              <li><a class="social face" href="#"><i class="fab fa-facebook-f"></i></a></li>
+              <li><a target="_blank" class="social face" href="https://web.facebook.com/CASDELSA"><i class="fab fa-facebook-f"></i></a></li>
               <li><a class="social youtube" href="#"><i class="fab fa-youtube"></i></a></li>
               <li><a class="social linked" href="#"><i class="fab fa-linkedin-in"></i></a></li>
             </ul>          

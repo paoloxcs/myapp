@@ -49,7 +49,7 @@
                 </div>
               </div>
                 <ul class="menu">
-                  <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li>
+                  {{-- <li><a href="#"><i class="fas fa-cogs"></i> Configuración</a></li> --}}
                   <li><a href="{{url('/')}}"><i class="fab fa-chrome"></i> Regresar a casdel</a></li>
                   <li>
                     <a href="{{ route('logout') }}"
@@ -83,6 +83,9 @@
             <li><a href="{{route('slide.index')}}"><i class="fas fa-arrows-alt-h"></i> Slides</a></li>
             <li><a href="{{route('iso.index')}}"><i class="fas fa-check-square"></i> Certificaciones</a></li>
             <li><a href="{{route('sede.index')}}"><i class="fas fa-home"></i> Sedes</a></li>
+            <li><a href="{{route('users.index')}}"><i class="fas fa-users"></i> Usuarios</a></li>
+            <li><a href="{{route('roles.index')}}"><i class="fas fa-cog"></i> Roles</a></li>
+            <li><a href="{{route('claimbook.index')}}"><i class="fas fa-book-reader"></i> Libro de Reclamaciones</a></li>
           </ul>
         </div>
         

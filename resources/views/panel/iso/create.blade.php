@@ -14,13 +14,13 @@
 						<section class="col-12 col-md-6">
 							<div class="form-group">
 								<label for="name">Nombre de Certificación</label>
-							   <input type="text" name="name" class="form-control" placeholder="Ingrese aqui el nombre del ISO">
+							   <input type="text" data-validate="true" name="name" class="form-control" placeholder="Ingrese aqui el nombre del ISO">
 							</div>
 						</section>
 						<section class="col-12 col-md-6">
 							<div class="form-group">
 								<label for="description">Ingrese la descripción</label>
-								<textarea name="description" class="form-control" rows="4" required></textarea>
+								<textarea name="description" data-validate="true" class="form-control" rows="4" required></textarea>
 							</div>
 						</section>
 					</div>

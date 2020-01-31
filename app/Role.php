@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Role extends Model
 {
-    
+    protected $fillable = ['name','section'];
     public $timestamps = false;
     /*=========== Relaciones ==================*/
     public function users()

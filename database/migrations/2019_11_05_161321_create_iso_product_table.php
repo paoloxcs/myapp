@@ -30,6 +30,6 @@ class CreateIsoProductTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('iso_product');
     }
 }

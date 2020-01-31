@@ -1,0 +1,29 @@
+<table>
+	<thead>
+		<tr>
+			<th>Nombre</th>
+			<th>Teléfono/Móvil</th>
+			<th>Correo Electrónico</th>
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{$data['nombre']}}</td>
+			<td>{{$data['telf']}}</td>
+			<td>{{$data['correo']}}</td>
+		</tr>
+	</tbody>
+</table>
+<br>
+<table>
+	<thead>
+		<tr>			
+			<th>Mensaje</th>			
+		</tr>
+	</thead>
+	<tbody>
+		<tr>
+			<td>{{$data['mensaje']}}</td>
+		</tr>
+	</tbody>
+</table>
