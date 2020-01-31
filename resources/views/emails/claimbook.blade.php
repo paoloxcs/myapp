@@ -11,12 +11,12 @@
 	</thead>
 	<tbody>
 		<tr>
-			<td>{{$claimBook['name']}}</td>
-			<td>{{$claimBook['last_name']}}</td>
-			<td>{{$claimBook['nrs']}}</td>
-			<td>{{$claimBook['phone_number']}}</td>
-			<td>{{$claimBook['doc_number']}}</td>
-			<td>{{$claimBook['email']}}</td>
+			<td>{{$claimBook->name}}</td>
+			<td>{{$claimBook->last_name}}</td>
+			<td>{{$claimBook->nrs}}</td>
+			<td>{{$claimBook->phone_number}}</td>
+			<td>{{$claimBook->doc_number}}</td>
+			<td>{{$claimBook->email}}</td>
 		</tr>
 	</tbody>
 </table>
@@ -27,19 +27,19 @@
 			<td>Motivo del Reclamo</td>
 		</tr>
 		<tr>
-			<td>{{$claimBook['reason']}}</td>
+			<td>{{$claimBook->reason}}</td>
 		</tr>
 		<tr>
 			<td>Detalle del Reclamo</td>
 		</tr>
 		<tr>
-			<td>{{$claimBook['detail']}}</td>
+			<td>{{$claimBook->detail}}</td>
 		</tr>
 		<tr>
 			<td>Solicitud del Cliente</td>
 		</tr>
 		<tr>
-			<td>{{$claimBook['request_client']}}</td>
+			<td>{{$claimBook->request_client}}</td>
 		</tr>
 	</tbody>
 </table>
