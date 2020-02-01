@@ -20,9 +20,9 @@ $factory->define(App\User::class, function (Faker\Generator $faker) {
     static $password;
 
     return [
-        'name' => $faker->firstName,
-        'last_name' => $faker->lastName,
-        'email' => 'admin@email.com',
+        'name' => 'User',
+        'last_name' => 'Admin',
+        'email' => 'admin@casdel.com.pe',
         'password' => $password ?: $password = bcrypt('secret'),
         'remember_token' => str_random(10),
         'role_id' => 1
